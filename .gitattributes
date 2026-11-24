@@ -12,4 +12,4 @@
 *.npy binary
 *.whl binary
 *.zip binary
-data/dataset.csv -text
+data/dataset.csv -text whitespace=cr-at-eol
