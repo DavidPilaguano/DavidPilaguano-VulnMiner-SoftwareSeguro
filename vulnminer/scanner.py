@@ -1,6 +1,7 @@
 """Lectura estatica acotada; el modelo asigna etiquetas, las reglas aportan evidencia."""
 from pathlib import Path
 from datetime import datetime, timezone
+import ast
 import hashlib
 import json
 import re
@@ -10,16 +11,28 @@ import yaml
 from .catalog import SCENARIOS, catalog
 
 IGNORED = {'.git','.venv','venv','node_modules','__pycache__','dist','build','target','.idea','.next','reportes','reports','output'}
-EXTENSIONS = {'.py','.js','.jsx','.ts','.tsx','.yml','.yaml','.properties','.json','.xml','.toml','.txt'}
+EXTENSIONS = {'.py','.java','.js','.jsx','.ts','.tsx','.yml','.yaml','.properties','.json','.xml','.toml','.txt'}
 MANIFESTS = {'package.json','pom.xml','requirements.txt','pyproject.toml','build.gradle','go.mod'}
 ANCHORS = {
-    'sql': r'\b(?:execute|query|raw)\s*\(',
+    'sql': r'\b(?:execute|executeQuery|executeUpdate|query|raw)\s*\(',
     'crypto': r'\b(?:md5|sha1|createHash|hashlib\.new)\s*\(',
     'debug': r'''\bdebug[\x27\x22]?\s*[:=]|\bdebug[\x27\x22]\]\s*=|\.set\([\x27\x22]debug[\x27\x22]''',
     'jwt': r'\b(?:jwt\.(?:decode|verify)|decode|verify)\s*\(',
     'ssrf': r'\b(?:requests|httpx|axios|https?|urllib\.request)\.(?:get|post|request|urlopen)\s*\(|\bfetch\s*\(',
     'deserialize': r'\b(?:pickle\.(?:loads?|load)|marshal\.loads|yaml\.(?:load|unsafe_load|safe_load)|(?:\w+\.)?unserialize|JSON\.parse|json\.loads?)\s*\(',
     'tls': r'verify\s*=|rejectUnauthorized|CERT_NONE|CERT_REQUIRED|check_hostname|_create_unverified_context|NODE_TLS_REJECT_UNAUTHORIZED',
+    'path': r'\b(?:open|FileInputStream|FileOutputStream|FileReader|readFile|readFileSync)\s*\(',
+    'redirect': r'\b(?:redirect|sendRedirect)\s*\(',
+    'cookie': r'\b(?:set_cookie|setSecure|Cookie)\s*\(',
+    'xxe': r'\b(?:DocumentBuilderFactory|SAXParserFactory|XMLParser|parseString|fromstring|etree\.parse)\b',
+    'hash': r'\b(?:MessageDigest\.getInstance|hashlib\.(?:md5|sha1)|createHash|md5|sha1)\s*\(',
+    'weakrand': r'\b(?:random\.[A-Za-z_]+|Random|SecureRandom|Math\.random)\s*\(',
+    'command': r'\b(?:Runtime\.getRuntime|ProcessBuilder|os\.system|subprocess\.[A-Za-z_]+|Popen|execFile)\s*\(',
+    'xss': r'\b(?:println|write|render_template_string|mark_safe)\s*\(',
+    'ldap': r'\b(?:search|search_s|search_ext_s)\s*\(',
+    'xpath': r'\b(?:xpath|XPathFactory|evaluate)\s*\(',
+    'code': r'\b(?:eval|exec)\s*\(',
+    'trustboundary': r'\b(?:setAttribute)\s*\(|\bsession\s*\[',
 }
 COMPILED = {k:re.compile(v,re.I) for k,v in ANCHORS.items()}
 SUSPICIOUS = re.compile(r'md5|sha1|debug\s*[=:]\s*(?:true|1)|DEBUG[\x27\x22]?\s*\]?\s*=\s*True|verify\s*=\s*False|rejectUnauthorized\s*:\s*false|verify_signature[\x27\x22]?\s*[:=]\s*False|jwt\.decode|pickle\.loads?|unserialize\(|yaml\.unsafe_load|yaml\.Loader\b|CERT_NONE|_create_unverified_context|\beval\(|\bexec\(|shell\s*=\s*True',re.I)
@@ -89,7 +102,17 @@ def discover_services(root, files):
 
 
 def language(path):
-    return {'.py':'Python','.js':'JavaScript','.jsx':'JavaScript','.ts':'TypeScript','.tsx':'TypeScript'}.get(path.suffix.lower(),'Configuracion')
+    return {'.py':'Python','.java':'Java','.js':'JavaScript','.jsx':'JavaScript','.ts':'TypeScript','.tsx':'TypeScript'}.get(path.suffix.lower(),'Configuracion')
+
+
+def function_spans(content,path):
+    if language(path)!='Python':
+        return []
+    try:
+        tree=ast.parse(content)
+        return [(n.lineno-1,n.end_lineno) for n in ast.walk(tree) if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef)) and n.end_lineno-n.lineno<150]
+    except (SyntaxError,ValueError):
+        return []
 
 
 def scan(root, standards=('owasp2025','api2023'), output=None):
@@ -109,9 +132,13 @@ def scan(root, standards=('owasp2025','api2023'), output=None):
             continue
         analyzed+=1
         lines=content.splitlines()
+        spans=function_spans(content,path)
         candidates=[]
         for i,line in enumerate(lines):
             if line.lstrip().startswith(('#','//','/*','*')):
+                continue
+            # A function called search/write is not evidence of a sink invocation.
+            if re.match(r'(?:async\s+)?def\s+\w+\s*\(|(?:export\s+)?(?:async\s+)?function\s+\w+\s*\(',line.lstrip()):
                 continue
             kinds=[kind for kind,pattern in COMPILED.items() if pattern.search(line)]
             unknown=bool(re.search(r'\beval\(|\bexec\(|shell\s*=\s*True',line))
@@ -124,6 +151,9 @@ def scan(root, standards=('owasp2025','api2023'), output=None):
             end=i+1
             while end<min(len(lines),i+3) and lines[end].strip():
                 end+=1
+            enclosing=[span for span in spans if span[0]<=i<span[1]]
+            if enclosing:
+                start,end=min(enclosing,key=lambda span:span[1]-span[0])
             candidates.append((i,line,'\n'.join(lines[start:end]),kinds,unknown))
         if not candidates:
             continue
@@ -149,7 +179,7 @@ def scan(root, standards=('owasp2025','api2023'), output=None):
             labels=filtered
             matched=[kind for kind in kinds if set(SCENARIOS[kind]['labels'])&set(labels)]
             # Resolve overlapping evidence (e.g. HTTP call with TLS disabled).
-            priority=['tls','jwt','deserialize','sql','crypto','debug','ssrf']
+            priority=['tls','jwt','deserialize','sql','crypto','debug','ssrf','path','redirect','cookie','xxe','hash','weakrand','command','xss','ldap','xpath','code','trustboundary']
             kind=next((k for k in priority if k in matched),None)
             info=SCENARIOS[kind] if kind else None
             owners=[folder for folder in services if path.is_relative_to(folder)]
@@ -163,4 +193,4 @@ def scan(root, standards=('owasp2025','api2023'), output=None):
                 continue
             findings.append(finding)
     selected_catalog=[c for c in catalog() if ('api2023' in standards if c['id'].startswith('API') else 'owasp2025' in standards)]
-    return dict(schema_version='1.0',generated_at=datetime.now(timezone.utc).isoformat(),project=root.name,root=str(root),standards=list(standards),model=dict(algorithm=model['algorithm'],threshold=model['threshold'],confidence_note='Puntuacion del clasificador; no es probabilidad calibrada ni severidad.'),services=list(services.values()),files_analyzed=analyzed,skipped_files=skipped,findings=findings,catalog=selected_catalog,limitations=['Analisis lexico local sin prueba de explotabilidad ni flujo interprocedimental.','Datos de entrenamiento sinteticos controlados; generalizacion real no demostrada.','Ausencia de hallazgos no certifica seguridad.','Dependencias e inventario se leen como configuracion; sin base CVE ni auditoria de cadena de suministro.','Configuraciones fuera de los patrones entrenados requieren revision; Java no esta soportado.','El reporte contiene evidencia del codigo y puede contener informacion sensible.'])
+    return dict(schema_version='1.0',generated_at=datetime.now(timezone.utc).isoformat(),project=root.name,root=str(root),standards=list(standards),model=dict(algorithm=model['algorithm'],threshold=model['threshold'],confidence_note='Puntuacion del clasificador; no es probabilidad calibrada ni severidad.'),services=list(services.values()),files_analyzed=analyzed,skipped_files=skipped,findings=findings,catalog=selected_catalog,limitations=['Analisis lexico local sin prueba de explotabilidad ni flujo interprocedimental.','Entrenamiento con OWASP Benchmark publico y suplemento propio; ambos son casos controlados, no produccion.','Ausencia de hallazgos no certifica seguridad.','Dependencias e inventario se leen como configuracion; sin base CVE ni auditoria de cadena de suministro.','Java se analiza lexicalmente; no se resuelven tipos ni flujos entre metodos. Configuraciones fuera del alcance requieren revision.','El reporte contiene evidencia del codigo y puede contener informacion sensible.'])

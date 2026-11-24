@@ -1,8 +1,35 @@
 scenario,cwe,owasp,basis
-sql,CWE-89,A05:2025,Relacion contextual del escenario; ver docs/fuentes.md
-crypto,CWE-327,A04:2025,Relacion contextual del escenario; ver docs/fuentes.md
-debug,CWE-489,A02:2025;API8:2023,Relacion contextual del escenario; ver docs/fuentes.md
-jwt,CWE-347,A07:2025;API2:2023,Relacion contextual del escenario; ver docs/fuentes.md
-ssrf,CWE-918,A01:2025;API7:2023,Relacion contextual del escenario; ver docs/fuentes.md
-deserialize,CWE-502,A08:2025,Relacion contextual del escenario; ver docs/fuentes.md
-tls,CWE-295,A07:2025;API10:2023,Relacion contextual del escenario; ver docs/fuentes.md
+sql,CWE-89,A05:2025,Escenario contextual; consultar docs/fuentes.md
+crypto,CWE-327,A04:2025,Escenario contextual; consultar docs/fuentes.md
+debug,CWE-489,A02:2025;API8:2023,Escenario contextual; consultar docs/fuentes.md
+jwt,CWE-347,A07:2025;API2:2023,Escenario contextual; consultar docs/fuentes.md
+ssrf,CWE-918,A01:2025;API7:2023,Escenario contextual; consultar docs/fuentes.md
+deserialize,CWE-502,A08:2025,Escenario contextual; consultar docs/fuentes.md
+tls,CWE-295,A07:2025;API10:2023,Escenario contextual; consultar docs/fuentes.md
+path,CWE-22,A01:2025,Escenario contextual; consultar docs/fuentes.md
+redirect,CWE-601,A01:2025,Escenario contextual; consultar docs/fuentes.md
+cookie,CWE-614,A02:2025,Escenario contextual; consultar docs/fuentes.md
+xxe,CWE-611,A02:2025,Escenario contextual; consultar docs/fuentes.md
+hash,CWE-328,A04:2025,Escenario contextual; consultar docs/fuentes.md
+weakrand,CWE-330,A04:2025,Escenario contextual; consultar docs/fuentes.md
+command,CWE-78,A05:2025,Escenario contextual; consultar docs/fuentes.md
+xss,CWE-79,A05:2025,Escenario contextual; consultar docs/fuentes.md
+ldap,CWE-90,A05:2025,Escenario contextual; consultar docs/fuentes.md
+xpath,CWE-643,A05:2025,Escenario contextual; consultar docs/fuentes.md
+code,CWE-94,A05:2025,Escenario contextual; consultar docs/fuentes.md
+trustboundary,CWE-501,A06:2025,Escenario contextual; consultar docs/fuentes.md
+public-oracle,CWE-22,A01:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-601,A01:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-614,A02:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-611,A02:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-327,A04:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-328,A04:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-330,A04:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-89,A05:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-78,A05:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-79,A05:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-90,A05:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-94,A05:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-643,A05:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-501,A06:2025,OWASP Top 10:2025; sin inferir etiquetas API
+public-oracle,CWE-502,A08:2025,OWASP Top 10:2025; sin inferir etiquetas API

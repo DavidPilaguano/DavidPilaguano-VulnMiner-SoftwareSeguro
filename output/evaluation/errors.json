@@ -1,129 +1,262 @@
 [
   {
-    "id": "VM-0062",
-    "code": "sql = 'UPDATE orders SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['name']))",
+    "id": "VM-0349",
+    "code": "with urllib.request.urlopen(request.form['name']) as stream:\n    content = stream.read()",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "Python",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0351",
+    "code": "with urllib.request.urlopen(request.form['id']) as stream:\n    content = stream.read()",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "Python",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0353",
+    "code": "with urllib.request.urlopen(request.form['value']) as stream:\n    content = stream.read()",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "Python",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0355",
+    "code": "with urllib.request.urlopen(request.form['ref']) as stream:\n    content = stream.read()",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "Python",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0357",
+    "code": "with urllib.request.urlopen(request.form['item']) as stream:\n    content = stream.read()",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "Python",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0359",
+    "code": "with urllib.request.urlopen(request.form['token']) as stream:\n    content = stream.read()",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "Python",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0422",
+    "code": "model = yaml.load(data['name'], Loader=yaml.SafeLoader)\nvalidate_schema(model, 'orders')",
     "false_positive": [
-      "A05:2025"
+      "A08:2025"
     ],
     "false_negative": [],
     "language": "Python",
-    "scenario": "sql"
+    "scenario": "deserialize"
   },
   {
-    "id": "VM-0064",
-    "code": "sql = 'UPDATE accounts SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['id']))",
+    "id": "VM-0424",
+    "code": "model = yaml.load(data['id'], Loader=yaml.SafeLoader)\nvalidate_schema(model, 'accounts')",
     "false_positive": [
-      "A05:2025"
+      "A08:2025"
     ],
     "false_negative": [],
     "language": "Python",
-    "scenario": "sql"
+    "scenario": "deserialize"
   },
   {
-    "id": "VM-0066",
-    "code": "sql = 'UPDATE products SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['value']))",
+    "id": "VM-0426",
+    "code": "model = yaml.load(data['value'], Loader=yaml.SafeLoader)\nvalidate_schema(model, 'products')",
     "false_positive": [
-      "A05:2025"
+      "A08:2025"
     ],
     "false_negative": [],
     "language": "Python",
-    "scenario": "sql"
+    "scenario": "deserialize"
   },
   {
-    "id": "VM-0068",
-    "code": "sql = 'UPDATE invoices SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['ref']))",
+    "id": "VM-0428",
+    "code": "model = yaml.load(data['ref'], Loader=yaml.SafeLoader)\nvalidate_schema(model, 'invoices')",
     "false_positive": [
-      "A05:2025"
+      "A08:2025"
     ],
     "false_negative": [],
     "language": "Python",
-    "scenario": "sql"
+    "scenario": "deserialize"
   },
   {
-    "id": "VM-0070",
-    "code": "sql = 'UPDATE customers SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['item']))",
+    "id": "VM-0430",
+    "code": "model = yaml.load(data['item'], Loader=yaml.SafeLoader)\nvalidate_schema(model, 'customers')",
     "false_positive": [
-      "A05:2025"
+      "A08:2025"
     ],
     "false_negative": [],
     "language": "Python",
-    "scenario": "sql"
+    "scenario": "deserialize"
   },
   {
-    "id": "VM-0072",
-    "code": "sql = 'UPDATE payments SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['token']))",
+    "id": "VM-0432",
+    "code": "model = yaml.load(data['token'], Loader=yaml.SafeLoader)\nvalidate_schema(model, 'payments')",
     "false_positive": [
-      "A05:2025"
+      "A08:2025"
     ],
     "false_negative": [],
     "language": "Python",
-    "scenario": "sql"
+    "scenario": "deserialize"
   },
   {
-    "id": "VM-0566",
-    "code": "repository.query('SELECT * FROM orders WHERE name=$1', [payload.name]);",
-    "false_positive": [
-      "A05:2025"
+    "id": "VM-0709",
+    "code": "const options = { service: 'orders', debug: true };\nstartServer(options);",
+    "false_positive": [],
+    "false_negative": [
+      "A02:2025"
     ],
-    "false_negative": [],
     "language": "JavaScript",
-    "scenario": "sql"
+    "scenario": "debug"
   },
   {
-    "id": "VM-0568",
-    "code": "repository.query('SELECT * FROM accounts WHERE name=$1', [payload.id]);",
-    "false_positive": [
-      "A05:2025"
+    "id": "VM-0711",
+    "code": "const options = { service: 'accounts', debug: true };\nstartServer(options);",
+    "false_positive": [],
+    "false_negative": [
+      "A02:2025"
     ],
-    "false_negative": [],
     "language": "JavaScript",
-    "scenario": "sql"
+    "scenario": "debug"
   },
   {
-    "id": "VM-0570",
-    "code": "repository.query('SELECT * FROM products WHERE name=$1', [payload.value]);",
-    "false_positive": [
-      "A05:2025"
+    "id": "VM-0713",
+    "code": "const options = { service: 'products', debug: true };\nstartServer(options);",
+    "false_positive": [],
+    "false_negative": [
+      "A02:2025"
     ],
-    "false_negative": [],
     "language": "JavaScript",
-    "scenario": "sql"
+    "scenario": "debug"
   },
   {
-    "id": "VM-0572",
-    "code": "repository.query('SELECT * FROM invoices WHERE name=$1', [payload.ref]);",
-    "false_positive": [
-      "A05:2025"
+    "id": "VM-0715",
+    "code": "const options = { service: 'invoices', debug: true };\nstartServer(options);",
+    "false_positive": [],
+    "false_negative": [
+      "A02:2025"
     ],
-    "false_negative": [],
     "language": "JavaScript",
-    "scenario": "sql"
+    "scenario": "debug"
   },
   {
-    "id": "VM-0574",
-    "code": "repository.query('SELECT * FROM customers WHERE name=$1', [payload.item]);",
-    "false_positive": [
-      "A05:2025"
+    "id": "VM-0717",
+    "code": "const options = { service: 'customers', debug: true };\nstartServer(options);",
+    "false_positive": [],
+    "false_negative": [
+      "A02:2025"
     ],
-    "false_negative": [],
     "language": "JavaScript",
-    "scenario": "sql"
+    "scenario": "debug"
   },
   {
-    "id": "VM-0576",
-    "code": "repository.query('SELECT * FROM payments WHERE name=$1', [payload.token]);",
-    "false_positive": [
-      "A05:2025"
+    "id": "VM-0719",
+    "code": "const options = { service: 'payments', debug: true };\nstartServer(options);",
+    "false_positive": [],
+    "false_negative": [
+      "A02:2025"
     ],
-    "false_negative": [],
     "language": "JavaScript",
-    "scenario": "sql"
+    "scenario": "debug"
+  },
+  {
+    "id": "VM-0853",
+    "code": "http.request(request.query.name, callback).end();",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "JavaScript",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0855",
+    "code": "http.request(request.query.id, callback).end();",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "JavaScript",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0857",
+    "code": "http.request(request.query.value, callback).end();",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "JavaScript",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0859",
+    "code": "http.request(request.query.ref, callback).end();",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "JavaScript",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0861",
+    "code": "http.request(request.query.item, callback).end();",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "JavaScript",
+    "scenario": "ssrf"
+  },
+  {
+    "id": "VM-0863",
+    "code": "http.request(request.query.token, callback).end();",
+    "false_positive": [],
+    "false_negative": [
+      "A01:2025",
+      "API7:2023"
+    ],
+    "language": "JavaScript",
+    "scenario": "ssrf"
   },
   {
     "id": "VM-0998",
     "code": "tls.connect({ host: 'orders.example', rejectUnauthorized: true });",
     "false_positive": [
-      "A07:2025"
+      "A07:2025",
+      "API10:2023"
     ],
     "false_negative": [],
     "language": "JavaScript",
@@ -133,7 +266,8 @@
     "id": "VM-1000",
     "code": "tls.connect({ host: 'accounts.example', rejectUnauthorized: true });",
     "false_positive": [
-      "A07:2025"
+      "A07:2025",
+      "API10:2023"
     ],
     "false_negative": [],
     "language": "JavaScript",
@@ -143,7 +277,8 @@
     "id": "VM-1002",
     "code": "tls.connect({ host: 'products.example', rejectUnauthorized: true });",
     "false_positive": [
-      "A07:2025"
+      "A07:2025",
+      "API10:2023"
     ],
     "false_negative": [],
     "language": "JavaScript",
@@ -153,7 +288,8 @@
     "id": "VM-1004",
     "code": "tls.connect({ host: 'invoices.example', rejectUnauthorized: true });",
     "false_positive": [
-      "A07:2025"
+      "A07:2025",
+      "API10:2023"
     ],
     "false_negative": [],
     "language": "JavaScript",
@@ -163,7 +299,8 @@
     "id": "VM-1006",
     "code": "tls.connect({ host: 'customers.example', rejectUnauthorized: true });",
     "false_positive": [
-      "A07:2025"
+      "A07:2025",
+      "API10:2023"
     ],
     "false_negative": [],
     "language": "JavaScript",
@@ -173,10 +310,901 @@
     "id": "VM-1008",
     "code": "tls.connect({ host: 'payments.example', rejectUnauthorized: true });",
     "false_positive": [
-      "A07:2025"
+      "A07:2025",
+      "API10:2023"
     ],
     "false_negative": [],
     "language": "JavaScript",
     "scenario": "tls"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00006",
+    "code": "RESPONSE = ''\nimport urllib.parse\nparam = urllib.parse.unquote_plus(request.cookies.get('BenchmarkCase', 'noCookieValueSupplied'))\nbar = ''\nif param:\n    lst = []\n    lst.append('safe')\n    lst.append(param)\n    lst.append('moresafe')\n    lst.pop(0)\n    bar = lst[0]\nimport helpers.utils\nif '../' in bar:\n    RESPONSE += \"File name must not contain '../'\"\n    return RESPONSE\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'wb')\n    RESPONSE += f'Now ready to write to file: {escape_for_html(fileName)}'\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{escape_for_html(fileName)}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00017",
+    "code": "RESPONSE = ''\nimport urllib.parse\nparam = urllib.parse.unquote_plus(request.cookies.get('BenchmarkCase', 'noCookieValueSupplied'))\nbar = 'This should never happen'\nif 'should' in bar:\n    bar = param\nimport xml.dom.minidom\nimport xml.sax.handler\ntry:\n    parser = xml.sax.make_parser()\n    doc = xml.dom.minidom.parseString(bar, parser)\n    out = ''\n    processing = [doc.documentElement]\n    while processing:\n        e = processing.pop(0)\n        if e.nodeType == xml.dom.Node.TEXT_NODE:\n            out += e.data\n        else:\n            processing[:0] = e.childNodes\n    RESPONSE += f'Your XML doc results are: <br>{escape_for_html(out)}'\nexcept:\n    RESPONSE += f'There was an error reading your XML doc:<br>{escape_for_html(bar)}'\nreturn RESPONSE",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xxe"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00056",
+    "code": "RESPONSE = ''\nimport urllib.parse\nparam = urllib.parse.unquote_plus(request.cookies.get('BenchmarkCase', 'noCookieValueSupplied'))\nTestParam = 'This should never happen'\nif 'should' not in TestParam:\n    bar = 'Ifnot case passed'\nelse:\n    bar = param\nimport hashlib, base64\nimport io, helpers.utils\ninput = ''\nif isinstance(bar, str):\n    input = bar.encode('utf-8')\nelif isinstance(bar, io.IOBase):\n    input = bar.read(1000)\nif len(input) == 0:\n    RESPONSE += 'Cannot generate hash: Input was empty.'\n    return RESPONSE\nhash = hashlib.new('sha512')\nhash.update(input)\nresult = hash.digest()\nf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\nf.write(f'hash_value={base64.b64encode(result)}\\n')\nRESPONSE += f\"Sensitive value '{helpers.utils.escape_for_html(input.decode('utf-8'))}' hashed and stored.\"\nf.close()\nreturn RESPONSE",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00074",
+    "code": "RESPONSE = ''\nimport urllib.parse\nparam = urllib.parse.unquote_plus(request.cookies.get('BenchmarkCase', 'noCookieValueSupplied'))\nimport configparser\nbar = 'safe!'\nconf90091 = configparser.ConfigParser()\nconf90091.add_section('section90091')\nconf90091.set('section90091', 'keyA-90091', 'a-Value')\nconf90091.set('section90091', 'keyB-90091', param)\nbar = conf90091.get('section90091', 'keyB-90091')\ntry:\n    exec(bar)\nexcept:\n    RESPONSE += f\"Error executing statement '{escape_for_html(bar)}'\"\nreturn RESPONSE",
+    "false_positive": [],
+    "false_negative": [
+      "A05:2025"
+    ],
+    "language": "Python",
+    "scenario": "codeinj"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00111",
+    "code": "RESPONSE = ''\nparam = request.form.get('BenchmarkCase')\nif not param:\n    param = ''\nbar = 'This should never happen'\nif 'should' in bar:\n    bar = param\nimport lxml.etree\nimport helpers.utils\ntry:\n    fd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n    root = lxml.etree.parse(fd)\n    query = f'/Employees/Employee[@emplid=$name]'\n    nodes = root.xpath(query, name=bar)\n    node_strings = []\n    for node in nodes:\n        node_strings.append(' '.join([e.text for e in node]))\n    RESPONSE += f\"Your XPATH query results are: <br>[ {', '.join(node_strings)} ]\"\nexcept:\n    RESPONSE += f\"Error parsing XPath Query: '{escape_for_html(query)}'\"\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xpathi"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00144",
+    "code": "RESPONSE = ''\nparam = request.form.get('BenchmarkCase')\nif not param:\n    param = ''\nimport configparser\nbar = 'safe!'\nconf18029 = configparser.ConfigParser()\nconf18029.add_section('section18029')\nconf18029.set('section18029', 'keyA-18029', 'a-Value')\nconf18029.set('section18029', 'keyB-18029', param)\nbar = conf18029.get('section18029', 'keyB-18029')\nimport hashlib, base64\nimport io, helpers.utils\ninput = ''\nif isinstance(bar, str):\n    input = bar.encode('utf-8')\nelif isinstance(bar, io.IOBase):\n    input = bar.read(1000)\nif len(input) == 0:\n    RESPONSE += 'Cannot generate hash: Input was empty.'\n    return RESPONSE\nhash = hashlib.sha384()\nhash.update(input)\nresult = hash.digest()\nf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\nf.write(f'hash_value={base64.b64encode(result)}\\n')\nRESPONSE += f\"Sensitive value '{helpers.utils.escape_for_html(input.decode('utf-8'))}' hashed and stored.\"\nf.close()\nreturn RESPONSE",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00186",
+    "code": "RESPONSE = ''\nvalues = request.form.getlist('BenchmarkCase')\nparam = ''\nif values:\n    param = values[0]\nimport markupsafe\nbar = markupsafe.escape(param)\notherarg = 'static text'\nRESPONSE += f\"bar is '{bar}' and otherarg is '{otherarg}'\"\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00261",
+    "code": "RESPONSE = ''\nvalues = request.form.getlist('BenchmarkCase')\nparam = ''\nif values:\n    param = values[0]\nmap14820 = {}\nmap14820['keyA-14820'] = 'a-Value'\nmap14820['keyB-14820'] = param\nmap14820['keyC'] = 'another-Value'\nbar = 'safe!'\nbar = map14820['keyB-14820']\nbar = map14820['keyA-14820']\nimport flask\nflask.session[bar] = '12345'\nRESPONSE += f\"Item: '{escape_for_html(bar)}' with value: 12345 saved in session.\"\nreturn RESPONSE",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00279",
+    "code": "RESPONSE = ''\nimport helpers.separate_request\nwrapped = helpers.separate_request.request_wrapper(request)\nparam = wrapped.get_form_parameter('BenchmarkCase')\nif not param:\n    param = ''\nstring59781 = ''\ndata12 = ''\ncopy = string59781\nstring59781 = ''\nstring59781 += param\ncopy += 'SomeOKString'\nbar = copy\notherarg = 'static text'\nRESPONSE += \"bar is '{0}' and otherarg is '{1}'\".format(bar, otherarg)\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00332",
+    "code": "RESPONSE = ''\nimport helpers.separate_request\nwrapped = helpers.separate_request.request_wrapper(request)\nparam = wrapped.get_form_parameter('BenchmarkCase')\nif not param:\n    param = ''\nbar = ''\nif param:\n    bar = param.split(' ')[0]\nimport hashlib, base64\nimport io, helpers.utils\ninput = ''\nif isinstance(bar, str):\n    input = bar.encode('utf-8')\nelif isinstance(bar, io.IOBase):\n    input = bar.read(1000)\nif len(input) == 0:\n    RESPONSE += 'Cannot generate hash: Input was empty.'\n    return RESPONSE\nhash = hashlib.sha512()\nhash.update(input)\nresult = hash.digest()\nf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\nf.write(f'hash_value={base64.b64encode(result)}\\n')\nRESPONSE += f\"Sensitive value '{helpers.utils.escape_for_html(input.decode('utf-8'))}' hashed and stored.\"\nf.close()\nreturn RESPONSE",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00349",
+    "code": "RESPONSE = ''\nimport helpers.separate_request\nwrapped = helpers.separate_request.request_wrapper(request)\nparam = wrapped.get_form_parameter('BenchmarkCase')\nif not param:\n    param = ''\nmap69172 = {}\nmap69172['keyA-69172'] = 'a-Value'\nmap69172['keyB-69172'] = param\nmap69172['keyC'] = 'another-Value'\nbar = 'safe!'\nbar = map69172['keyB-69172']\nbar = map69172['keyA-69172']\nimport pickle\nimport base64\nimport helpers.utils\nhelpers.utils.sharedstr = 'no pickles to be seen here'\ntry:\n    unpickled = pickle.loads(base64.urlsafe_b64decode(bar))\nexcept:\n    RESPONSE += 'Unpickling failed!'\n    return RESPONSE\nRESPONSE += f'shared string is {helpers.utils.sharedstr}'\nreturn RESPONSE",
+    "false_positive": [
+      "A08:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "deserialization"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00364",
+    "code": "RESPONSE = ''\nparam = ''\nfor name in request.form.keys():\n    if 'BenchmarkCase' in request.form.getlist(name):\n        param = name\n        break\nimport helpers.utils\nbar = helpers.utils.escape_for_html(param)\ndict = {}\ndict['bar'] = bar\ndict['otherarg'] = 'this is it'\nRESPONSE += \"bar is '{0[bar]}' and otherarg is '{0[otherarg]}'\".format(dict)\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00375",
+    "code": "RESPONSE = ''\nparam = ''\nfor name in request.form.keys():\n    if 'BenchmarkCase' in request.form.getlist(name):\n        param = name\n        break\nTestParam = 'This should never happen'\nif 'should' not in TestParam:\n    bar = 'Ifnot case passed'\nelse:\n    bar = param\nimport lxml.etree\nimport helpers.utils\ntry:\n    fd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n    root = lxml.etree.parse(fd)\n    query = f\"\"\"/Employees/Employee[@emplid='{bar.replace(\"'\", '&apos;')}']\"\"\"\n    nodes = root.xpath(query)\n    node_strings = []\n    for node in nodes:\n        node_strings.append(' '.join([e.text for e in node]))\n    RESPONSE += f\"Your XPATH query results are: <br>[ {', '.join(node_strings)} ]\"\nexcept:\n    RESPONSE += f\"Error parsing XPath Query: '{escape_for_html(query)}'\"\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xpathi"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00421",
+    "code": "RESPONSE = ''\nparam = ''\nfor name in request.form.keys():\n    if 'BenchmarkCase' in request.form.getlist(name):\n        param = name\n        break\npossible = 'ABC'\nguess = possible[1]\nmatch guess:\n    case 'A':\n        bar = param\n    case 'B':\n        bar = 'bob'\n    case 'C' | 'D':\n        bar = param\n    case _:\n        bar = \"bob's your uncle\"\nimport flask\nflask.session['userid'] = bar\nRESPONSE += f\"Item: 'userid' with value '{escape_for_html(bar)}'saved in session.\"\nreturn RESPONSE",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00442",
+    "code": "RESPONSE = ''\nparam = request.headers.get('BenchmarkCase')\nif not param:\n    param = ''\nTestParam = 'This should never happen'\nif 'should' not in TestParam:\n    bar = 'Ifnot case passed'\nelse:\n    bar = param\nimport helpers.utils\nif '../' in bar:\n    RESPONSE += \"File name must not contain '../'\"\n    return RESPONSE\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'wb')\n    RESPONSE += f'Now ready to write to file: {escape_for_html(fileName)}'\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{escape_for_html(fileName)}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00490",
+    "code": "RESPONSE = ''\nparam = request.headers.get('BenchmarkCase')\nif not param:\n    param = ''\nimport configparser\nbar = 'safe!'\nconf24944 = configparser.ConfigParser()\nconf24944.add_section('section24944')\nconf24944.set('section24944', 'keyA-24944', 'a_Value')\nconf24944.set('section24944', 'keyB-24944', param)\nbar = conf24944.get('section24944', 'keyA-24944')\nimport hashlib, base64\nimport io, helpers.utils\ninput = ''\nif isinstance(bar, str):\n    input = bar.encode('utf-8')\nelif isinstance(bar, io.IOBase):\n    input = bar.read(1000)\nif len(input) == 0:\n    RESPONSE += 'Cannot generate hash: Input was empty.'\n    return RESPONSE\nhash = hashlib.sha384()\nhash.update(input)\nresult = hash.digest()\nf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\nf.write(f'hash_value={base64.b64encode(result)}\\n')\nRESPONSE += f\"Sensitive value '{helpers.utils.escape_for_html(input.decode('utf-8'))}' hashed and stored.\"\nf.close()\nreturn RESPONSE",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00512",
+    "code": "RESPONSE = ''\nparam = request.headers.get('BenchmarkCase')\nif not param:\n    param = ''\nimport configparser\nbar = 'safe!'\nconf41882 = configparser.ConfigParser()\nconf41882.add_section('section41882')\nconf41882.set('section41882', 'keyA-41882', 'a_Value')\nconf41882.set('section41882', 'keyB-41882', param)\nbar = conf41882.get('section41882', 'keyA-41882')\nimport platform\nimport subprocess\nimport helpers.utils\nargStr = ''\nif platform.system() == 'Windows':\n    argStr = 'cmd.exe /c '\nelse:\n    argStr = 'sh -c '\nargStr += f'echo {bar}'\ntry:\n    proc = subprocess.run(argStr, shell=True, capture_output=True, encoding='utf-8')\n    RESPONSE += helpers.utils.commandOutput(proc)\nexcept IOError:\n    RESPONSE += 'Problem executing cmdi - subprocess.run(list) Test Case'\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "cmdi"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00518",
+    "code": "RESPONSE = ''\nparam = ''\nheaders = request.headers.getlist('BenchmarkCase')\nif headers:\n    param = headers[0]\nmap10307 = {}\nmap10307['keyA-10307'] = 'a-Value'\nmap10307['keyB-10307'] = param\nmap10307['keyC'] = 'another-Value'\nbar = map10307['keyB-10307']\nimport helpers.utils\nfileName = None\nfd = None\nif '../' in bar:\n    RESPONSE += \"File name must not include '../'\"\n    return RESPONSE\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'rb')\n    RESPONSE += f\"The beginning of file: '{escape_for_html(fileName)}' is:\\n\\n{escape_for_html(fd.read(1000).decode('utf-8'))}\"\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{{escape_for_html(fileName)}}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00530",
+    "code": "RESPONSE = ''\nparam = ''\nheaders = request.headers.getlist('BenchmarkCase')\nif headers:\n    param = headers[0]\npossible = 'ABC'\nguess = possible[1]\nmatch guess:\n    case 'A':\n        bar = param\n    case 'B':\n        bar = 'bob'\n    case 'C' | 'D':\n        bar = param\n    case _:\n        bar = \"bob's your uncle\"\nimport helpers.utils\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    with open(fileName, 'wb') as fd:\n        RESPONSE += f'Now ready to write to file: {escape_for_html(fileName)}'\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{escape_for_html(fileName)}': {escape_for_html(e.strerror)}\"\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00540",
+    "code": "RESPONSE = ''\nparam = ''\nheaders = request.headers.getlist('BenchmarkCase')\nif headers:\n    param = headers[0]\npossible = 'ABC'\nguess = possible[1]\nmatch guess:\n    case 'A':\n        bar = param\n    case 'B':\n        bar = 'bob'\n    case 'C' | 'D':\n        bar = param\n    case _:\n        bar = \"bob's your uncle\"\nimport xml.dom.minidom\nimport xml.sax.handler\ntry:\n    parser = xml.sax.make_parser()\n    parser.setFeature(xml.sax.handler.feature_external_ges, True)\n    doc = xml.dom.minidom.parseString(bar, parser)\n    out = ''\n    processing = [doc.documentElement]\n    while processing:\n        e = processing.pop(0)\n        if e.nodeType == xml.dom.Node.TEXT_NODE:\n            out += e.data\n        else:\n            processing[:0] = e.childNodes\n    RESPONSE += f'Your XML doc results are: <br>{escape_for_html(out)}'\nexcept:\n    RESPONSE += f'There was an error reading your XML doc:<br>{escape_for_html(bar)}'\nreturn RESPONSE",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xxe"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00544",
+    "code": "RESPONSE = ''\nparam = ''\nheaders = request.headers.getlist('BenchmarkCase')\nif headers:\n    param = headers[0]\npossible = 'ABC'\nguess = possible[1]\nmatch guess:\n    case 'A':\n        bar = param\n    case 'B':\n        bar = 'bob'\n    case 'C' | 'D':\n        bar = param\n    case _:\n        bar = \"bob's your uncle\"\nimport lxml.etree\nimport helpers.utils\ntry:\n    fd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n    root = lxml.etree.parse(fd)\n    query = ''.join([\"/Employees/Employee[@emplid='\", bar, \"']\"])\n    nodes = root.xpath(query)\n    node_strings = []\n    for node in nodes:\n        node_strings.append(' '.join([e.text for e in node]))\n    RESPONSE += f\"Your XPATH query results are: <br>[ {', '.join(node_strings)} ]\"\nexcept:\n    RESPONSE += f\"Error parsing XPath Query: '{escape_for_html(query)}'\"\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xpathi"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00600",
+    "code": "RESPONSE = ''\nparam = ''\nheaders = request.headers.getlist('BenchmarkCase')\nif headers:\n    param = headers[0]\npossible = 'ABC'\nguess = possible[1]\nmatch guess:\n    case 'A':\n        bar = param\n    case 'B':\n        bar = 'bob'\n    case 'C' | 'D':\n        bar = param\n    case _:\n        bar = \"bob's your uncle\"\ntry:\n    RESPONSE += eval(bar)\nexcept:\n    RESPONSE += f\"Error evaluating expression '{escape_for_html(bar)}'\"\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "codeinj"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00617",
+    "code": "RESPONSE = ''\nimport helpers.utils\nparam = ''\nfor name in request.headers.keys():\n    if name.lower() in helpers.utils.commonHeaderNames:\n        continue\n    if request.headers.get_all(name):\n        param = name\n        break\nstring61762 = 'help'\nstring61762 += param\nstring61762 += 'snapes on a plane'\nbar = string61762[4:-17]\nimport pathlib\nimport helpers.utils\ntry:\n    testfiles = pathlib.Path(helpers.utils.TESTFILES_DIR)\n    p = (testfiles / bar).resolve()\n    if not str(p).startswith(str(testfiles)):\n        RESPONSE += 'Invalid Path.'\n        return RESPONSE\n    RESPONSE += f\"The beginning of file: '{escape_for_html(str(p))}' is:\\n\\n{escape_for_html(p.read_text()[:1000])}\"\nexcept OSError:\n    RESPONSE += f\"Problem reading from file '{{escape_for_html(fileName)}}': {escape_for_html(e.strerror)}\"\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00670",
+    "code": "RESPONSE = ''\nparam = request.args.get('BenchmarkCase')\nif not param:\n    param = ''\nstring49442 = ''\ndata12 = ''\ncopy = string49442\nstring49442 = ''\nstring49442 += param\ncopy += 'SomeOKString'\nbar = copy\notherarg = 'static text'\nRESPONSE += \"bar is '{0}' and otherarg is '{1}'\".format(bar, otherarg)\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00721",
+    "code": "RESPONSE = ''\nparam = request.args.get('BenchmarkCase')\nif not param:\n    param = ''\nbar = ''\nif param:\n    bar = param.split(' ')[0]\nfrom flask import make_response\nimport io\nimport helpers.utils\ninput = ''\nif isinstance(bar, str):\n    input = bar.encode('utf-8')\nelif isinstance(bar, io.IOBase):\n    input = bar.read(1000)\ncookie = 'SomeCookie'\nvalue = input.decode('utf-8')\nRESPONSE += f\"Created cookie: '{cookie}' with value '{helpers.utils.escape_for_html(value)}' and secure flag set to false.\"\nRESPONSE = make_response(RESPONSE)\nRESPONSE.set_cookie(cookie, value, path=request.path, secure=True, httponly=True)\nreturn RESPONSE",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "securecookie"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00832",
+    "code": "RESPONSE = ''\nimport helpers.separate_request\nwrapped = helpers.separate_request.request_wrapper(request)\nparam = wrapped.get_query_parameter('BenchmarkCase')\nif not param:\n    param = ''\npossible = 'ABC'\nguess = possible[1]\nmatch guess:\n    case 'A':\n        bar = param\n    case 'B':\n        bar = 'bob'\n    case 'C' | 'D':\n        bar = param\n    case _:\n        bar = \"bob's your uncle\"\nimport helpers.utils\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'wb')\n    RESPONSE += f'Now ready to write to file: {escape_for_html(fileName)}'\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{escape_for_html(fileName)}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00833",
+    "code": "RESPONSE = ''\nimport helpers.separate_request\nwrapped = helpers.separate_request.request_wrapper(request)\nparam = wrapped.get_query_parameter('BenchmarkCase')\nif not param:\n    param = ''\nimport helpers.ThingFactory\nthing = helpers.ThingFactory.createThing()\nbar = thing.doSomething(param)\nimport helpers.utils\nif '../' in bar:\n    RESPONSE += \"File name must not contain '../'\"\n    return RESPONSE\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'wb')\n    RESPONSE += f'Now ready to write to file: {escape_for_html(fileName)}'\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{escape_for_html(fileName)}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00911",
+    "code": "RESPONSE = ''\nimport urllib.parse\nquery_string = request.query_string.decode('utf-8')\nparamLoc = query_string.find('BenchmarkCase' + '=')\nif paramLoc == -1:\n    return f\"request.query_string did not contain expected parameter '{'BenchmarkCase'}'.\"\nparam = query_string[paramLoc + len('BenchmarkCase') + 1:]\nampLoc = param.find('&')\nif ampLoc != -1:\n    param = param[:ampLoc]\nparam = urllib.parse.unquote_plus(param)\nbar = param\nimport helpers.utils\nfileName = None\nfd = None\nif '../' in bar:\n    RESPONSE += \"File name must not include '../'\"\n    return RESPONSE\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'rb')\n    RESPONSE += f\"The beginning of file: '{escape_for_html(fileName)}' is:\\n\\n{escape_for_html(fd.read(1000).decode('utf-8'))}\"\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{{escape_for_html(fileName)}}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest00934",
+    "code": "RESPONSE = ''\nimport urllib.parse\nquery_string = request.query_string.decode('utf-8')\nparamLoc = query_string.find('BenchmarkCase' + '=')\nif paramLoc == -1:\n    return f\"request.query_string did not contain expected parameter '{'BenchmarkCase'}'.\"\nparam = query_string[paramLoc + len('BenchmarkCase') + 1:]\nampLoc = param.find('&')\nif ampLoc != -1:\n    param = param[:ampLoc]\nparam = urllib.parse.unquote_plus(param)\nbar = 'alsosafe'\nif param:\n    lst = []\n    lst.append('safe')\n    lst.append(param)\n    lst.append('moresafe')\n    lst.pop(0)\n    bar = lst[1]\nimport lxml.etree\nimport helpers.utils\ntry:\n    fd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n    root = lxml.etree.parse(fd)\n    query = f\"/Employees/Employee[@emplid='{bar}']\"\n    run_query = lxml.etree.XPath(query)\n    nodes = run_query(root)\n    node_strings = []\n    for node in nodes:\n        node_strings.append(' '.join([e.text for e in node]))\n    RESPONSE += f\"Your XPATH query results are: <br>[ {', '.join(node_strings)} ]\"\nexcept:\n    RESPONSE += f\"Error parsing XPath Query: '{escape_for_html(query)}'\"\nreturn RESPONSE",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "xpathi"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest01005",
+    "code": "RESPONSE = ''\nparts = request.path.split('/')\nparam = parts[1]\nif not param:\n    param = ''\nmap96560 = {}\nmap96560['keyA-96560'] = 'a-Value'\nmap96560['keyB-96560'] = param\nmap96560['keyC'] = 'another-Value'\nbar = map96560['keyB-96560']\nimport platform\nimport codecs\nimport helpers.utils\nfrom urllib.parse import urlparse\nfrom urllib.request import url2pathname\nstartURIslashes = ''\nif platform.system() == 'Windows':\n    startURIslashes = '/'\nelse:\n    startURIslashes = '//'\ntry:\n    fileURI = urlparse('file:' + startURIslashes + helpers.utils.TESTFILES_DIR.replace('\\\\', '/').replace(' ', '_') + bar)\n    fileTarget = codecs.open(f'{helpers.utils.TESTFILES_DIR}/{bar}', 'r', 'utf-8')\n    RESPONSE += f\"Access to file: '{escape_for_html(fileTarget.name)}' created.\"\n    RESPONSE += ' And file already exists.'\nexcept FileNotFoundError:\n    RESPONSE += \" But file doesn't exist yet.\"\nexcept IOError:\n    pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest01006",
+    "code": "RESPONSE = ''\nparts = request.path.split('/')\nparam = parts[1]\nif not param:\n    param = ''\nbar = ''\nif param:\n    lst = []\n    lst.append('safe')\n    lst.append(param)\n    lst.append('moresafe')\n    lst.pop(0)\n    bar = lst[0]\nimport helpers.utils\nfileName = None\nfd = None\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n    fd = open(fileName, 'rb')\n    RESPONSE += f\"The beginning of file: '{escape_for_html(fileName)}' is:\\n\\n{escape_for_html(fd.read(1000).decode('utf-8'))}\"\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{{escape_for_html(fileName)}}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest01071",
+    "code": "RESPONSE = ''\nparts = request.path.split('/')\nparam = parts[1]\nif not param:\n    param = ''\nimport configparser\nbar = 'safe!'\nconf45576 = configparser.ConfigParser()\nconf45576.add_section('section45576')\nconf45576.set('section45576', 'keyA-45576', 'a-Value')\nconf45576.set('section45576', 'keyB-45576', param)\nbar = conf45576.get('section45576', 'keyB-45576')\nimport hashlib, base64\nimport io, helpers.utils\ninput = ''\nif isinstance(bar, str):\n    input = bar.encode('utf-8')\nelif isinstance(bar, io.IOBase):\n    input = bar.read(1000)\nif len(input) == 0:\n    RESPONSE += 'Cannot generate hash: Input was empty.'\n    return RESPONSE\nhash = hashlib.new('sha384')\nhash.update(input)\nresult = hash.digest()\nf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\nf.write(f'hash_value={base64.b64encode(result)}\\n')\nRESPONSE += f\"Sensitive value '{helpers.utils.escape_for_html(input.decode('utf-8'))}' hashed and stored.\"\nf.close()\nreturn RESPONSE",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest01195",
+    "code": "RESPONSE = ''\nparam = request.stream\nimport hashlib, base64\nimport io, helpers.utils\ninput = ''\nif isinstance(param, str):\n    input = param.encode('utf-8')\nelif isinstance(param, io.IOBase):\n    input = param.read(1000)\nif len(input) == 0:\n    RESPONSE += 'Cannot generate hash: Input was empty.'\n    return RESPONSE\nhash = hashlib.new('sha384')\nhash.update(input)\nresult = hash.digest()\nf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\nf.write(f'hash_value={base64.b64encode(result)}\\n')\nRESPONSE += f\"Sensitive value '{helpers.utils.escape_for_html(input.decode('utf-8'))}' hashed and stored.\"\nf.close()\nreturn RESPONSE",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest01202",
+    "code": "RESPONSE = ''\nparam = request.args.get('BenchmarkCase')\nif not param:\n    param = ''\nimport helpers.utils\nfileName = None\nfd = None\nif '../' in param:\n    RESPONSE += \"File name must not include '../'\"\n    return RESPONSE\ntry:\n    fileName = f'{helpers.utils.TESTFILES_DIR}/{param}'\n    fd = open(fileName, 'rb')\n    RESPONSE += f\"The beginning of file: '{escape_for_html(fileName)}' is:\\n\\n{escape_for_html(fd.read(1000).decode('utf-8'))}\"\nexcept IOError as e:\n    RESPONSE += f\"Problem reading from file '{{escape_for_html(fileName)}}': {escape_for_html(e.strerror)}\"\nfinally:\n    try:\n        if fd is not None:\n            fd.close()\n    except IOError:\n        pass\nreturn RESPONSE",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkPython-BenchmarkTest01207",
+    "code": "RESPONSE = ''\nparam = request.args.get('BenchmarkCase')\nif not param:\n    param = ''\nfrom flask import make_response\nimport io\nimport helpers.utils\ninput = ''\nif isinstance(param, str):\n    input = param.encode('utf-8')\nelif isinstance(param, io.IOBase):\n    input = param.read(1000)\ncookie = 'SomeCookie'\nvalue = input.decode('utf-8')\nRESPONSE += f\"Created cookie: '{cookie}' with value '{helpers.utils.escape_for_html(value)}' and secure flag set to false.\"\nRESPONSE = make_response(RESPONSE)\nRESPONSE.set_cookie(cookie, value, path=request.path, secure=True, httponly=True)\nreturn RESPONSE",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "securecookie"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00064",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        javax.servlet.http.Cookie[] theCookies = request.getCookies();\n        String param = \"noCookieValueSupplied\";\n        if (theCookies != null) {\n            for (javax.servlet.http.Cookie theCookie : theCookies) {\n                if (theCookie.getName().equals(\"BenchmarkCase\")) {\n                    param = java.net.URLDecoder.decode(theCookie.getValue(), \"UTF-8\");\n                    break;\n                }\n            }\n        }\n        String bar;\n        int num = 106;\n        bar = (7 * 18) + num > 200 ? \"This_should_always_happen\" : param;\n        String fileName = null;\n        java.io.FileOutputStream fos = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fos = new java.io.FileOutputStream(fileName);\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fos != null) {\n                try {\n                    fos.close();\n                    fos = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00069",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        javax.servlet.http.Cookie[] theCookies = request.getCookies();\n        String param = \"noCookieValueSupplied\";\n        if (theCookies != null) {\n            for (javax.servlet.http.Cookie theCookie : theCookies) {\n                if (theCookie.getName().equals(\"BenchmarkCase\")) {\n                    param = java.net.URLDecoder.decode(theCookie.getValue(), \"UTF-8\");\n                    break;\n                }\n            }\n        }\n        String bar;\n        int num = 106;\n        bar = (7 * 18) + num > 200 ? \"This_should_always_happen\" : param;\n        java.security.Provider[] provider = java.security.Security.getProviders();\n        java.security.MessageDigest md;\n        try {\n            if (provider.length > 1) {\n                md = java.security.MessageDigest.getInstance(\"sha-384\", provider[0]);\n            } else {\n                md = java.security.MessageDigest.getInstance(\"sha-384\", \"SUN\");\n            }\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.security.Provider)\");\n            throw new ServletException(e);\n        } catch (java.security.NoSuchProviderException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.security.Provider)\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String,java.security.Provider) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00072",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        javax.servlet.http.Cookie[] theCookies = request.getCookies();\n        String param = \"noCookieValueSupplied\";\n        if (theCookies != null) {\n            for (javax.servlet.http.Cookie theCookie : theCookies) {\n                if (theCookie.getName().equals(\"BenchmarkCase\")) {\n                    param = java.net.URLDecoder.decode(theCookie.getValue(), \"UTF-8\");\n                    break;\n                }\n            }\n        }\n        org.owasp.benchmark.helpers.ThingInterface thing =\n                org.owasp.benchmark.helpers.ThingFactory.createThing();\n        String bar = thing.doSomething(param);\n        try {\n            java.security.MessageDigest md =\n                    java.security.MessageDigest.getInstance(\"SHA-512\", \"SUN\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.lang.String)\");\n            throw new ServletException(e);\n        } catch (java.security.NoSuchProviderException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.lang.String)\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String,java.lang.String) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00076",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        javax.servlet.http.Cookie[] theCookies = request.getCookies();\n        String param = \"noCookieValueSupplied\";\n        if (theCookies != null) {\n            for (javax.servlet.http.Cookie theCookie : theCookies) {\n                if (theCookie.getName().equals(\"BenchmarkCase\")) {\n                    param = java.net.URLDecoder.decode(theCookie.getValue(), \"UTF-8\");\n                    break;\n                }\n            }\n        }\n        String bar;\n        String guess = \"ABC\";\n        char switchTarget = guess.charAt(2);\n        switch (switchTarget) {\n            case 'A':\n                bar = param;\n                break;\n            case 'B':\n                bar = \"bobs_your_uncle\";\n                break;\n            case 'C':\n            case 'D':\n                bar = param;\n                break;\n            default:\n                bar = \"bobs_your_uncle\";\n                break;\n        }\n        try {\n            java.util.Properties benchmarkprops = new java.util.Properties();\n            benchmarkprops.load(\n                    this.getClass().getClassLoader().getResourceAsStream(\"benchmark.properties\"));\n            String algorithm = benchmarkprops.getProperty(\"hashAlg2\", \"SHA5\");\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00131",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        if (request.getHeader(\"BenchmarkCase\") != null) {\n            param = request.getHeader(\"BenchmarkCase\");\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar;\n        String guess = \"ABC\";\n        char switchTarget = guess.charAt(1);\n        switch (switchTarget) {\n            case 'A':\n                bar = param;\n                break;\n            case 'B':\n                bar = \"bob\";\n                break;\n            case 'C':\n            case 'D':\n                bar = param;\n                break;\n            default:\n                bar = \"bob's your uncle\";\n                break;\n        }\n        java.io.File fileTarget = new java.io.File(bar);\n        response.getWriter()\n                .println(\n                        \"Access to file: '\"\n                                + org.owasp\n                                        .esapi\n                                        .ESAPI\n                                        .encoder()\n                                        .encodeForHTML(fileTarget.toString())\n                                + \"' created.\");\n        if (fileTarget.exists()) {\n            response.getWriter().println(\" And file already exists.\");\n        } else {\n            response.getWriter().println(\" But file doesn't exist yet.\");\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00137",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        if (request.getHeader(\"BenchmarkCase\") != null) {\n            param = request.getHeader(\"BenchmarkCase\");\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = \"safe!\";\n        java.util.HashMap<String, Object> map53289 = new java.util.HashMap<String, Object>();\n        map53289.put(\"keyA-53289\", \"a_Value\");\n        map53289.put(\"keyB-53289\", param);\n        map53289.put(\"keyC\", \"another_Value\");\n        bar = (String) map53289.get(\"keyB-53289\");\n        bar = (String) map53289.get(\"keyA-53289\");\n        String fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n        java.io.InputStream is = null;\n        try {\n            java.nio.file.Path path = java.nio.file.Paths.get(fileName);\n            is = java.nio.file.Files.newInputStream(path, java.nio.file.StandardOpenOption.READ);\n            byte[] b = new byte[1000];\n            int size = is.read(b);\n            response.getWriter()\n                    .println(\n                            \"The beginning of file: '\"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName)\n                                    + \"' is:\\n\\n\");\n            response.getWriter()\n                    .println(org.owasp.esapi.ESAPI.encoder().encodeForHTML(new String(b, 0, size)));\n            is.close();\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open InputStream on file: '\" + fileName + \"'\");\n            response.getWriter()\n                    .println(\n                            \"Problem getting InputStream: \"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(e.getMessage()));\n        } finally {\n            if (is != null) {\n                try {\n                    is.close();\n                    is = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00282",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"Referer\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n        response.setHeader(\"X-XSS-Protection\", \"0\");\n        Object[] obj = {bar, \"b\"};\n        response.getWriter().printf(\"Formatted like: %1$s and %2$s.\", obj);\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00322",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"BenchmarkCase\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = \"safe!\";\n        java.util.HashMap<String, Object> map53101 = new java.util.HashMap<String, Object>();\n        map53101.put(\"keyA-53101\", \"a_Value\");\n        map53101.put(\"keyB-53101\", param);\n        map53101.put(\"keyC\", \"another_Value\");\n        bar = (String) map53101.get(\"keyB-53101\");\n        bar = (String) map53101.get(\"keyA-53101\");\n        request.getSession().putValue(\"userid\", bar);\n        response.getWriter()\n                .println(\n                        \"Item: 'userid' with value: '\"\n                                + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)\n                                + \"' saved in session.\");\n    }\n}",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00373",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = request.getParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar;\n        int num = 86;\n        if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n        else bar = param;\n        try {\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(\"SHA-256\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00454",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        java.util.Map<String, String[]> map = request.getParameterMap();\n        String param = \"\";\n        if (!map.isEmpty()) {\n            String[] values = map.get(\"BenchmarkCase\");\n            if (values != null) param = values[0];\n        }\n        String bar;\n        int num = 86;\n        if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n        else bar = param;\n        String fileName = null;\n        java.io.FileInputStream fis = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fis = new java.io.FileInputStream(new java.io.File(fileName));\n            byte[] b = new byte[1000];\n            int size = fis.read(b);\n            response.getWriter()\n                    .println(\n                            \"The beginning of file: '\"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName)\n                                    + \"' is:\\n\\n\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(b, 0, size)));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileInputStream on file: '\" + fileName + \"'\");\n            response.getWriter()\n                    .println(\n                            \"Problem getting FileInputStream: \"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(e.getMessage()));\n        } finally {\n            if (fis != null) {\n                try {\n                    fis.close();\n                    fis = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00466",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        java.util.Map<String, String[]> map = request.getParameterMap();\n        String param = \"\";\n        if (!map.isEmpty()) {\n            String[] values = map.get(\"BenchmarkCase\");\n            if (values != null) param = values[0];\n        }\n        String bar = \"safe!\";\n        java.util.HashMap<String, Object> map46344 = new java.util.HashMap<String, Object>();\n        map46344.put(\"keyA-46344\", \"a-Value\");\n        map46344.put(\"keyB-46344\", param);\n        map46344.put(\"keyC\", \"another-Value\");\n        bar = (String) map46344.get(\"keyB-46344\");\n        try {\n            java.util.Properties benchmarkprops = new java.util.Properties();\n            benchmarkprops.load(\n                    this.getClass().getClassLoader().getResourceAsStream(\"benchmark.properties\"));\n            String algorithm = benchmarkprops.getProperty(\"hashAlg2\", \"SHA5\");\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00539",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        boolean flag = true;\n        java.util.Enumeration<String> names = request.getParameterNames();\n        while (names.hasMoreElements() && flag) {\n            String name = (String) names.nextElement();\n            String[] values = request.getParameterValues(name);\n            if (values != null) {\n                for (int i = 0; i < values.length && flag; i++) {\n                    String value = values[i];\n                    if (value.equals(\"BenchmarkCase\")) {\n                        param = name;\n                        flag = false;\n                    }\n                }\n            }\n        }\n        String bar = \"\";\n        if (param != null) bar = param.split(\" \")[0];\n        try {\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(\"SHA-256\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00620",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = \"alsosafe\";\n        if (param != null) {\n            java.util.List<String> valuesList = new java.util.ArrayList<String>();\n            valuesList.add(\"safe\");\n            valuesList.add(param);\n            valuesList.add(\"moresafe\");\n            valuesList.remove(0);\n            bar = valuesList.get(1);\n        }\n        java.io.File fileTarget =\n                new java.io.File(\n                        new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR), bar);\n        response.getWriter()\n                .println(\n                        \"Access to file: '\"\n                                + org.owasp\n                                        .esapi\n                                        .ESAPI\n                                        .encoder()\n                                        .encodeForHTML(fileTarget.toString())\n                                + \"' created.\");\n        if (fileTarget.exists()) {\n            response.getWriter().println(\" And file already exists.\");\n        } else {\n            response.getWriter().println(\" But file doesn't exist yet.\");\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00625",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar;\n        int num = 86;\n        if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n        else bar = param;\n        String fileName = null;\n        java.io.FileOutputStream fos = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fos = new java.io.FileOutputStream(new java.io.File(fileName), false);\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fos != null) {\n                try {\n                    fos.close();\n                    fos = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00632",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = \"\";\n        if (param != null) bar = param.split(\" \")[0];\n        java.security.Provider[] provider = java.security.Security.getProviders();\n        java.security.MessageDigest md;\n        try {\n            if (provider.length > 1) {\n                md = java.security.MessageDigest.getInstance(\"sha-384\", provider[0]);\n            } else {\n                md = java.security.MessageDigest.getInstance(\"sha-384\", \"SUN\");\n            }\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.security.Provider)\");\n            throw new ServletException(e);\n        } catch (java.security.NoSuchProviderException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.security.Provider)\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String,java.security.Provider) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00640",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar;\n        int num = 106;\n        bar = (7 * 42) - num > 200 ? \"This should never happen\" : param;\n        try {\n            java.util.Properties benchmarkprops = new java.util.Properties();\n            benchmarkprops.load(\n                    this.getClass().getClassLoader().getResourceAsStream(\"benchmark.properties\"));\n            String algorithm = benchmarkprops.getProperty(\"hashAlg2\", \"SHA5\");\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00655",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = \"\";\n        if (param != null) {\n            bar =\n                    new String(\n                            org.apache.commons.codec.binary.Base64.decodeBase64(\n                                    org.apache.commons.codec.binary.Base64.encodeBase64(\n                                            param.getBytes())));\n        }\n        byte[] input = new byte[1000];\n        String str = \"?\";\n        Object inputParam = param;\n        if (inputParam instanceof String) str = ((String) inputParam);\n        if (inputParam instanceof java.io.InputStream) {\n            int i = ((java.io.InputStream) inputParam).read(input);\n            if (i == -1) {\n                response.getWriter()\n                        .println(\n                                \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                return;\n            }\n            str = new String(input, 0, i);\n        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);\n        cookie.setSecure(true);\n        cookie.setHttpOnly(true);\n        cookie.setPath(request.getRequestURI());\n        response.addCookie(cookie);\n        response.getWriter()\n                .println(\n                        \"Created cookie: 'SomeCookie': with value: '\"\n                                + org.owasp.esapi.ESAPI.encoder().encodeForHTML(str)\n                                + \"' and secure flag set to: true\");\n    }\n}",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "securecookie"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest00980",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        javax.servlet.http.Cookie[] theCookies = request.getCookies();\n        String param = \"noCookieValueSupplied\";\n        if (theCookies != null) {\n            for (javax.servlet.http.Cookie theCookie : theCookies) {\n                if (theCookie.getName().equals(\"BenchmarkCase\")) {\n                    param = java.net.URLDecoder.decode(theCookie.getValue(), \"UTF-8\");\n                    break;\n                }\n            }\n        }\n        String bar = new Test().doSomething(request, param);\n        String cmd =\n                org.owasp.benchmark.helpers.Utils.getInsecureOSCommandString(\n                        this.getClass().getClassLoader());\n        String[] args = {cmd};\n        String[] argsEnv = {bar};\n        Runtime r = Runtime.getRuntime();\n        try {\n            Process p = r.exec(args, argsEnv);\n            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);\n        } catch (IOException e) {\n            System.out.println(\"Problem executing cmdi - TestCase\");\n            response.getWriter()\n                    .println(org.owasp.esapi.ESAPI.encoder().encodeForHTML(e.getMessage()));\n            return;\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = \"alsosafe\";\n            if (param != null) {\n                java.util.List<String> valuesList = new java.util.ArrayList<String>();\n                valuesList.add(\"safe\");\n                valuesList.add(param);\n                valuesList.add(\"moresafe\");\n                valuesList.remove(0);\n                bar = valuesList.get(1);\n            }\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "cmdi"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01030",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        if (request.getHeader(\"BenchmarkCase\") != null) {\n            param = request.getHeader(\"BenchmarkCase\");\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        String startURIslashes = \"\";\n        if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1)\n            if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1) startURIslashes = \"/\";\n            else startURIslashes = \"//\";\n        try {\n            java.net.URI fileURI =\n                    new java.net.URI(\n                            \"file\",\n                            null,\n                            startURIslashes\n                                    + org.owasp.benchmark.helpers.Utils.TESTFILES_DIR\n                                            .replace('\\\\', java.io.File.separatorChar)\n                                            .replace(' ', '_')\n                                    + bar,\n                            null,\n                            null);\n            java.io.File fileTarget = new java.io.File(fileURI);\n            response.getWriter()\n                    .println(\n                            \"Access to file: '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(fileTarget.toString())\n                                    + \"' created.\");\n            if (fileTarget.exists()) {\n                response.getWriter().println(\" And file already exists.\");\n            } else {\n                response.getWriter().println(\" But file doesn't exist yet.\");\n            }\n        } catch (java.net.URISyntaxException e) {\n            throw new ServletException(e);\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            String guess = \"ABC\";\n            char switchTarget = guess.charAt(1);\n            switch (switchTarget) {\n                case 'A':\n                    bar = param;\n                    break;\n                case 'B':\n                    bar = \"bob\";\n                    break;\n                case 'C':\n                case 'D':\n                    bar = param;\n                    break;\n                default:\n                    bar = \"bob's your uncle\";\n                    break;\n            }\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01039",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        if (request.getHeader(\"BenchmarkCase\") != null) {\n            param = request.getHeader(\"BenchmarkCase\");\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        try {\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(\"SHA-256\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 106;\n            bar = (7 * 18) + num > 200 ? \"This_should_always_happen\" : param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01098",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        if (request.getHeader(\"BenchmarkCase\") != null) {\n            param = request.getHeader(\"BenchmarkCase\");\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        String sql = \"INSERT INTO users (username, password) VALUES ('foo','\" + bar + \"')\";\n        try {\n            java.sql.Statement statement =\n                    org.owasp.benchmark.helpers.DatabaseHelper.getSqlStatement();\n            int count = statement.executeUpdate(sql, new int[] {1, 2});\n            org.owasp.benchmark.helpers.DatabaseHelper.outputUpdateComplete(sql, response);\n        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = \"alsosafe\";\n            if (param != null) {\n                java.util.List<String> valuesList = new java.util.ArrayList<String>();\n                valuesList.add(\"safe\");\n                valuesList.add(param);\n                valuesList.add(\"moresafe\");\n                valuesList.remove(0);\n                bar = valuesList.get(1);\n            }\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "sqli"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01142",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> names = request.getHeaderNames();\n        while (names.hasMoreElements()) {\n            String name = (String) names.nextElement();\n            if (org.owasp.benchmark.helpers.Utils.commonHeaders.contains(name)) {\n                continue;\n            }\n            java.util.Enumeration<String> values = request.getHeaders(name);\n            if (values != null && values.hasMoreElements()) {\n                param = name;\n                break;\n            }\n        }\n        String bar = new Test().doSomething(request, param);\n        request.getSession().putValue(\"userid\", bar);\n        response.getWriter()\n                .println(\n                        \"Item: 'userid' with value: '\"\n                                + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)\n                                + \"' saved in session.\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 86;\n            if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n            else bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01145",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> names = request.getHeaderNames();\n        while (names.hasMoreElements()) {\n            String name = (String) names.nextElement();\n            if (org.owasp.benchmark.helpers.Utils.commonHeaders.contains(name)) {\n                continue;\n            }\n            java.util.Enumeration<String> values = request.getHeaders(name);\n            if (values != null && values.hasMoreElements()) {\n                param = name;\n                break;\n            }\n        }\n        String bar = new Test().doSomething(request, param);\n        request.getSession().setAttribute(\"userid\", bar);\n        response.getWriter()\n                .println(\n                        \"Item: 'userid' with value: '\"\n                                + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)\n                                + \"' saved in session.\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 86;\n            if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n            else bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01160",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"BenchmarkCase\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        String fileName = null;\n        java.io.FileOutputStream fos = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fos = new java.io.FileOutputStream(new java.io.File(fileName), false);\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fos != null) {\n                try {\n                    fos.close();\n                    fos = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 86;\n            if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n            else bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01188",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"Referer\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().write(\"Parameter value: \" + bar);\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01205",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"BenchmarkCase\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        request.getSession().putValue(\"userid\", bar);\n        response.getWriter()\n                .println(\n                        \"Item: 'userid' with value: '\"\n                                + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)\n                                + \"' saved in session.\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 106;\n            bar = (7 * 18) + num > 200 ? \"This_should_always_happen\" : param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01251",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = request.getParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = new Test().doSomething(request, param);\n        response.setHeader(\"X-XSS-Protection\", \"0\");\n        Object[] obj = {\"a\", bar};\n        java.io.PrintWriter out = response.getWriter();\n        out.write(\"<!DOCTYPE html>\\n<html>\\n<body>\\n<p>\");\n        out.format(java.util.Locale.US, \"Formatted like: %1$s and %2$s.\", obj);\n        out.write(\"\\n</p>\\n</body>\\n</html>\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01407",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        boolean flag = true;\n        java.util.Enumeration<String> names = request.getParameterNames();\n        while (names.hasMoreElements() && flag) {\n            String name = (String) names.nextElement();\n            String[] values = request.getParameterValues(name);\n            if (values != null) {\n                for (int i = 0; i < values.length && flag; i++) {\n                    String value = values[i];\n                    if (value.equals(\"BenchmarkCase\")) {\n                        param = name;\n                        flag = false;\n                    }\n                }\n            }\n        }\n        String bar = new Test().doSomething(request, param);\n        String fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n        try (\n        java.io.FileOutputStream fos =\n                new java.io.FileOutputStream(new java.io.FileInputStream(fileName).getFD()); ) {\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 86;\n            if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n            else bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01493",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = new Test().doSomething(request, param);\n        java.io.File fileTarget =\n                new java.io.File(\n                        new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR), bar);\n        response.getWriter()\n                .println(\n                        \"Access to file: '\"\n                                + org.owasp\n                                        .esapi\n                                        .ESAPI\n                                        .encoder()\n                                        .encodeForHTML(fileTarget.toString())\n                                + \"' created.\");\n        if (fileTarget.exists()) {\n            response.getWriter().println(\" And file already exists.\");\n        } else {\n            response.getWriter().println(\" But file doesn't exist yet.\");\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = \"safe!\";\n            java.util.HashMap<String, Object> map71009 = new java.util.HashMap<String, Object>();\n            map71009.put(\"keyA-71009\", \"a_Value\");\n            map71009.put(\"keyB-71009\", param);\n            map71009.put(\"keyC\", \"another_Value\");\n            bar = (String) map71009.get(\"keyB-71009\");\n            bar = (String) map71009.get(\"keyA-71009\");\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01604",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String[] values = request.getParameterValues(\"BenchmarkCase\");\n        String param;\n        if (values != null && values.length > 0) param = values[0];\n        else param = \"\";\n        String bar = new Test().doSomething(request, param);\n        byte[] input = new byte[1000];\n        String str = \"?\";\n        Object inputParam = param;\n        if (inputParam instanceof String) str = ((String) inputParam);\n        if (inputParam instanceof java.io.InputStream) {\n            int i = ((java.io.InputStream) inputParam).read(input);\n            if (i == -1) {\n                response.getWriter()\n                        .println(\n                                \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                return;\n            }\n            str = new String(input, 0, i);\n        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);\n        cookie.setSecure(true);\n        cookie.setHttpOnly(true);\n        cookie.setPath(request.getRequestURI());\n        response.addCookie(cookie);\n        response.getWriter()\n                .println(\n                        \"Created cookie: 'SomeCookie': with value: '\"\n                                + org.owasp.esapi.ESAPI.encoder().encodeForHTML(str)\n                                + \"' and secure flag set to: true\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "securecookie"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01622",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String[] values = request.getParameterValues(\"BenchmarkCase\");\n        String param;\n        if (values != null && values.length > 0) param = values[0];\n        else param = \"\";\n        String bar = new Test().doSomething(request, param);\n        String sql = \"{call \" + bar + \"}\";\n        try {\n            java.sql.Connection connection =\n                    org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection();\n            java.sql.CallableStatement statement =\n                    connection.prepareCall(\n                            sql,\n                            java.sql.ResultSet.TYPE_FORWARD_ONLY,\n                            java.sql.ResultSet.CONCUR_READ_ONLY,\n                            java.sql.ResultSet.CLOSE_CURSORS_AT_COMMIT);\n            java.sql.ResultSet rs = statement.executeQuery();\n            org.owasp.benchmark.helpers.DatabaseHelper.printResults(rs, sql, response);\n        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = \"alsosafe\";\n            if (param != null) {\n                java.util.List<String> valuesList = new java.util.ArrayList<String>();\n                valuesList.add(\"safe\");\n                valuesList.add(param);\n                valuesList.add(\"moresafe\");\n                valuesList.remove(0);\n                bar = valuesList.get(1);\n            }\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "sqli"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01646",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        String fileName = null;\n        java.io.FileOutputStream fos = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fos = new java.io.FileOutputStream(new java.io.File(fileName));\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fos != null) {\n                try {\n                    fos.close();\n                    fos = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = \"safe!\";\n            java.util.HashMap<String, Object> map84260 = new java.util.HashMap<String, Object>();\n            map84260.put(\"keyA-84260\", \"a_Value\");\n            map84260.put(\"keyB-84260\", param);\n            map84260.put(\"keyC\", \"another_Value\");\n            bar = (String) map84260.get(\"keyB-84260\");\n            bar = (String) map84260.get(\"keyA-84260\");\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01669",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().println(bar);\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01671",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().write(bar);\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01684",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        byte[] input = new byte[1000];\n        String str = \"?\";\n        Object inputParam = param;\n        if (inputParam instanceof String) str = ((String) inputParam);\n        if (inputParam instanceof java.io.InputStream) {\n            int i = ((java.io.InputStream) inputParam).read(input);\n            if (i == -1) {\n                response.getWriter()\n                        .println(\n                                \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                return;\n            }\n            str = new String(input, 0, i);\n        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);\n        cookie.setSecure(true);\n        cookie.setHttpOnly(true);\n        cookie.setPath(request.getRequestURI());\n        response.addCookie(cookie);\n        response.getWriter()\n                .println(\n                        \"Created cookie: 'SomeCookie': with value: '\"\n                                + org.owasp.esapi.ESAPI.encoder().encodeForHTML(str)\n                                + \"' and secure flag set to: true\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            StringBuilder sbxyz77558 = new StringBuilder(param);\n            String bar = sbxyz77558.append(\"_SafeStuff\").toString();\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "securecookie"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01719",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = new Test().doSomething(request, param);\n        String sql = \"SELECT * from USERS where USERNAME=? and PASSWORD='\" + bar + \"'\";\n        try {\n            java.sql.Connection connection =\n                    org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection();\n            java.sql.PreparedStatement statement =\n                    connection.prepareStatement(sql, new String[] {\"Column1\", \"Column2\"});\n            statement.setString(1, \"foo\");\n            statement.execute();\n            org.owasp.benchmark.helpers.DatabaseHelper.printResults(statement, sql, response);\n        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = \"alsosafe\";\n            if (param != null) {\n                java.util.List<String> valuesList = new java.util.ArrayList<String>();\n                valuesList.add(\"safe\");\n                valuesList.add(param);\n                valuesList.add(\"moresafe\");\n                valuesList.remove(0);\n                bar = valuesList.get(1);\n            }\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "sqli"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01746",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheValue(\"BenchmarkCase\");\n        String bar = new Test().doSomething(request, param);\n        String startURIslashes = \"\";\n        if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1)\n            if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1) startURIslashes = \"/\";\n            else startURIslashes = \"//\";\n        try {\n            java.net.URI fileURI =\n                    new java.net.URI(\n                            \"file:\"\n                                    + startURIslashes\n                                    + org.owasp.benchmark.helpers.Utils.TESTFILES_DIR\n                                            .replace('\\\\', '/')\n                                            .replace(' ', '_')\n                                    + bar);\n            java.io.File fileTarget = new java.io.File(fileURI);\n            response.getWriter()\n                    .println(\n                            \"Access to file: '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(fileTarget.toString())\n                                    + \"' created.\");\n            if (fileTarget.exists()) {\n                response.getWriter().println(\" And file already exists.\");\n            } else {\n                response.getWriter().println(\" But file doesn't exist yet.\");\n            }\n        } catch (java.net.URISyntaxException e) {\n            throw new ServletException(e);\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 106;\n            bar = (7 * 42) - num > 200 ? \"This should never happen\" : param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01747",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheValue(\"BenchmarkCase\");\n        String bar = new Test().doSomething(request, param);\n        String startURIslashes = \"\";\n        if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1)\n            if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1) startURIslashes = \"/\";\n            else startURIslashes = \"//\";\n        try {\n            java.net.URI fileURI =\n                    new java.net.URI(\n                            \"file\",\n                            null,\n                            startURIslashes\n                                    + org.owasp.benchmark.helpers.Utils.TESTFILES_DIR\n                                            .replace('\\\\', java.io.File.separatorChar)\n                                            .replace(' ', '_')\n                                    + bar,\n                            null,\n                            null);\n            java.io.File fileTarget = new java.io.File(fileURI);\n            response.getWriter()\n                    .println(\n                            \"Access to file: '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(fileTarget.toString())\n                                    + \"' created.\");\n            if (fileTarget.exists()) {\n                response.getWriter().println(\" And file already exists.\");\n            } else {\n                response.getWriter().println(\" But file doesn't exist yet.\");\n            }\n        } catch (java.net.URISyntaxException e) {\n            throw new ServletException(e);\n        }\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar;\n            int num = 86;\n            if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n            else bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01802",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheValue(\"BenchmarkCase\");\n        String bar = new Test().doSomething(request, param);\n        request.getSession().putValue(bar, \"10340\");\n        response.getWriter()\n                .println(\n                        \"Item: '\"\n                                + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)\n                                + \"' with value: 10340 saved in session.\");\n    }\n    private class Test {\n        public String doSomething(HttpServletRequest request, String param)\n                throws ServletException, IOException {\n            String bar = param;\n            return bar;\n        }\n    }\n}",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01862",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        javax.servlet.http.Cookie[] theCookies = request.getCookies();\n        String param = \"noCookieValueSupplied\";\n        if (theCookies != null) {\n            for (javax.servlet.http.Cookie theCookie : theCookies) {\n                if (theCookie.getName().equals(\"BenchmarkCase\")) {\n                    param = java.net.URLDecoder.decode(theCookie.getValue(), \"UTF-8\");\n                    break;\n                }\n            }\n        }\n        String bar = doSomething(request, param);\n        byte[] input = new byte[1000];\n        String str = \"?\";\n        Object inputParam = param;\n        if (inputParam instanceof String) str = ((String) inputParam);\n        if (inputParam instanceof java.io.InputStream) {\n            int i = ((java.io.InputStream) inputParam).read(input);\n            if (i == -1) {\n                response.getWriter()\n                        .println(\n                                \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                return;\n            }\n            str = new String(input, 0, i);\n        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);\n        cookie.setSecure(true);\n        cookie.setHttpOnly(true);\n        cookie.setPath(request.getRequestURI());\n        response.addCookie(cookie);\n        response.getWriter()\n                .println(\n                        \"Created cookie: 'SomeCookie': with value: '\"\n                                + org.owasp.esapi.ESAPI.encoder().encodeForHTML(str)\n                                + \"' and secure flag set to: true\");\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = param;\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A02:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "securecookie"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01905",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        if (request.getHeader(\"BenchmarkCase\") != null) {\n            param = request.getHeader(\"BenchmarkCase\");\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = doSomething(request, param);\n        String fileName = null;\n        java.io.FileInputStream fis = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fis = new java.io.FileInputStream(fileName);\n            byte[] b = new byte[1000];\n            int size = fis.read(b);\n            response.getWriter()\n                    .println(\n                            \"The beginning of file: '\"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName)\n                                    + \"' is:\\n\\n\");\n            response.getWriter()\n                    .println(org.owasp.esapi.ESAPI.encoder().encodeForHTML(new String(b, 0, size)));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileInputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fis != null) {\n                try {\n                    fis.close();\n                    fis = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = \"safe!\";\n        java.util.HashMap<String, Object> map33587 = new java.util.HashMap<String, Object>();\n        map33587.put(\"keyA-33587\", \"a_Value\");\n        map33587.put(\"keyB-33587\", param);\n        map33587.put(\"keyC\", \"another_Value\");\n        bar = (String) map33587.get(\"keyB-33587\");\n        bar = (String) map33587.get(\"keyA-33587\");\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest01984",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> names = request.getHeaderNames();\n        while (names.hasMoreElements()) {\n            String name = (String) names.nextElement();\n            if (org.owasp.benchmark.helpers.Utils.commonHeaders.contains(name)) {\n                continue;\n            }\n            java.util.Enumeration<String> values = request.getHeaders(name);\n            if (values != null && values.hasMoreElements()) {\n                param = name;\n                break;\n            }\n        }\n        String bar = doSomething(request, param);\n        java.io.File fileTarget =\n                new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR, bar);\n        response.getWriter()\n                .println(\n                        \"Access to file: '\"\n                                + org.owasp\n                                        .esapi\n                                        .ESAPI\n                                        .encoder()\n                                        .encodeForHTML(fileTarget.toString())\n                                + \"' created.\");\n        if (fileTarget.exists()) {\n            response.getWriter().println(\" And file already exists.\");\n        } else {\n            response.getWriter().println(\" But file doesn't exist yet.\");\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = \"safe!\";\n        java.util.HashMap<String, Object> map95438 = new java.util.HashMap<String, Object>();\n        map95438.put(\"keyA-95438\", \"a_Value\");\n        map95438.put(\"keyB-95438\", param);\n        map95438.put(\"keyC\", \"another_Value\");\n        bar = (String) map95438.get(\"keyB-95438\");\n        bar = (String) map95438.get(\"keyA-95438\");\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02030",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"BenchmarkCase\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = doSomething(request, param);\n        String startURIslashes = \"\";\n        if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1)\n            if (System.getProperty(\"os.name\").indexOf(\"Windows\") != -1) startURIslashes = \"/\";\n            else startURIslashes = \"//\";\n        try {\n            java.net.URI fileURI =\n                    new java.net.URI(\n                            \"file\",\n                            null,\n                            startURIslashes\n                                    + org.owasp.benchmark.helpers.Utils.TESTFILES_DIR\n                                            .replace('\\\\', java.io.File.separatorChar)\n                                            .replace(' ', '_')\n                                    + bar,\n                            null,\n                            null);\n            java.io.File fileTarget = new java.io.File(fileURI);\n            response.getWriter()\n                    .println(\n                            \"Access to file: '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(fileTarget.toString())\n                                    + \"' created.\");\n            if (fileTarget.exists()) {\n                response.getWriter().println(\" And file already exists.\");\n            } else {\n                response.getWriter().println(\" But file doesn't exist yet.\");\n            }\n        } catch (java.net.URISyntaxException e) {\n            throw new ServletException(e);\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String a60868 = param;\n        StringBuilder b60868 = new StringBuilder(a60868);\n        b60868.append(\" SafeStuff\");\n        b60868.replace(\n                b60868.length() - \"Chars\".length(),\n                b60868.length(),\n                \"Chars\");\n        java.util.HashMap<String, Object> map60868 = new java.util.HashMap<String, Object>();\n        map60868.put(\"key60868\", b60868.toString());\n        String c60868 = (String) map60868.get(\"key60868\");\n        String d60868 = c60868.substring(0, c60868.length() - 1);\n        String e60868 =\n                new String(\n                        org.apache.commons.codec.binary.Base64.decodeBase64(\n                                org.apache.commons.codec.binary.Base64.encodeBase64(\n                                        d60868.getBytes())));\n        String f60868 = e60868.split(\" \")[0];\n        org.owasp.benchmark.helpers.ThingInterface thing =\n                org.owasp.benchmark.helpers.ThingFactory.createThing();\n        String g60868 = \"barbarians_at_the_gate\";\n        String bar = thing.doSomething(g60868);\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02033",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = \"\";\n        java.util.Enumeration<String> headers = request.getHeaders(\"BenchmarkCase\");\n        if (headers != null && headers.hasMoreElements()) {\n            param = headers.nextElement();\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = doSomething(request, param);\n        String fileName = null;\n        java.io.FileOutputStream fos = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fos = new java.io.FileOutputStream(new java.io.File(fileName), false);\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fos != null) {\n                try {\n                    fos.close();\n                    fos = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar;\n        String guess = \"ABC\";\n        char switchTarget = guess.charAt(1);\n        switch (switchTarget) {\n            case 'A':\n                bar = param;\n                break;\n            case 'B':\n                bar = \"bob\";\n                break;\n            case 'C':\n            case 'D':\n                bar = param;\n                break;\n            default:\n                bar = \"bob's your uncle\";\n                break;\n        }\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02104",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = request.getParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = doSomething(request, param);\n        org.owasp.benchmark.helpers.LDAPManager ads = new org.owasp.benchmark.helpers.LDAPManager();\n        try {\n            response.setContentType(\"text/html;charset=UTF-8\");\n            javax.naming.directory.DirContext ctx = ads.getDirContext();\n            String base = \"ou=users,ou=system\";\n            javax.naming.directory.SearchControls sc = new javax.naming.directory.SearchControls();\n            sc.setSearchScope(javax.naming.directory.SearchControls.SUBTREE_SCOPE);\n            String filter = \"(&(objectclass=person))(|(uid=\" + bar + \")(street={0}))\";\n            Object[] filters = new Object[] {\"The streetz 4 Ms bar\"};\n            boolean found = false;\n            javax.naming.NamingEnumeration<javax.naming.directory.SearchResult> results =\n                    ctx.search(base, filter, filters, sc);\n            while (results.hasMore()) {\n                javax.naming.directory.SearchResult sr =\n                        (javax.naming.directory.SearchResult) results.next();\n                javax.naming.directory.Attributes attrs = sr.getAttributes();\n                javax.naming.directory.Attribute attr = attrs.get(\"uid\");\n                javax.naming.directory.Attribute attr2 = attrs.get(\"street\");\n                if (attr != null) {\n                    response.getWriter()\n                            .println(\n                                    \"LDAP query results:<br>\"\n                                            + \"Record found with name \"\n                                            + org.owasp\n                                                    .esapi\n                                                    .ESAPI\n                                                    .encoder()\n                                                    .encodeForHTML(attr.get().toString())\n                                            + \"<br>Address: \"\n                                            + org.owasp\n                                                    .esapi\n                                                    .ESAPI\n                                                    .encoder()\n                                                    .encodeForHTML(attr2.get().toString())\n                                            + \"<br>\");\n                    found = true;\n                }\n            }\n            if (!found) {\n                response.getWriter()\n                        .println(\n                                \"LDAP query results: nothing found for query: \"\n                                        + org.owasp.esapi.ESAPI.encoder().encodeForHTML(filter));\n            }\n        } catch (javax.naming.NamingException e) {\n            throw new ServletException(e);\n        } finally {\n            try {\n                ads.closeDirContext();\n            } catch (Exception e) {\n                throw new ServletException(e);\n            }\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = \"alsosafe\";\n        if (param != null) {\n            java.util.List<String> valuesList = new java.util.ArrayList<String>();\n            valuesList.add(\"safe\");\n            valuesList.add(param);\n            valuesList.add(\"moresafe\");\n            valuesList.remove(0);\n            bar = valuesList.get(1);\n        }\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "ldapi"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02168",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = request.getParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = doSomething(request, param);\n        request.getSession().setAttribute(\"userid\", bar);\n        response.getWriter()\n                .println(\n                        \"Item: 'userid' with value: '\"\n                                + org.owasp.benchmark.helpers.Utils.encodeForHTML(bar)\n                                + \"' saved in session.\");\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = \"alsosafe\";\n        if (param != null) {\n            java.util.List<String> valuesList = new java.util.ArrayList<String>();\n            valuesList.add(\"safe\");\n            valuesList.add(param);\n            valuesList.add(\"moresafe\");\n            valuesList.remove(0);\n            bar = valuesList.get(1);\n        }\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A06:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "trustbound"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02184",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String param = request.getParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = doSomething(request, param);\n        String sql = \"SELECT  * from USERS where USERNAME='foo' and PASSWORD='\" + bar + \"'\";\n        try {\n            org.springframework.jdbc.support.rowset.SqlRowSet results =\n                    org.owasp.benchmark.helpers.DatabaseHelper.JDBCtemplate.queryForRowSet(sql);\n            response.getWriter().println(\"Your results are: \");\n            while (results.next()) {\n                response.getWriter()\n                        .println(\n                                org.owasp\n                                                .esapi\n                                                .ESAPI\n                                                .encoder()\n                                                .encodeForHTML(results.getString(\"USERNAME\"))\n                                        + \" \");\n            }\n        } catch (org.springframework.dao.EmptyResultDataAccessException e) {\n            response.getWriter()\n                    .println(\n                            \"No results returned for query: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(sql));\n        } catch (org.springframework.dao.DataAccessException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = \"alsosafe\";\n        if (param != null) {\n            java.util.List<String> valuesList = new java.util.ArrayList<String>();\n            valuesList.add(\"safe\");\n            valuesList.add(param);\n            valuesList.add(\"moresafe\");\n            valuesList.remove(0);\n            bar = valuesList.get(1);\n        }\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "sqli"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02214",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        java.util.Map<String, String[]> map = request.getParameterMap();\n        String param = \"\";\n        if (!map.isEmpty()) {\n            String[] values = map.get(\"BenchmarkCase\");\n            if (values != null) param = values[0];\n        }\n        String bar = doSomething(request, param);\n        try {\n            java.security.MessageDigest md =\n                    java.security.MessageDigest.getInstance(\"SHA-512\", \"SUN\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.lang.String)\");\n            throw new ServletException(e);\n        } catch (java.security.NoSuchProviderException e) {\n            System.out.println(\n                    \"Problem executing hash - TestCase java.security.MessageDigest.getInstance(java.lang.String,java.lang.String)\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String,java.lang.String) executed\");\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02237",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        java.util.Map<String, String[]> map = request.getParameterMap();\n        String param = \"\";\n        if (!map.isEmpty()) {\n            String[] values = map.get(\"BenchmarkCase\");\n            if (values != null) param = values[0];\n        }\n        String bar = doSomething(request, param);\n        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().println(bar);\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = org.owasp.esapi.ESAPI.encoder().encodeForHTML(param);\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "xss"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02390",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        org.owasp.benchmark.helpers.SeparateClassRequest scr =\n                new org.owasp.benchmark.helpers.SeparateClassRequest(request);\n        String param = scr.getTheParameter(\"BenchmarkCase\");\n        if (param == null) param = \"\";\n        String bar = doSomething(request, param);\n        try {\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(\"SHA-256\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String a73202 = param;\n        StringBuilder b73202 = new StringBuilder(a73202);\n        b73202.append(\" SafeStuff\");\n        b73202.replace(\n                b73202.length() - \"Chars\".length(),\n                b73202.length(),\n                \"Chars\");\n        java.util.HashMap<String, Object> map73202 = new java.util.HashMap<String, Object>();\n        map73202.put(\"key73202\", b73202.toString());\n        String c73202 = (String) map73202.get(\"key73202\");\n        String d73202 = c73202.substring(0, c73202.length() - 1);\n        String e73202 =\n                new String(\n                        org.apache.commons.codec.binary.Base64.decodeBase64(\n                                org.apache.commons.codec.binary.Base64.encodeBase64(\n                                        d73202.getBytes())));\n        String f73202 = e73202.split(\" \")[0];\n        org.owasp.benchmark.helpers.ThingInterface thing =\n                org.owasp.benchmark.helpers.ThingFactory.createThing();\n        String g73202 = \"barbarians_at_the_gate\";\n        String bar = thing.doSomething(g73202);\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02470",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String[] values = request.getParameterValues(\"BenchmarkCase\");\n        String param;\n        if (values != null && values.length > 0) param = values[0];\n        else param = \"\";\n        String bar = doSomething(request, param);\n        String fileName = null;\n        java.io.FileOutputStream fos = null;\n        try {\n            fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n            fos = new java.io.FileOutputStream(fileName, false);\n            response.getWriter()\n                    .println(\n                            \"Now ready to write to file: \"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName));\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open FileOutputStream on file: '\" + fileName + \"'\");\n        } finally {\n            if (fos != null) {\n                try {\n                    fos.close();\n                    fos = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar;\n        int num = 86;\n        if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n        else bar = param;\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02471",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String[] values = request.getParameterValues(\"BenchmarkCase\");\n        String param;\n        if (values != null && values.length > 0) param = values[0];\n        else param = \"\";\n        String bar = doSomething(request, param);\n        String fileName = org.owasp.benchmark.helpers.Utils.TESTFILES_DIR + bar;\n        java.io.InputStream is = null;\n        try {\n            java.nio.file.Path path = java.nio.file.Paths.get(fileName);\n            is = java.nio.file.Files.newInputStream(path, java.nio.file.StandardOpenOption.READ);\n            byte[] b = new byte[1000];\n            int size = is.read(b);\n            response.getWriter()\n                    .println(\n                            \"The beginning of file: '\"\n                                    + org.owasp.esapi.ESAPI.encoder().encodeForHTML(fileName)\n                                    + \"' is:\\n\\n\");\n            response.getWriter()\n                    .println(org.owasp.esapi.ESAPI.encoder().encodeForHTML(new String(b, 0, size)));\n            is.close();\n        } catch (Exception e) {\n            System.out.println(\"Couldn't open InputStream on file: '\" + fileName + \"'\");\n            response.getWriter()\n                    .println(\n                            \"Problem getting InputStream: \"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(e.getMessage()));\n        } finally {\n            if (is != null) {\n                try {\n                    is.close();\n                    is = null;\n                } catch (Exception e) {\n                }\n            }\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar;\n        int num = 86;\n        if ((7 * 42) - num > 200) bar = \"This_should_always_happen\";\n        else bar = param;\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A01:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "pathtraver"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02576",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = doSomething(request, param);\n        try {\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(\"SHA-256\");\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;\n            if (inputParam instanceof String) input = ((String) inputParam).getBytes();\n            if (inputParam instanceof java.io.InputStream) {\n                byte[] strInput = new byte[1000];\n                int i = ((java.io.InputStream) inputParam).read(strInput);\n                if (i == -1) {\n                    response.getWriter()\n                            .println(\n                                    \"This input source requires a POST, not a GET. Incompatible UI for the InputStream source.\");\n                    return;\n                }\n                input = java.util.Arrays.copyOf(strInput, i);\n            }\n            md.update(input);\n            byte[] result = md.digest();\n            java.io.File fileTarget =\n                    new java.io.File(\n                            new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR),\n                            \"passwordFile.txt\");\n            java.io.FileWriter fw =\n                    new java.io.FileWriter(fileTarget, true);\n            fw.write(\n                    \"hash_value=\"\n                            + org.owasp.esapi.ESAPI.encoder().encodeForBase64(result, true)\n                            + \"\\n\");\n            fw.close();\n            response.getWriter()\n                    .println(\n                            \"Sensitive value '\"\n                                    + org.owasp\n                                            .esapi\n                                            .ESAPI\n                                            .encoder()\n                                            .encodeForHTML(new String(input))\n                                    + \"' hashed and stored<br/>\");\n        } catch (java.security.NoSuchAlgorithmException e) {\n            System.out.println(\"Problem executing hash - TestCase\");\n            throw new ServletException(e);\n        }\n        response.getWriter()\n                .println(\n                        \"Hash Test java.security.MessageDigest.getInstance(java.lang.String) executed\");\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar;\n        int num = 196;\n        if ((500 / 42) + num > 200) bar = param;\n        else bar = \"This should never happen\";\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A04:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "hash"
+  },
+  {
+    "id": "BenchmarkJava-BenchmarkTest02634",
+    "code": "public class BenchmarkCase extends HttpServlet {\n    private static final long serialVersionUID = 1L;\n    @Override\n    public void doPost(HttpServletRequest request, HttpServletResponse response)\n            throws ServletException, IOException {\n        response.setContentType(\"text/html;charset=UTF-8\");\n        String queryString = request.getQueryString();\n        String paramval = \"BenchmarkCase\" + \"=\";\n        int paramLoc = -1;\n        if (queryString != null) paramLoc = queryString.indexOf(paramval);\n        if (paramLoc == -1) {\n            response.getWriter()\n                    .println(\n                            \"getQueryString() couldn't find expected parameter '\"\n                                    + \"BenchmarkCase\"\n                                    + \"' in query string.\");\n            return;\n        }\n        String param =\n                queryString.substring(\n                        paramLoc\n                                + paramval\n                                        .length());\n        int ampersandLoc = queryString.indexOf(\"&\", paramLoc);\n        if (ampersandLoc != -1) {\n            param = queryString.substring(paramLoc + paramval.length(), ampersandLoc);\n        }\n        param = java.net.URLDecoder.decode(param, \"UTF-8\");\n        String bar = doSomething(request, param);\n        String sql = \"SELECT * from USERS where USERNAME=? and PASSWORD='\" + bar + \"'\";\n        try {\n            java.sql.Connection connection =\n                    org.owasp.benchmark.helpers.DatabaseHelper.getSqlConnection();\n            java.sql.PreparedStatement statement =\n                    connection.prepareStatement(\n                            sql,\n                            java.sql.ResultSet.TYPE_FORWARD_ONLY,\n                            java.sql.ResultSet.CONCUR_READ_ONLY);\n            statement.setString(1, \"foo\");\n            statement.execute();\n            org.owasp.benchmark.helpers.DatabaseHelper.printResults(statement, sql, response);\n        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }\n    }\n    private static String doSomething(HttpServletRequest request, String param)\n            throws ServletException, IOException {\n        String bar = \"alsosafe\";\n        if (param != null) {\n            java.util.List<String> valuesList = new java.util.ArrayList<String>();\n            valuesList.add(\"safe\");\n            valuesList.add(param);\n            valuesList.add(\"moresafe\");\n            valuesList.remove(0);\n            bar = valuesList.get(1);\n        }\n        return bar;\n    }\n}",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Java",
+    "scenario": "sqli"
   }
 ]

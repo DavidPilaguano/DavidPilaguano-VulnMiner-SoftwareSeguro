@@ -34,13 +34,14 @@ def explore(df, out):
     out.mkdir(parents=True, exist_ok=True)
     plt.rcParams.update({'font.size': 10, 'figure.figsize': (10, 5)})
     counts = Counter(label for labels in df.labels for label in labels)
-    stats = dict(records=len(df), safe=int((df.vulnerable == 0).sum()), vulnerable=int(df.vulnerable.sum()), languages=df.language.value_counts().to_dict(), partitions=df.split.value_counts().to_dict(), projects=int(df.project.nunique()), duplicate_hashes=int(df.sha256.duplicated().sum()), missing_required=int(df[['code','language','project','split','labels']].isna().sum().sum()), labels=dict(counts), length=df.code.str.len().describe().to_dict())
+    stats = dict(records=len(df), safe=int((df.vulnerable == 0).sum()), vulnerable=int(df.vulnerable.sum()), sources=df.source.value_counts().to_dict(), languages=df.language.value_counts().to_dict(), partitions=df.split.value_counts().to_dict(), projects=int(df.project.nunique()), duplicate_hashes=int(df.sha256.duplicated().sum()), missing_required=int(df[['code','language','project','split','labels']].isna().sum().sum()), labels=dict(counts), length=df.code.str.len().describe().to_dict())
     (out / 'dataset_statistics.json').write_text(json.dumps(stats, indent=2), encoding='utf-8')
     df.groupby(['split','language','vulnerable']).size().rename('count').to_csv(out / 'distribution.csv')
     charts = [
         ('categorias', dict(sorted(counts.items())), 'Distribucion multietiqueta OWASP'),
         ('seguridad', {'No vulnerable': stats['safe'], 'Vulnerable': stats['vulnerable']}, 'Balance de ejemplos controlados'),
         ('lenguajes', stats['languages'], 'Distribucion por lenguaje'),
+        ('fuentes', stats['sources'], 'Procedencia: benchmarks publicos y suplemento propio'),
         ('patrones', {s: int(df.code.str.contains(s, case=False, regex=False).sum()) for s in ['execute','query','md5','debug','jwt','verify','fetch','loads']}, 'Frecuencia de tokens relevantes'),
         ('desbalance', dict(sorted(counts.items(), key=lambda x:x[1])), 'Desbalance de etiquetas (multietiqueta)'),
     ]
@@ -105,7 +106,25 @@ def run():
     chosen = candidates[best]
     summary = dict(seed=42, selection='F1 macro de validacion; empate: regresion logistica por simplicidad. Test no selecciona hiperparametros.', classes=classes, selected=best, candidates=candidates, versions=dict(python=platform.python_version(), sklearn=sklearn.__version__, numpy=np.__version__), dataset_sha256=hashlib.sha256((ROOT/'data/dataset.csv').read_bytes()).hexdigest(), statistics=stats, matrix_shapes={k:list(v.shape) for k,v in matrices.items()})
     for estimator, entry in zip(fitted, candidates):
+        entry['train'] = metrics(targets['train'], probabilities(estimator, matrices['train']) >= entry['threshold'], classes)
         entry['test'] = metrics(targets['test'], probabilities(estimator, matrices['test']) >= entry['threshold'], classes)
+    source_metrics={}
+    for source in sorted(df.source.unique()):
+        mask=(splits['test'].source==source).to_numpy()
+        if not mask.any():
+            continue
+        truth=targets['test'][mask]
+        pred=probabilities(fitted[best],matrices['test'][mask])>=chosen['threshold']
+        result=metrics(truth,pred,classes)
+        supported=truth.sum(axis=0)>0
+        result['f1_macro_supported']=f1_score(truth[:,supported],pred[:,supported],average='macro',zero_division=0)
+        result['records']=int(mask.sum())
+        result['supported_categories']=[label for label,yes in zip(classes,supported) if yes]
+        source_metrics[source]=result
+    summary['test_by_source']=source_metrics
+    manifest=ROOT/'data/public_manifest.json'
+    if manifest.exists():
+        summary['public_manifest']=json.loads(manifest.read_text(encoding='utf-8'))
     selected_prediction = probabilities(fitted[best], matrices['test']) >= chosen['threshold']
     errors = []
     for row, truth, pred in zip(splits['test'].itertuples(), targets['test'], selected_prediction):
@@ -131,7 +150,8 @@ def run():
     fig.tight_layout()
     fig.savefig(out/'model_comparison.png',dpi=150)
     plt.close(fig)
-    fig, axes = plt.subplots(2,5,figsize=(15,6))
+    rows=int(np.ceil(len(classes)/4))
+    fig, axes = plt.subplots(rows,4,figsize=(14,3.1*rows))
     for ax,label,cm in zip(axes.flat, classes, chosen['test']['confusion_matrices']):
         ax.imshow(cm,cmap='Blues')
         for (r,c),value in np.ndenumerate(np.array(cm)):
@@ -143,6 +163,30 @@ def run():
     fig.savefig(out/'confusion_matrices.png',dpi=150)
     plt.close(fig)
     artifact = dict(features=features, estimator=fitted[best], classes=classes, threshold=chosen['threshold'], algorithm=chosen['algorithm'], metadata=summary)
+    joblib.dump(artifact,art/'model.joblib',compress=3)
+    # Independent public-only experiment: no controlled examples, no API imputation.
+    public_parts={s:part[part.source!='original-controlled-v1'] for s,part in splits.items()}
+    if len(public_parts['train']):
+        public_features=make_features()
+        public_mlb=MultiLabelBinarizer()
+        public_y={}
+        public_y['train']=public_mlb.fit_transform(public_parts['train'].labels)
+        public_y['validation']=public_mlb.transform(public_parts['validation'].labels)
+        public_y['test']=public_mlb.transform(public_parts['test'].labels)
+        public_x={s:(public_features.fit_transform(part.code) if s=='train' else public_features.transform(part.code)) for s,part in public_parts.items()}
+        public_est=OneVsRestClassifier(LogisticRegression(C=2.0,class_weight='balanced',max_iter=1500,random_state=42))
+        public_est.fit(public_x['train'],public_y['train'])
+        scores=public_est.predict_proba(public_x['validation'])
+        public_threshold=max([.3,.4,.5,.6],key=lambda t:f1_score(public_y['validation'],scores>=t,average='macro',zero_division=0))
+        public_result=dict(algorithm='LogisticRegression',parameter=2.0,threshold=public_threshold,classes=public_mlb.classes_.tolist(),records={s:len(p) for s,p in public_parts.items()},selection='C=2.0 fijado; umbral seleccionado solo con validacion publica. No participa en la seleccion del modelo hibrido.')
+        for split in public_parts:
+            public_result[split]=metrics(public_y[split],public_est.predict_proba(public_x[split])>=public_threshold,public_result['classes'])
+        summary['public_only']=public_result
+        joblib.dump(dict(features=public_features,estimator=public_est,classes=public_result['classes'],threshold=public_threshold,algorithm='LogisticRegression',metadata=public_result),art/'public_model.joblib',compress=3)
+        (out/'public_only.json').write_text(json.dumps(public_result,ensure_ascii=False,indent=2),encoding='utf-8')
+        print(f'Solo datos publicos: test F1 macro={public_result["test"]["f1_macro"]:.4f}',flush=True)
+    # Rewrite after all independently evaluated experiments are available.
+    (out/'metrics.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
     joblib.dump(artifact,art/'model.joblib',compress=3)
     (art/'metadata.json').write_text(json.dumps({k:v for k,v in summary.items() if k!='candidates'},ensure_ascii=False,indent=2),encoding='utf-8')
     print(f'Seleccionado: {chosen["algorithm"]}; test F1 macro={chosen["test"]["f1_macro"]:.4f}; errores={len(errors)}',flush=True)

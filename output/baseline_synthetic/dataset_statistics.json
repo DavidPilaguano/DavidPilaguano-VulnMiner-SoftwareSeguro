@@ -1,0 +1,40 @@
+{
+  "records": 1008,
+  "safe": 504,
+  "vulnerable": 504,
+  "languages": {
+    "Python": 504,
+    "JavaScript": 504
+  },
+  "partitions": {
+    "train": 672,
+    "validation": 168,
+    "test": 168
+  },
+  "projects": 84,
+  "duplicate_hashes": 0,
+  "missing_required": 0,
+  "labels": {
+    "A05:2025": 72,
+    "A04:2025": 72,
+    "A02:2025": 72,
+    "API8:2023": 72,
+    "A07:2025": 144,
+    "API2:2023": 72,
+    "A01:2025": 72,
+    "API7:2023": 72,
+    "A08:2025": 72,
+    "API10:2023": 72
+  },
+  "length": {
+    "count": 1008.0,
+    "mean": 74.87896825396825,
+    "std": 24.989237685973965,
+    "min": 30.0,
+    "25%": 56.0,
+    "50%": 73.0,
+    "75%": 88.0,
+    "max": 162.0
+  },
+  "canonical_cross_partition_duplicates": 0
+}

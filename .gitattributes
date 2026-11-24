@@ -13,3 +13,6 @@
 *.whl binary
 *.zip binary
 data/dataset.csv -text whitespace=cr-at-eol
+data/controlled.csv -text whitespace=cr-at-eol
+data/public/**/*.csv -text whitespace=cr-at-eol
+*.gz binary

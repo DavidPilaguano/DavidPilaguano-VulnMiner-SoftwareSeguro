@@ -6,7 +6,7 @@ try {
         python -m pip install -e '.[lab]'
         if ($LASTEXITCODE -ne 0) { throw 'Fallo la instalacion' }
     }
-    $steps = @('scripts/generate_dataset.py', 'scripts/train.py', 'scripts/create_examples.py', 'scripts/evaluate_projects.py', 'scripts/build_deliverables.py')
+    $steps = @('scripts/import_public_datasets.py', 'scripts/train.py', 'scripts/create_examples.py', 'scripts/evaluate_projects.py', 'scripts/evaluate_public_cli.py', 'scripts/build_deliverables.py')
     foreach ($step in $steps) {
         python $step
         if ($LASTEXITCODE -ne 0) { throw "Fallo $step" }

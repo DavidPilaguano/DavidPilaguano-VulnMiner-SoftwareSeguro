@@ -2,21 +2,21 @@
 
 | Requisito | Implementación y evidencia |
 |---|---|
-| RF01 | 1.008 ejemplos, 504 corregidos; generador y CSV reproducibles. |
+| RF01 | 4.974 registros, 2.603 no vulnerables; dos fuentes públicas, suplemento propio y manifiesto reproducible. |
 | RF02 | Cinco notebooks ejecutados, informe y scripts SEMMA. |
 | RF03 | Regresión logística y Random Forest, dos configuraciones por algoritmo y cuatro umbrales de validación. |
-| RF04 | Localización léxica de operaciones, contexto y lectura de configuración; complementa al modelo. |
+| RF04 | Extracción de contexto, AST de funciones Python, localización léxica Java/JS y lectura de configuración; complementa al modelo. |
 | RF05 | Clasificación multietiqueta y catálogo de veinte categorías; cobertura parcial explícita. |
 | RF06 | Descubrimiento mediante manifiestos, Dockerfile y contextos Compose locales. |
 | RF07 | Entry point `vulnminer scan .`, con modelo empaquetado. |
 | RF08 | Servicio, ruta relativa, línea verificada y evidencia en cada hallazgo. |
 | RF09 | JSON y HTML con filtro por microservicio. |
-| RF10 | Holdout por familia, métricas multietiqueta y dos fixtures externas al entrenamiento. |
+| RF10 | Holdout por grupos estructurales, experimento solo público, métricas por fuente, dos fixtures propias y 96 originales de prueba para la CLI. |
 
 ## Condiciones cuantitativas
 
-- Dos lenguajes en el dataset: Python y JavaScript; extracción compatible con TypeScript.
-- Seis categorías generales: A01, A02, A04, A05, A07, A08.
+- Tres lenguajes en el dataset: Python, Java y JavaScript; extracción compatible con TypeScript.
+- Siete categorías generales con datos y mecanismos parciales: A01, A02, A04, A05, A06, A07, A08.
 - Cuatro categorías API: API2, API7, API8, API10.
 - Sin clasificador LLM ni dependencia de un SAST externo.
 - CLI no necesita entrenar de nuevo; el modelo se incluye en el paquete.

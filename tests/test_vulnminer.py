@@ -33,6 +33,9 @@ class FunctionalTests(unittest.TestCase):
             self.assertFalse(finding['confirmed'])
             self.assertTrue(finding['recommendation'])
             self.assertTrue(finding['severity_justification'])
+            if finding['file'].endswith('sql_risk.py'):
+                self.assertEqual(finding['cwe'],'CWE-89')
+                self.assertIn('execute(',finding['evidence'])
 
     def test_safe_pairs_and_metadata_are_not_findings(self):
         self.assertTrue(self.report['findings'])
@@ -82,7 +85,8 @@ class FunctionalTests(unittest.TestCase):
             report=scan(root)
             self.assertEqual(report['files_analyzed'],1)
             self.assertEqual(len(report['skipped_files']),1)
-            self.assertEqual(report['findings'][0]['verification_status'],'Pendiente de revision')
+            self.assertFalse(report['findings'][0]['confirmed'])
+            self.assertIn(report['findings'][0]['verification_status'],['Pendiente de revision','Requiere verificacion'])
 
     def test_configuration_file(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -112,6 +116,33 @@ class FunctionalTests(unittest.TestCase):
         self.assertFalse(df.sha256.duplicated().any())
         self.assertEqual(df.groupby('project').split.nunique().max(),1)
         self.assertTrue(set(df[df.split=='train'].family).isdisjoint(set(df[df.split=='test'].family)))
+
+    def test_public_provenance_and_oracles(self):
+        import hashlib
+        manifest=json.loads((ROOT/'data/public_manifest.json').read_text(encoding='utf-8'))
+        self.assertEqual(manifest['raw_public_records'],3970)
+        self.assertGreater(manifest['public_records_retained'],3000)
+        for source in manifest['sources']:
+            folder=ROOT/'data/public'/source['name']
+            self.assertTrue((folder/'LICENSE').is_file())
+            self.assertEqual(hashlib.sha256((folder/source['oracle']).read_bytes()).hexdigest(),source['expectedresults_sha256'])
+            self.assertEqual(hashlib.sha256((folder/'original_sources.jsonl.gz').read_bytes()).hexdigest(),source['archive_sha256'])
+
+    def test_public_input_has_no_test_identifiers(self):
+        import pandas as pd
+        df=pd.read_csv(ROOT/'data/dataset.csv',keep_default_na=False)
+        public=df[df.source!='original-controlled-v1']
+        self.assertFalse(public.code.str.contains(r'BenchmarkTest\d+').any())
+        self.assertFalse(public.code.str.contains('OWASP Benchmark v',regex=False).any())
+
+    def test_java_files_are_supported(self):
+        from vulnminer.scanner import language
+        with tempfile.TemporaryDirectory() as folder:
+            path=Path(folder)/'Example.java'
+            path.write_text('class Example { void run() { System.out.println("hello"); } }',encoding='utf-8')
+            self.assertEqual(language(path),'Java')
+            report=scan(folder)
+            self.assertEqual(report['files_analyzed'],1)
 
 
 if __name__=='__main__':

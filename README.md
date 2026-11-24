@@ -4,7 +4,7 @@ VulnMiner es una herramienta de línea de comandos que identifica posibles vulne
 
 Utiliza clasificación supervisada multietiqueta y la metodología SEMMA para reconocer patrones conforme a OWASP Top 10:2025 y OWASP API Security Top 10:2023. **El modelo entrenado está incluido: no es necesario reentrenarlo para instalar o utilizar la herramienta.**
 
-Admite código Python y JavaScript, además de extracción léxica compatible con TypeScript. También lee configuraciones y manifiestos de servicios. Los resultados son hallazgos potenciales que requieren revisión.
+Admite código Python, Java y JavaScript, además de extracción léxica compatible con TypeScript. Java no utiliza resolución de tipos ni flujo entre métodos. También lee configuraciones y manifiestos de servicios. Los resultados son hallazgos potenciales que requieren revisión.
 
 ## Requisitos
 
@@ -109,7 +109,7 @@ Después de instalar, desde la raíz del repositorio:
 ./.venv/bin/python -m unittest discover -s tests -v
 ```
 
-La suite contiene diez pruebas funcionales sobre cobertura, ubicaciones, pares corregidos, clasificación, abstención, configuración, reportes y separación de datos.
+La suite contiene trece pruebas funcionales sobre cobertura, ubicaciones, pares corregidos, clasificación, abstención, configuración, reportes y separación de datos.
 
 En Windows también se dispone de un asistente de preparación y prueba:
 
@@ -121,10 +121,10 @@ Este prepara el entorno, instala el proyecto, ejecuta las pruebas y analiza las 
 
 ## Instalar desde el paquete distribuible
 
-El archivo `output/packages/vulnminer_espe-1.0.0-py3-none-any.whl` incluye el programa y el modelo entrenado. Se puede instalar en un entorno Python compatible mediante:
+El archivo `output/packages/vulnminer_espe-1.1.0-py3-none-any.whl` incluye el programa y el modelo entrenado. Se puede instalar en un entorno Python compatible mediante:
 
 ```shell
-python -m pip install ./output/packages/vulnminer_espe-1.0.0-py3-none-any.whl
+python -m pip install ./output/packages/vulnminer_espe-1.1.0-py3-none-any.whl
 ```
 
 En este comando, `python` debe corresponder al entorno en el que se desea instalar. Una vez instalado el paquete, no es necesario conservar el clon para ejecutar el programa.
@@ -140,24 +140,38 @@ python -m pip install -e ".[lab]"
 Después, desde la raíz del repositorio y utilizando ese mismo entorno:
 
 ```shell
-python scripts/generate_dataset.py
+python scripts/import_public_datasets.py
 python scripts/train.py
 python scripts/create_examples.py
 python scripts/evaluate_projects.py
+python scripts/evaluate_public_cli.py
 python scripts/build_deliverables.py
 python -m unittest discover -s tests -v
 ```
 
-Estos comandos regeneran datos, modelos y resultados. `build_deliverables.py` ejecuta los cinco notebooks; el de Model vuelve a entrenar. La selección utiliza F1 macro de validación antes de evaluar prueba, con semilla 42. En Windows, `scripts/reproduce.ps1 -Install` automatiza la reproducción y el empaquetado.
+El importador requiere Git para descargar los commits fijados de las fuentes; conserva originales, licencias y oráculos. Estos comandos regeneran datos, modelos y resultados. `build_deliverables.py` ejecuta los cinco notebooks; el de Model vuelve a entrenar. La selección utiliza F1 macro de validación antes de evaluar prueba, con semilla 42. En Windows, `scripts/reproduce.ps1 -Install` automatiza la reproducción y el empaquetado.
 
 `requirements-lock.txt` registra las versiones directas usadas para generar los entregables originales. Su disponibilidad puede depender de la versión de Python y del sistema operativo. Para el uso habitual basta con `pip install .`; scikit-learn se fija en 1.8.0 para mantener la compatibilidad del modelo serializado.
+
+## Datos públicos y resultados de la versión 1.1
+
+Se descargaron **3.970** casos con oráculos oficiales: 1.230 de [OWASP BenchmarkPython](https://github.com/OWASP-Benchmark/BenchmarkPython) y 2.740 de [OWASP BenchmarkJava](https://github.com/OWASP-Benchmark/BenchmarkJava). Tras retirar cuatro duplicados, se conservan 3.966 casos públicos. El [manifiesto](data/public_manifest.json) fija commits y hashes; [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) identifica licencias y transformaciones.
+
+| Experimento | F1 macro en prueba | F1 micro en prueba |
+|---|---:|---:|
+| Modelo híbrido seleccionado por validación | 0,7618 | 0,8423 |
+| Modelo solo público, seis etiquetas generales | 0,7916 | 0,8576 |
+
+Los espacios de etiquetas son distintos: las filas no constituyen una comparación controlada entre sí. La CLI utiliza `model.joblib`; `public_model.joblib` permite inspeccionar el experimento sin ejemplos propios. La evaluación completa de la CLI sobre 96 originales públicos obtuvo F1 por archivo de 0,6667. Consulte [comparison.csv](output/evaluation/comparison.csv), [public_only.json](output/evaluation/public_only.json) y [public_cli.json](output/evaluation/public_cli.json).
+
+El F1 previo de 0,9556 se conserva como antecedente en `output/baseline_synthetic/`: correspondía a otro dataset, exclusivamente propio, y no estima desempeño sobre producción. El informe renovado incluye fortalezas, limitaciones y dos incidentes documentados al final: MOVEit Transfer (2023) y Capital One (2019), sin afirmar que la herramienta los habría detectado.
 
 ## Contenido del repositorio
 
 | Recurso | Ubicación |
 |---|---|
 | Aplicación CLI | [`vulnminer/`](vulnminer/) |
-| Dataset: 1.008 registros, 504 corregidos | [`data/dataset.csv`](data/dataset.csv) |
+| Dataset híbrido: 4.974 registros, 2.603 no vulnerables | [`data/dataset.csv`](data/dataset.csv) |
 | Diccionario de datos | [`data/diccionario.md`](data/diccionario.md) |
 | Fuentes y correspondencias CWE–OWASP | [`docs/fuentes.md`](docs/fuentes.md), [`data/cwe_owasp.csv`](data/cwe_owasp.csv) |
 | Cinco notebooks SEMMA ejecutados | [`notebooks/`](notebooks/) |
@@ -171,7 +185,7 @@ Estos comandos regeneran datos, modelos y resultados. `build_deliverables.py` ej
 
 ## Alcance y limitaciones
 
-El dataset es sintético: sus 84 grupos son familias artificiales. Las fixtures se usan para evaluación funcional y depuración; no constituyen un ensayo ciego de producción. La cobertura es parcial: seis categorías generales y cuatro de API, dentro de siete escenarios. Las diez categorías restantes se declaran no evaluadas en el catálogo.
+El corpus combina 3.966 casos públicos de OWASP BenchmarkPython y BenchmarkJava con 1.008 ejemplos propios. Los benchmarks también son suites de pruebas controladas, no código de incidentes de producción. La cobertura es parcial: siete categorías generales y cuatro de API. Las etiquetas API proceden exclusivamente del suplemento propio. Las nueve categorías restantes se declaran no evaluadas. La muestra CLI de 96 originales procede del mismo holdout; no es un nuevo ensayo ciego.
 
 El análisis es léxico y local, sin propagación interprocedimental de datos ni comprobación de explotabilidad. TypeScript comparte el extractor de JavaScript y no tiene evaluación estadística independiente. Se leen Dockerfile, Compose, YAML, properties, OpenAPI y manifiestos, pero no se realiza un análisis semántico completo ni una consulta a bases de CVE. Un patrón desconocido puede quedar pendiente de revisión o pasar inadvertido.
 

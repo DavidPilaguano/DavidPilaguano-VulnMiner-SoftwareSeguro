@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_at": "2026-11-24T06:13:46.609075+00:00",
+  "generated_at": "2026-11-24T14:40:09.102731+00:00",
   "project": "tienda-demo",
   "root": "D:\\ESPE\\36902-DESARROLLO SOFTWARE SEGURO\\Pacial2\\Trabajo\\examples\\tienda-demo",
   "standards": [
@@ -9,7 +9,7 @@
   ],
   "model": {
     "algorithm": "LogisticRegression",
-    "threshold": 0.4,
+    "threshold": 0.6,
     "confidence_note": "Puntuacion del clasificador; no es probabilidad calibrada ni severidad."
   },
   "services": [
@@ -49,10 +49,10 @@
         "API2:2023"
       ],
       "cwe": "CWE-347",
-      "confidence": 0.9627,
+      "confidence": 0.9856,
       "label_scores": {
-        "A07:2025": 0.956,
-        "API2:2023": 0.9627
+        "A07:2025": 0.9856,
+        "API2:2023": 0.9818
       },
       "severity": "Alta",
       "severity_justification": "Una firma no verificada podria permitir suplantacion de identidad.",
@@ -76,10 +76,10 @@
         "API7:2023"
       ],
       "cwe": "CWE-918",
-      "confidence": 0.8258,
+      "confidence": 0.9393,
       "label_scores": {
-        "A01:2025": 0.8258,
-        "API7:2023": 0.8258
+        "A01:2025": 0.8978,
+        "API7:2023": 0.9393
       },
       "severity": "Alta",
       "severity_justification": "Un destino no restringido podria alcanzar recursos internos.",
@@ -103,10 +103,10 @@
         "API10:2023"
       ],
       "cwe": "CWE-295",
-      "confidence": 0.9279,
+      "confidence": 0.9754,
       "label_scores": {
-        "A07:2025": 0.8951,
-        "API10:2023": 0.9279
+        "A07:2025": 0.9646,
+        "API10:2023": 0.9754
       },
       "severity": "Alta",
       "severity_justification": "La identidad del servidor remoto no queda autenticada.",
@@ -128,9 +128,9 @@
       ],
       "owasp_api": [],
       "cwe": "CWE-327",
-      "confidence": 0.9728,
+      "confidence": 0.9632,
       "label_scores": {
-        "A04:2025": 0.9728
+        "A04:2025": 0.9632
       },
       "severity": "Media",
       "severity_justification": "MD5 o SHA-1 no proporcionan resistencia adecuada en este contexto.",
@@ -154,10 +154,10 @@
         "API8:2023"
       ],
       "cwe": "CWE-489",
-      "confidence": 0.8975,
+      "confidence": 0.8799,
       "label_scores": {
-        "A02:2025": 0.8975,
-        "API8:2023": 0.8975
+        "A02:2025": 0.8539,
+        "API8:2023": 0.8799
       },
       "severity": "Media",
       "severity_justification": "La depuracion podria revelar detalles internos o exponer funciones de diagnostico.",
@@ -179,9 +179,9 @@
       ],
       "owasp_api": [],
       "cwe": "CWE-502",
-      "confidence": 0.8927,
+      "confidence": 0.9884,
       "label_scores": {
-        "A08:2025": 0.8927
+        "A08:2025": 0.9884
       },
       "severity": "Alta",
       "severity_justification": "Un deserializador de objetos puede ejecutar comportamiento peligroso.",
@@ -203,9 +203,9 @@
       ],
       "owasp_api": [],
       "cwe": "CWE-89",
-      "confidence": 0.922,
+      "confidence": 0.7483,
       "label_scores": {
-        "A05:2025": 0.922
+        "A05:2025": 0.7483
       },
       "severity": "Alta",
       "severity_justification": "La entrada podria modificar la consulta y acceder a datos.",
@@ -218,12 +218,12 @@
     {
       "id": "A01:2025",
       "name": "Broken Access Control",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A02:2025",
       "name": "Security Misconfiguration",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A03:2025",
@@ -233,27 +233,27 @@
     {
       "id": "A04:2025",
       "name": "Cryptographic Failures",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A05:2025",
       "name": "Injection",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A06:2025",
       "name": "Insecure Design",
-      "status": "No evaluada: sin datos ni detector suficiente"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A07:2025",
       "name": "Authentication Failures",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A08:2025",
       "name": "Software or Data Integrity Failures",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "A09:2025",
@@ -273,7 +273,7 @@
     {
       "id": "API2:2023",
       "name": "Broken Authentication",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "API3:2023",
@@ -298,12 +298,12 @@
     {
       "id": "API7:2023",
       "name": "Server Side Request Forgery",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "API8:2023",
       "name": "Security Misconfiguration",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     },
     {
       "id": "API9:2023",
@@ -313,15 +313,15 @@
     {
       "id": "API10:2023",
       "name": "Unsafe Consumption of APIs",
-      "status": "Evaluada en casos controlados"
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
     }
   ],
   "limitations": [
     "Analisis lexico local sin prueba de explotabilidad ni flujo interprocedimental.",
-    "Datos de entrenamiento sinteticos controlados; generalizacion real no demostrada.",
+    "Entrenamiento con OWASP Benchmark publico y suplemento propio; ambos son casos controlados, no produccion.",
     "Ausencia de hallazgos no certifica seguridad.",
     "Dependencias e inventario se leen como configuracion; sin base CVE ni auditoria de cadena de suministro.",
-    "Configuraciones fuera de los patrones entrenados requieren revision; Java no esta soportado.",
+    "Java se analiza lexicalmente; no se resuelven tipos ni flujos entre metodos. Configuraciones fuera del alcance requieren revision.",
     "El reporte contiene evidencia del codigo y puede contener informacion sensible."
   ]
 }

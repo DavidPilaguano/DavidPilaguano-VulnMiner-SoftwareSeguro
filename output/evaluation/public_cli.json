@@ -1,0 +1,452 @@
+{
+  "sample_size": 96,
+  "sampling": "Maximo dos por fuente/escenario/estado, orden SHA-256 del id; solo split=test.",
+  "tp": 33,
+  "fp": 19,
+  "fn": 14,
+  "tn": 30,
+  "precision": 0.6346153846153846,
+  "recall": 0.7021276595744681,
+  "f1": 0.6666666666666666,
+  "label_f1_micro": 0.6736842105263158,
+  "errors": [
+    {
+      "file": "python-service/BenchmarkTest00012.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "sqli",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00012",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00012.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00540.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "xxe",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00540",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00540.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00375.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "xpathi",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00375",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00375.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A05:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00036.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "weakrand",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00036",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00036.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00074.py",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkPython",
+      "scenario": "codeinj",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00074",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00074.py",
+      "predicted": true,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest00076.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "ldapi",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00076",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00076.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00281.py",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkPython",
+      "scenario": "xss",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00281",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00281.py",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest00278.py",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkPython",
+      "scenario": "xss",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00278",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00278.py",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest00261.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "trustbound",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00261",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00261.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A06:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00421.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "trustbound",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00421",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00421.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A06:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00283.py",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkPython",
+      "scenario": "sqli",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00283",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00283.py",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest00600.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "codeinj",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00600",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00600.py",
+      "predicted": true,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest00424.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "codeinj",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00424",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00424.py",
+      "predicted": true,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest00512.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "cmdi",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00512",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00512.py",
+      "predicted": true,
+      "predicted_labels": []
+    },
+    {
+      "file": "python-service/BenchmarkTest01207.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "securecookie",
+      "dataset_id": "BenchmarkPython-BenchmarkTest01207",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest01207.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "python-service/BenchmarkTest00721.py",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkPython",
+      "scenario": "securecookie",
+      "dataset_id": "BenchmarkPython-BenchmarkTest00721",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkPython/blob/f1291485808b66e20ddb6b01b10dc71b3df8c8ba/testcode/BenchmarkTest00721.py",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest02362.java",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "sqli",
+      "dataset_id": "BenchmarkJava-BenchmarkTest02362",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02362.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest00698.java",
+      "vulnerable": 1,
+      "labels": [
+        "A01:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "pathtraver",
+      "dataset_id": "BenchmarkJava-BenchmarkTest00698",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00698.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest01985.java",
+      "vulnerable": 1,
+      "labels": [
+        "A01:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "pathtraver",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01985",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01985.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest02019.java",
+      "vulnerable": 1,
+      "labels": [
+        "A04:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "crypto",
+      "dataset_id": "BenchmarkJava-BenchmarkTest02019",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02019.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest01015.java",
+      "vulnerable": 1,
+      "labels": [
+        "A04:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "crypto",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01015",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01015.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest02470.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "pathtraver",
+      "dataset_id": "BenchmarkJava-BenchmarkTest02470",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02470.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A01:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest01885.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "sqli",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01885",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01885.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A05:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest01622.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "sqli",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01622",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01622.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A05:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest01606.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "cmdi",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01606",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01606.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A05:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest00887.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "xss",
+      "dataset_id": "BenchmarkJava-BenchmarkTest00887",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00887.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A05:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest01604.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "securecookie",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01604",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01604.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest00655.java",
+      "vulnerable": 0,
+      "labels": [],
+      "source": "BenchmarkJava",
+      "scenario": "securecookie",
+      "dataset_id": "BenchmarkJava-BenchmarkTest00655",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00655.java",
+      "predicted": true,
+      "predicted_labels": [
+        "A02:2025"
+      ]
+    },
+    {
+      "file": "java-service/BenchmarkTest01568.java",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "ldapi",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01568",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01568.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest00694.java",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "ldapi",
+      "dataset_id": "BenchmarkJava-BenchmarkTest00694",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest00694.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest01374.java",
+      "vulnerable": 1,
+      "labels": [
+        "A06:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "trustbound",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01374",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01374.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest02446.java",
+      "vulnerable": 1,
+      "labels": [
+        "A06:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "trustbound",
+      "dataset_id": "BenchmarkJava-BenchmarkTest02446",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest02446.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest01894.java",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "xpathi",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01894",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01894.java",
+      "predicted": false,
+      "predicted_labels": []
+    },
+    {
+      "file": "java-service/BenchmarkTest01224.java",
+      "vulnerable": 1,
+      "labels": [
+        "A05:2025"
+      ],
+      "source": "BenchmarkJava",
+      "scenario": "xpathi",
+      "dataset_id": "BenchmarkJava-BenchmarkTest01224",
+      "source_url": "https://github.com/OWASP-Benchmark/BenchmarkJava/blob/10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17/src/main/java/org/owasp/benchmark/testcode/BenchmarkTest01224.java",
+      "predicted": false,
+      "predicted_labels": []
+    }
+  ],
+  "findings": 55,
+  "warning": "Metricas de CLI por archivo y etiquetas; distintas de las del clasificador en fragmentos preparados."
+}

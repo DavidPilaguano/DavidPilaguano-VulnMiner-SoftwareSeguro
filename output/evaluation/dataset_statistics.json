@@ -1,40 +1,47 @@
 {
-  "records": 1008,
-  "safe": 504,
-  "vulnerable": 504,
+  "records": 4974,
+  "safe": 2603,
+  "vulnerable": 2371,
+  "sources": {
+    "BenchmarkJava": 2736,
+    "BenchmarkPython": 1230,
+    "original-controlled-v1": 1008
+  },
   "languages": {
-    "Python": 504,
+    "Java": 2736,
+    "Python": 1734,
     "JavaScript": 504
   },
   "partitions": {
-    "train": 672,
-    "validation": 168,
-    "test": 168
+    "train": 3504,
+    "validation": 735,
+    "test": 735
   },
-  "projects": 84,
+  "projects": 3900,
   "duplicate_hashes": 0,
   "missing_required": 0,
   "labels": {
-    "A05:2025": 72,
-    "A04:2025": 72,
-    "A02:2025": 72,
+    "A05:2025": 894,
+    "A04:2025": 719,
+    "A02:2025": 140,
     "API8:2023": 72,
     "A07:2025": 144,
     "API2:2023": 72,
-    "A01:2025": 72,
+    "A01:2025": 283,
     "API7:2023": 72,
-    "A08:2025": 72,
-    "API10:2023": 72
+    "A08:2025": 90,
+    "API10:2023": 72,
+    "A06:2025": 101
   },
   "length": {
-    "count": 1008.0,
-    "mean": 74.87896825396825,
-    "std": 24.989237685973965,
+    "count": 4974.0,
+    "mean": 1603.5679533574587,
+    "std": 1417.3488104978603,
     "min": 30.0,
-    "25%": 56.0,
-    "50%": 73.0,
-    "75%": 88.0,
-    "max": 162.0
+    "25%": 515.25,
+    "50%": 1152.0,
+    "75%": 2560.0,
+    "max": 7443.0
   },
   "canonical_cross_partition_duplicates": 0
 }

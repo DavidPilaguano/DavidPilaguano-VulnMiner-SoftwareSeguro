@@ -1,0 +1,1451 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-24T14:40:18.716229+00:00",
+  "project": "benchmark-holdout",
+  "root": "D:\\ESPE\\36902-DESARROLLO SOFTWARE SEGURO\\Pacial2\\Trabajo\\examples\\benchmark-holdout",
+  "standards": [
+    "owasp2025",
+    "api2023"
+  ],
+  "model": {
+    "algorithm": "LogisticRegression",
+    "threshold": 0.6,
+    "confidence_note": "Puntuacion del clasificador; no es probabilidad calibrada ni severidad."
+  },
+  "services": [
+    {
+      "name": "java-service",
+      "path": "java-service",
+      "technologies": [
+        "Configuracion",
+        "Java"
+      ]
+    },
+    {
+      "name": "python-service",
+      "path": "python-service",
+      "technologies": [
+        "Configuracion",
+        "Python"
+      ]
+    }
+  ],
+  "files_analyzed": 99,
+  "skipped_files": [],
+  "findings": [
+    {
+      "id": "VM-e3139d8d3565",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest00092.java",
+      "line": 96,
+      "language": "Java",
+      "description": "Evaluacion dinamica potencial de codigo no confiable",
+      "evidence": "Process p = r.exec(args, argsEnv);",
+      "context": "        try {\n            Process p = r.exec(args, argsEnv);\n            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);\n        } catch (IOException e) {",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-94",
+      "confidence": 0.6626,
+      "label_scores": {
+        "A05:2025": 0.6626
+      },
+      "severity": "Alta",
+      "severity_justification": "La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.",
+      "recommendation": "Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-b8fee1fb53bc",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest00174.java",
+      "line": 63,
+      "language": "Java",
+      "description": "Evaluacion dinamica potencial de codigo no confiable",
+      "evidence": "Process p = r.exec(cmd, argsEnv);",
+      "context": "        try {\n            Process p = r.exec(cmd, argsEnv);\n            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);\n        } catch (IOException e) {",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-94",
+      "confidence": 0.6081,
+      "label_scores": {
+        "A05:2025": 0.6081
+      },
+      "severity": "Alta",
+      "severity_justification": "La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.",
+      "recommendation": "Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-d71386d680b6",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest00233.java",
+      "line": 65,
+      "language": "Java",
+      "description": "Aleatoriedad potencialmente insuficiente para un uso de seguridad",
+      "evidence": "int randNumber = new java.util.Random().nextInt(99);",
+      "context": "        int randNumber = new java.util.Random().nextInt(99);\n        String rememberMeKey = Integer.toString(randNumber);",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-330",
+      "confidence": 0.6152,
+      "label_scores": {
+        "A04:2025": 0.6152
+      },
+      "severity": "Media",
+      "severity_justification": "Un generador predecible puede debilitar tokens o identificadores secretos.",
+      "recommendation": "Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-a32305672213",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest00403.java",
+      "line": 68,
+      "language": "Java",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "context": "        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.8049,
+      "label_scores": {
+        "A02:2025": 0.8049
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-1a00ef74de1f",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest00655.java",
+      "line": 72,
+      "language": "Java",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "context": "        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.8049,
+      "label_scores": {
+        "A02:2025": 0.8049
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-b30956102ae3",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest00887.java",
+      "line": 55,
+      "language": "Java",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "response.getWriter().println(bar.toCharArray());",
+      "context": "        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().println(bar.toCharArray());\n    }\n}",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.6526,
+      "label_scores": {
+        "A05:2025": 0.6526
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-290760ead3da",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01041.java",
+      "line": 58,
+      "language": "Java",
+      "description": "Hash potencialmente debil en un contexto sensible",
+      "evidence": "java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);",
+      "context": "                    this.getClass().getClassLoader().getResourceAsStream(\"benchmark.properties\"));\n            String algorithm = benchmarkprops.getProperty(\"hashAlg1\", \"SHA512\");\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-328",
+      "confidence": 0.6986,
+      "label_scores": {
+        "A04:2025": 0.6986
+      },
+      "severity": "Media",
+      "severity_justification": "Un hash debil puede no proteger adecuadamente secretos o integridad.",
+      "recommendation": "Elegir una funcion moderna adecuada al contexto y usar Argon2id para contrasenas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-32997b79885a",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01279.java",
+      "line": 48,
+      "language": "Java",
+      "description": "Aleatoriedad potencialmente insuficiente para un uso de seguridad",
+      "evidence": "long l = new java.util.Random().nextLong();",
+      "context": "        long l = new java.util.Random().nextLong();\n        String rememberMeKey = Long.toString(l);",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-330",
+      "confidence": 0.711,
+      "label_scores": {
+        "A04:2025": 0.711
+      },
+      "severity": "Media",
+      "severity_justification": "Un generador predecible puede debilitar tokens o identificadores secretos.",
+      "recommendation": "Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-96e60585466a",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01279.java",
+      "line": 95,
+      "language": "Java",
+      "description": "Aleatoriedad potencialmente insuficiente para un uso de seguridad",
+      "evidence": "response.getWriter().println(\"Weak Randomness Test java.util.Random.nextLong() executed\");",
+      "context": "        response.getWriter().println(\"Weak Randomness Test java.util.Random.nextLong() executed\");\n    } // end doPost",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-330",
+      "confidence": 0.6699,
+      "label_scores": {
+        "A04:2025": 0.6699
+      },
+      "severity": "Media",
+      "severity_justification": "Un generador predecible puede debilitar tokens o identificadores secretos.",
+      "recommendation": "Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-4949c1067607",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01280.java",
+      "line": 63,
+      "language": "Java",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "context": "        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.8049,
+      "label_scores": {
+        "A02:2025": 0.8049
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-f3078962eae3",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01347.java",
+      "line": 53,
+      "language": "Java",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "response.getWriter().println(bar);",
+      "context": "        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().println(bar);\n    } // end doPost",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.8069,
+      "label_scores": {
+        "A05:2025": 0.8069
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-d076adcfe33a",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01604.java",
+      "line": 65,
+      "language": "Java",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "context": "        }\n        if (\"\".equals(str)) str = \"No cookie value supplied\";\n        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(\"SomeCookie\", str);",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.8049,
+      "label_scores": {
+        "A02:2025": 0.8049
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-eb41705dc024",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01606.java",
+      "line": 59,
+      "language": "Java",
+      "description": "Evaluacion dinamica potencial de codigo no confiable",
+      "evidence": "Process p = r.exec(cmd + bar);",
+      "context": "        try {\n            Process p = r.exec(cmd + bar);\n            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);\n        } catch (IOException e) {",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-94",
+      "confidence": 0.602,
+      "label_scores": {
+        "A05:2025": 0.602
+      },
+      "severity": "Alta",
+      "severity_justification": "La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.",
+      "recommendation": "Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-cb6b7c5e1899",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01622.java",
+      "line": 65,
+      "language": "Java",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "response.getWriter().println(\"Error processing request.\");",
+      "context": "        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.6084,
+      "label_scores": {
+        "A05:2025": 0.6084
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-9ead213179ee",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01665.java",
+      "line": 73,
+      "language": "Java",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "response.getWriter().println(bar.toCharArray());",
+      "context": "        response.setHeader(\"X-XSS-Protection\", \"0\");\n        response.getWriter().println(bar.toCharArray());\n    } // end doPost",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.6607,
+      "label_scores": {
+        "A05:2025": 0.6607
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-c3bb6df2953b",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest01885.java",
+      "line": 77,
+      "language": "Java",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "response.getWriter().println(\"Error processing request.\");",
+      "context": "        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.6084,
+      "label_scores": {
+        "A05:2025": 0.6084
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-0d6f5177bfd6",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest02391.java",
+      "line": 55,
+      "language": "Java",
+      "description": "Hash potencialmente debil en un contexto sensible",
+      "evidence": "java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);",
+      "context": "                    this.getClass().getClassLoader().getResourceAsStream(\"benchmark.properties\"));\n            String algorithm = benchmarkprops.getProperty(\"hashAlg1\", \"SHA512\");\n            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);\n            byte[] input = {(byte) '?'};\n            Object inputParam = bar;",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-328",
+      "confidence": 0.6986,
+      "label_scores": {
+        "A04:2025": 0.6986
+      },
+      "severity": "Media",
+      "severity_justification": "Un hash debil puede no proteger adecuadamente secretos o integridad.",
+      "recommendation": "Elegir una funcion moderna adecuada al contexto y usar Argon2id para contrasenas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-8d909e67866f",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest02470.java",
+      "line": 56,
+      "language": "Java",
+      "description": "Acceso a archivos con posible recorrido de rutas",
+      "evidence": "fos = new java.io.FileOutputStream(fileName, false);",
+      "context": "            fos = new java.io.FileOutputStream(fileName, false);\n            response.getWriter()\n                    .println(",
+      "owasp_top10": [
+        "A01:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-22",
+      "confidence": 0.6022,
+      "label_scores": {
+        "A01:2025": 0.6022
+      },
+      "severity": "Alta",
+      "severity_justification": "Una ruta externa podria acceder a archivos fuera del directorio autorizado.",
+      "recommendation": "Resolver y validar la ruta final dentro de una raiz permitida, evitando enlaces y rutas externas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-3277802c99ef",
+      "service": "java-service",
+      "file": "java-service/BenchmarkTest02627.java",
+      "line": 86,
+      "language": "Java",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "response.getWriter().println(\"Error processing request.\");",
+      "context": "        } catch (java.sql.SQLException e) {\n            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {\n                response.getWriter().println(\"Error processing request.\");\n            } else throw new ServletException(e);\n        }",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.6084,
+      "label_scores": {
+        "A05:2025": 0.6084
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-acb5f22d62c9",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00012.py",
+      "line": 26,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "response.set_cookie('BenchmarkTest00012', 'bar',",
+      "context": "\tdef BenchmarkTest00012_get():\n\t\tresponse = make_response(render_template('web/sqli-00/BenchmarkTest00012.html'))\n\t\tresponse.set_cookie('BenchmarkTest00012', 'bar',\n\t\t\tmax_age=60*3,\n\t\t\tsecure=True,\n\t\t\tpath=request.path,\n\t\t\tdomain='localhost')\n\t\treturn response\n\t\treturn BenchmarkTest00012_post()",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.6484,
+      "label_scores": {
+        "A02:2025": 0.6484
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-6621a42f4810",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00036.py",
+      "line": 26,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "response.set_cookie('BenchmarkTest00036', 'whatever',",
+      "context": "\tdef BenchmarkTest00036_get():\n\t\tresponse = make_response(render_template('web/weakrand-00/BenchmarkTest00036.html'))\n\t\tresponse.set_cookie('BenchmarkTest00036', 'whatever',\n\t\t\tmax_age=60*3,\n\t\t\tsecure=True,\n\t\t\tpath=request.path,\n\t\t\tdomain='localhost')\n\t\treturn response\n\t\treturn BenchmarkTest00036_post()",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.6524,
+      "label_scores": {
+        "A02:2025": 0.6524
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-dd2836d2c0f6",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00074.py",
+      "line": 51,
+      "language": "Python",
+      "description": "Patron sensible sin clasificacion suficientemente respaldada",
+      "evidence": "exec(bar)",
+      "context": "\tdef BenchmarkTest00074_post():\n\t\tRESPONSE = \"\"\n\n\t\timport urllib.parse\n\t\tparam = urllib.parse.unquote_plus(request.cookies.get(\"BenchmarkTest00074\", \"noCookieValueSupplied\"))\n\n\t\timport configparser\n\t\t\n\t\tbar = 'safe!'\n\t\tconf90091 = configparser.ConfigParser()\n\t\tconf90091.add_section('section90091')\n\t\tconf90091.set('section90091', 'keyA-90091', 'a-Value')\n\t\tconf90091.set('section90091', 'keyB-90091', param)\n\t\tbar = conf90091.get('section90091', 'keyB-90091')\n\n\t\ttry:\n\t\t\texec(bar)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error executing statement \\'{escape_for_html(bar)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [],
+      "owasp_api": [],
+      "cwe": null,
+      "confidence": 0.2993,
+      "label_scores": {},
+      "severity": "Sin estimar",
+      "severity_justification": "No hay evidencia suficiente para estimar el impacto.",
+      "recommendation": "Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.",
+      "verification_status": "Pendiente de revision",
+      "confirmed": false
+    },
+    {
+      "id": "VM-059db19e8d3f",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00076.py",
+      "line": 26,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "response.set_cookie('BenchmarkTest00076', 'Ms+Bar',",
+      "context": "\tdef BenchmarkTest00076_get():\n\t\tresponse = make_response(render_template('web/ldapi-00/BenchmarkTest00076.html'))\n\t\tresponse.set_cookie('BenchmarkTest00076', 'Ms+Bar',\n\t\t\tmax_age=60*3,\n\t\t\tsecure=True,\n\t\t\tpath=request.path,\n\t\t\tdomain='localhost')\n\t\treturn response\n\t\treturn BenchmarkTest00076_post()",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.6069,
+      "label_scores": {
+        "A02:2025": 0.6069
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-e5d6d2f4ab1c",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00143.py",
+      "line": 54,
+      "language": "Python",
+      "description": "Algoritmo criptografico debil en contexto sensible",
+      "evidence": "hash = hashlib.sha1()",
+      "context": "\tdef BenchmarkTest00143_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = request.form.get(\"BenchmarkTest00143\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\timport html\n\t\t\n\t\tbar = html.escape(param)\n\n\t\timport hashlib, base64\n\t\timport io, helpers.utils\n\n\t\tinput = ''\n\t\tif isinstance(bar, str):\n\t\t\tinput = bar.encode('utf-8')\n\t\telif isinstance(bar, io.IOBase):\n\t\t\tinput = bar.read(1000)\n\n\t\tif len(input) == 0:\n\t\t\tRESPONSE += (\n\t\t\t\t'Cannot generate hash: Input was empty.'\n\t\t\t)\n\t\t\treturn RESPONSE\n\n\t\thash = hashlib.sha1()\n\t\thash.update(input)\n\n\t\tresult = hash.digest()\n\t\tf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\n\t\tf.write(f'hash_value={base64.b64encode(result)}\\n')\n\t\tRESPONSE += (\n\t\t\tf'Sensitive value \\'{helpers.utils.escape_for_html(input.decode('utf-8'))}\\' hashed and stored.'\n\t\t)\n\t\tf.close()\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-327",
+      "confidence": 0.7981,
+      "label_scores": {
+        "A04:2025": 0.7981
+      },
+      "severity": "Media",
+      "severity_justification": "MD5 o SHA-1 no proporcionan resistencia adecuada en este contexto.",
+      "recommendation": "Usar Argon2id para contrasenas y algoritmos actuales adecuados al uso; revisar el contexto.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-e5ae62b4a5ce",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00258.py",
+      "line": 40,
+      "language": "Python",
+      "description": "Redireccion potencialmente controlada por entrada externa",
+      "evidence": "return flask.redirect(bar)",
+      "context": "\tdef BenchmarkTest00258_post():\n\t\tRESPONSE = \"\"\n\n\t\tvalues = request.form.getlist(\"BenchmarkTest00258\")\n\t\tparam = \"\"\n\t\tif values:\n\t\t\tparam = values[0]\n\n\t\tbar = param\n\n\t\timport flask\n\n\t\treturn flask.redirect(bar)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A01:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-601",
+      "confidence": 0.903,
+      "label_scores": {
+        "A01:2025": 0.903
+      },
+      "severity": "Media",
+      "severity_justification": "Un destino no validado puede dirigir a un sitio no confiable.",
+      "recommendation": "Permitir solo destinos locales o una lista explicita de origenes autorizados.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-c08296a4ecdf",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00260.py",
+      "line": 41,
+      "language": "Python",
+      "description": "Posible cruce de limites de confianza en estado de sesion",
+      "evidence": "flask.session['userid'] = bar",
+      "context": "\tdef BenchmarkTest00260_post():\n\t\tRESPONSE = \"\"\n\n\t\tvalues = request.form.getlist(\"BenchmarkTest00260\")\n\t\tparam = \"\"\n\t\tif values:\n\t\t\tparam = values[0]\n\n\t\tsuperstring = f'39218{param}abcd'\n\t\tbar = superstring[len('39218'):len(superstring)-5]\n\n\t\timport flask\n\n\t\tflask.session['userid'] = bar\n\n\t\tRESPONSE += (\n\t\t\tf'Item: \\'userid\\' with value \\'{escape_for_html(bar)}'\n\t\t\t'\\'saved in session.'\n\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A06:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-501",
+      "confidence": 0.942,
+      "label_scores": {
+        "A06:2025": 0.942
+      },
+      "severity": "Media",
+      "severity_justification": "La entrada externa puede modificar estado que deberia controlar la aplicacion.",
+      "recommendation": "Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-f453f072a297",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00261.py",
+      "line": 46,
+      "language": "Python",
+      "description": "Posible cruce de limites de confianza en estado de sesion",
+      "evidence": "flask.session[bar] = '12345'",
+      "context": "\tdef BenchmarkTest00261_post():\n\t\tRESPONSE = \"\"\n\n\t\tvalues = request.form.getlist(\"BenchmarkTest00261\")\n\t\tparam = \"\"\n\t\tif values:\n\t\t\tparam = values[0]\n\n\t\tmap14820 = {}\n\t\tmap14820['keyA-14820'] = 'a-Value'\n\t\tmap14820['keyB-14820'] = param\n\t\tmap14820['keyC'] = 'another-Value'\n\t\tbar = \"safe!\"\n\t\tbar = map14820['keyB-14820']\n\t\tbar = map14820['keyA-14820']\n\n\t\timport flask\n\n\t\tflask.session[bar] = '12345'\n\n\t\tRESPONSE += (\n\t\t\tf'Item: \\'{escape_for_html(bar)}'\n\t\t\t'\\' with value: 12345 saved in session.'\n\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A06:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-501",
+      "confidence": 0.9087,
+      "label_scores": {
+        "A06:2025": 0.9087
+      },
+      "severity": "Media",
+      "severity_justification": "La entrada externa puede modificar estado que deberia controlar la aplicacion.",
+      "recommendation": "Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-d457d37643c7",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00269.py",
+      "line": 44,
+      "language": "Python",
+      "description": "Deserializacion de entrada externa",
+      "evidence": "yobj = yaml.load(bar, Loader=yaml.Loader)",
+      "context": "\tdef BenchmarkTest00269_post():\n\t\tRESPONSE = \"\"\n\n\t\tvalues = request.form.getlist(\"BenchmarkTest00269\")\n\t\tparam = \"\"\n\t\tif values:\n\t\t\tparam = values[0]\n\n\t\timport helpers.ThingFactory\n\t\t\n\t\tthing = helpers.ThingFactory.createThing()\n\t\tbar = thing.doSomething(param)\n\n\t\timport yaml\n\n\t\ttry:\n\t\t\tyobj = yaml.load(bar, Loader=yaml.Loader)\n\n\t\t\tRESPONSE += (\n\t\t\t\tyobj['text']\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\t\"There was an error loading the configuration\"\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A08:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-502",
+      "confidence": 0.8398,
+      "label_scores": {
+        "A08:2025": 0.8398
+      },
+      "severity": "Alta",
+      "severity_justification": "Un deserializador de objetos puede ejecutar comportamiento peligroso.",
+      "recommendation": "Usar JSON con validacion de esquema; evitar pickle o node-serialize para datos no confiables.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-9d4c40b54730",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00294.py",
+      "line": 52,
+      "language": "Python",
+      "description": "Procesamiento XML con posible resolucion de entidades externas",
+      "evidence": "doc = xml.dom.minidom.parseString(bar, parser)",
+      "context": "\tdef BenchmarkTest00294_post():\n\t\tRESPONSE = \"\"\n\n\t\timport helpers.separate_request\n\t\t\n\t\twrapped = helpers.separate_request.request_wrapper(request)\n\t\tparam = wrapped.get_form_parameter(\"BenchmarkTest00294\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\tTestParam = \"This should never happen\"\n\t\tif 'should' not in TestParam:\n\t\t\tbar = \"Ifnot case passed\"\n\t\telse:\n\t\t\tbar = param\n\n\t\timport xml.dom.minidom\n\t\timport xml.sax.handler\n\n\t\ttry:\n\t\t\tparser = xml.sax.make_parser()\n\t\t\t# all features are disabled by default\n\t\t\tparser.setFeature(xml.sax.handler.feature_external_ges, True)\n\n\t\t\tdoc = xml.dom.minidom.parseString(bar, parser)\n\n\t\t\tout = ''\n\t\t\tprocessing = [doc.documentElement]\n\t\t\twhile processing:\n\t\t\t\te = processing.pop(0)\n\t\t\t\tif e.nodeType == xml.dom.Node.TEXT_NODE:\n\t\t\t\t\tout += e.data\n\t\t\t\telse:\n\t\t\t\t\tprocessing[:0] = e.childNodes\n\n\t\t\tRESPONSE += (\n\t\t\t\tf'Your XML doc results are: <br>{escape_for_html(out)}'\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'There was an error reading your XML doc:<br>{escape_for_html(bar)}'\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-611",
+      "confidence": 0.831,
+      "label_scores": {
+        "A02:2025": 0.831
+      },
+      "severity": "Alta",
+      "severity_justification": "Una entidad externa podria revelar archivos o provocar solicitudes internas.",
+      "recommendation": "Deshabilitar DTD y entidades externas y usar un analizador XML endurecido.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-975e9d31b2dc",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00341.py",
+      "line": 44,
+      "language": "Python",
+      "description": "Posible cruce de limites de confianza en estado de sesion",
+      "evidence": "flask.session[bar] = '12345'",
+      "context": "\tdef BenchmarkTest00341_post():\n\t\tRESPONSE = \"\"\n\n\t\timport helpers.separate_request\n\t\t\n\t\twrapped = helpers.separate_request.request_wrapper(request)\n\t\tparam = wrapped.get_form_parameter(\"BenchmarkTest00341\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\tbar = \"This should never happen\"\n\t\tif 'should' in bar:\n\t\t\tbar = param\n\n\t\timport flask\n\n\t\tflask.session[bar] = '12345'\n\n\t\tRESPONSE += (\n\t\t\tf'Item: \\'{escape_for_html(bar)}'\n\t\t\t'\\' with value: 12345 saved in session.'\n\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A06:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-501",
+      "confidence": 0.9469,
+      "label_scores": {
+        "A06:2025": 0.9469
+      },
+      "severity": "Media",
+      "severity_justification": "La entrada externa puede modificar estado que deberia controlar la aplicacion.",
+      "recommendation": "Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-79131c3d3577",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00351.py",
+      "line": 43,
+      "language": "Python",
+      "description": "Acceso a archivos con posible recorrido de rutas",
+      "evidence": "fileTarget = codecs.open(f'{helpers.utils.TESTFILES_DIR}/{bar}','r','utf-8')",
+      "context": "\tdef BenchmarkTest00351_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\tfor name in request.form.keys():\n\t\t\tif \"BenchmarkTest00351\" in request.form.getlist(name):\n\t\t\t\tparam = name\n\t\t\t\tbreak\n\n\t\tbar = param\n\n\t\timport codecs\n\t\timport helpers.utils\n\n\t\ttry:\n\t\t\tfileTarget = codecs.open(f'{helpers.utils.TESTFILES_DIR}/{bar}','r','utf-8')\n\n\t\t\tRESPONSE += (\n\t\t\t\tf\"Access to file: \\'{escape_for_html(fileTarget.name)}\\' created.\"\n\t\t\t)\n\n\t\t\tRESPONSE += (\n\t\t\t\t\" And file already exists.\"\n\t\t\t)\n\n\t\texcept FileNotFoundError:\n\t\t\tRESPONSE += (\n\t\t\t\t\" But file doesn't exist yet.\"\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A01:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-22",
+      "confidence": 0.9561,
+      "label_scores": {
+        "A01:2025": 0.9561
+      },
+      "severity": "Alta",
+      "severity_justification": "Una ruta externa podria acceder a archivos fuera del directorio autorizado.",
+      "recommendation": "Resolver y validar la ruta final dentro de una raiz permitida, evitando enlaces y rutas externas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-e21807100d01",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00375.py",
+      "line": 50,
+      "language": "Python",
+      "description": "Consulta XPath potencialmente construida con entrada externa",
+      "evidence": "nodes = root.xpath(query)",
+      "context": "\tdef BenchmarkTest00375_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\tfor name in request.form.keys():\n\t\t\tif \"BenchmarkTest00375\" in request.form.getlist(name):\n\t\t\t\tparam = name\n\t\t\t\tbreak\n\n\t\tTestParam = \"This should never happen\"\n\t\tif 'should' not in TestParam:\n\t\t\tbar = \"Ifnot case passed\"\n\t\telse:\n\t\t\tbar = param\n\n\t\timport lxml.etree\n\t\timport helpers.utils\n\n\t\ttry:\n\t\t\tfd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n\t\t\troot = lxml.etree.parse(fd)\n\t\t\tquery = f'/Employees/Employee[@emplid=\\'{bar.replace('\\'', '&apos;')}\\']'\n\t\t\tnodes = root.xpath(query)\n\t\t\tnode_strings = []\n\t\t\tfor node in nodes:\n\t\t\t\tnode_strings.append(' '.join([e.text for e in node]))\n\n\t\t\tRESPONSE += (\n\t\t\t\tf'Your XPATH query results are: <br>[ {', '.join(node_strings)} ]'\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error parsing XPath Query: \\'{escape_for_html(query)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-643",
+      "confidence": 0.6141,
+      "label_scores": {
+        "A05:2025": 0.6141
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada puede alterar la expresion de seleccion de datos.",
+      "recommendation": "Usar variables XPath enlazadas y evitar concatenar entrada en expresiones.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-a8b27a5bdf8f",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00421.py",
+      "line": 52,
+      "language": "Python",
+      "description": "Posible cruce de limites de confianza en estado de sesion",
+      "evidence": "flask.session['userid'] = bar",
+      "context": "\tdef BenchmarkTest00421_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\tfor name in request.form.keys():\n\t\t\tif \"BenchmarkTest00421\" in request.form.getlist(name):\n\t\t\t\tparam = name\n\t\t\t\tbreak\n\n\t\tpossible = \"ABC\"\n\t\tguess = possible[1]\n\t\t\n\t\tmatch guess:\n\t\t\tcase 'A':\n\t\t\t\tbar = param\n\t\t\tcase 'B':\n\t\t\t\tbar = 'bob'\n\t\t\tcase 'C' | 'D':\n\t\t\t\tbar = param\n\t\t\tcase _:\n\t\t\t\tbar = 'bob\\'s your uncle'\n\n\t\timport flask\n\n\t\tflask.session['userid'] = bar\n\n\t\tRESPONSE += (\n\t\t\tf'Item: \\'userid\\' with value \\'{escape_for_html(bar)}'\n\t\t\t'\\'saved in session.'\n\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A06:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-501",
+      "confidence": 0.7614,
+      "label_scores": {
+        "A06:2025": 0.7614
+      },
+      "severity": "Media",
+      "severity_justification": "La entrada externa puede modificar estado que deberia controlar la aplicacion.",
+      "recommendation": "Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-4f6ce0fdfeae",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00424.py",
+      "line": 47,
+      "language": "Python",
+      "description": "Patron sensible sin clasificacion suficientemente respaldada",
+      "evidence": "exec(bar)",
+      "context": "\tdef BenchmarkTest00424_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\tfor name in request.form.keys():\n\t\t\tif \"BenchmarkTest00424\" in request.form.getlist(name):\n\t\t\t\tparam = name\n\t\t\t\tbreak\n\n\t\tbar = \"alsosafe\"\n\t\tif param:\n\t\t\tlst = []\n\t\t\tlst.append('safe')\n\t\t\tlst.append(param)\n\t\t\tlst.append('moresafe')\n\t\t\tlst.pop(0)\n\t\t\tbar = lst[1]\n\n\t\ttry:\n\t\t\texec(bar)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error executing statement \\'{escape_for_html(bar)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [],
+      "owasp_api": [],
+      "cwe": null,
+      "confidence": 0.3411,
+      "label_scores": {},
+      "severity": "Sin estimar",
+      "severity_justification": "No hay evidencia suficiente para estimar el impacto.",
+      "recommendation": "Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.",
+      "verification_status": "Pendiente de revision",
+      "confirmed": false
+    },
+    {
+      "id": "VM-8b215587ed99",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00494.py",
+      "line": 57,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "RESPONSE.set_cookie(cookie, value,",
+      "context": "\tdef BenchmarkTest00494_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = request.headers.get(\"BenchmarkTest00494\")\n\t\tif not param:\n\t\t    param = \"\"\n\n\t\tbar = ''\n\t\tif param:\n\t\t\tbar = param.split(' ')[0]\n\n\t\tfrom flask import make_response\n\t\timport io\n\t\timport helpers.utils\n\n\t\tinput = ''\n\t\tif isinstance(bar, str):\n\t\t\tinput = bar.encode('utf-8')\n\t\telif isinstance(bar, io.IOBase):\n\t\t\tinput = bar.read(1000)\n\n\t\tcookie = 'SomeCookie'\n\t\tvalue = input.decode('utf-8')\n\n\t\tRESPONSE += (\n\t\t\tf'Created cookie: \\'{cookie}\\' with value \\'{helpers.utils.escape_for_html(value)}\\' and secure flag set to false.'\n\t\t)\n\n\t\tRESPONSE = make_response(RESPONSE)\n\t\tRESPONSE.set_cookie(cookie, value,\n\t\t\tpath=request.path,\n\t\t\tsecure=False,\n\t\t\thttponly=True)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.983,
+      "label_scores": {
+        "A02:2025": 0.983
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-1dd82f45413b",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00512.py",
+      "line": 56,
+      "language": "Python",
+      "description": "Patron sensible sin clasificacion suficientemente respaldada",
+      "evidence": "proc = subprocess.run(argStr, shell=True, capture_output=True, encoding=\"utf-8\")",
+      "context": "\tdef BenchmarkTest00512_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = request.headers.get(\"BenchmarkTest00512\")\n\t\tif not param:\n\t\t    param = \"\"\n\n\t\timport configparser\n\t\t\n\t\tbar = 'safe!'\n\t\tconf41882 = configparser.ConfigParser()\n\t\tconf41882.add_section('section41882')\n\t\tconf41882.set('section41882', 'keyA-41882', 'a_Value')\n\t\tconf41882.set('section41882', 'keyB-41882', param)\n\t\tbar = conf41882.get('section41882', 'keyA-41882')\n\n\t\timport platform\n\t\timport subprocess\n\t\timport helpers.utils\n\n\t\targStr = \"\"\n\t\tif platform.system() == \"Windows\":\n\t\t\targStr = \"cmd.exe /c \"\n\t\telse:\n\t\t\targStr = \"sh -c \"\n\t\targStr += f\"echo {bar}\"\n\n\t\ttry:\n\t\t\tproc = subprocess.run(argStr, shell=True, capture_output=True, encoding=\"utf-8\")\n\n\t\t\tRESPONSE += (\n\t\t\t\thelpers.utils.commandOutput(proc)\n\t\t\t)\n\t\texcept IOError:\n\t\t\tRESPONSE += (\n\t\t\t\t\"Problem executing cmdi - subprocess.run(list) Test Case\"\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [],
+      "owasp_api": [],
+      "cwe": null,
+      "confidence": 0.55,
+      "label_scores": {},
+      "severity": "Sin estimar",
+      "severity_justification": "No hay evidencia suficiente para estimar el impacto.",
+      "recommendation": "Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.",
+      "verification_status": "Pendiente de revision",
+      "confirmed": false
+    },
+    {
+      "id": "VM-960085ad5ae9",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00540.py",
+      "line": 58,
+      "language": "Python",
+      "description": "Procesamiento XML con posible resolucion de entidades externas",
+      "evidence": "doc = xml.dom.minidom.parseString(bar, parser)",
+      "context": "\tdef BenchmarkTest00540_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\theaders = request.headers.getlist(\"BenchmarkTest00540\")\n\t\t\n\t\tif headers:\n\t\t\tparam = headers[0]\n\n\t\tpossible = \"ABC\"\n\t\tguess = possible[1]\n\t\t\n\t\tmatch guess:\n\t\t\tcase 'A':\n\t\t\t\tbar = param\n\t\t\tcase 'B':\n\t\t\t\tbar = 'bob'\n\t\t\tcase 'C' | 'D':\n\t\t\t\tbar = param\n\t\t\tcase _:\n\t\t\t\tbar = 'bob\\'s your uncle'\n\n\t\timport xml.dom.minidom\n\t\timport xml.sax.handler\n\n\t\ttry:\n\t\t\tparser = xml.sax.make_parser()\n\t\t\t# all features are disabled by default\n\t\t\tparser.setFeature(xml.sax.handler.feature_external_ges, True)\n\n\t\t\tdoc = xml.dom.minidom.parseString(bar, parser)\n\n\t\t\tout = ''\n\t\t\tprocessing = [doc.documentElement]\n\t\t\twhile processing:\n\t\t\t\te = processing.pop(0)\n\t\t\t\tif e.nodeType == xml.dom.Node.TEXT_NODE:\n\t\t\t\t\tout += e.data\n\t\t\t\telse:\n\t\t\t\t\tprocessing[:0] = e.childNodes\n\n\t\t\tRESPONSE += (\n\t\t\t\tf'Your XML doc results are: <br>{escape_for_html(out)}'\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'There was an error reading your XML doc:<br>{escape_for_html(bar)}'\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-611",
+      "confidence": 0.8973,
+      "label_scores": {
+        "A02:2025": 0.8973
+      },
+      "severity": "Alta",
+      "severity_justification": "Una entidad externa podria revelar archivos o provocar solicitudes internas.",
+      "recommendation": "Deshabilitar DTD y entidades externas y usar un analizador XML endurecido.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-9992f2ae2ce2",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00554.py",
+      "line": 51,
+      "language": "Python",
+      "description": "Salida HTML potencialmente construida con entrada externa",
+      "evidence": "strIO.write('/Employees/Employee[@emplid=\\'')",
+      "context": "\tdef BenchmarkTest00554_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\theaders = request.headers.getlist(\"BenchmarkTest00554\")\n\t\t\n\t\tif headers:\n\t\t\tparam = headers[0]\n\n\t\tTestParam = \"This should never happen\"\n\t\tif 'should' not in TestParam:\n\t\t\tbar = \"Ifnot case passed\"\n\t\telse:\n\t\t\tbar = param\n\n\t\timport lxml.etree\n\t\timport helpers.utils\n\t\timport io\n\n\t\ttry:\n\t\t\tfd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n\t\t\troot = lxml.etree.parse(fd)\n\t\t\tstrIO = io.StringIO()\n\t\t\tstrIO.write('/Employees/Employee[@emplid=\\'')\n\t\t\tstrIO.write(bar)\n\t\t\tstrIO.write('\\']')\n\t\t\tquery = strIO.getvalue()\n\n\t\t\tnodes = root.xpath(query)\n\t\t\tnode_strings = []\n\t\t\tfor node in nodes:\n\t\t\t\tnode_strings.append(' '.join([e.text for e in node]))\n\n\t\t\tRESPONSE += (\n\t\t\t\tf'Your XPATH query results are: <br>[ {', '.join(node_strings)} ]'\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error parsing XPath Query: \\'{escape_for_html(query)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-79",
+      "confidence": 0.8178,
+      "label_scores": {
+        "A05:2025": 0.8178
+      },
+      "severity": "Media",
+      "severity_justification": "Contenido no codificado puede interpretarse como marcado activo.",
+      "recommendation": "Codificar segun el contexto de salida y utilizar plantillas con escape automatico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-bf60ceba1a73",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00554.py",
+      "line": 56,
+      "language": "Python",
+      "description": "Consulta XPath potencialmente construida con entrada externa",
+      "evidence": "nodes = root.xpath(query)",
+      "context": "\tdef BenchmarkTest00554_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\theaders = request.headers.getlist(\"BenchmarkTest00554\")\n\t\t\n\t\tif headers:\n\t\t\tparam = headers[0]\n\n\t\tTestParam = \"This should never happen\"\n\t\tif 'should' not in TestParam:\n\t\t\tbar = \"Ifnot case passed\"\n\t\telse:\n\t\t\tbar = param\n\n\t\timport lxml.etree\n\t\timport helpers.utils\n\t\timport io\n\n\t\ttry:\n\t\t\tfd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n\t\t\troot = lxml.etree.parse(fd)\n\t\t\tstrIO = io.StringIO()\n\t\t\tstrIO.write('/Employees/Employee[@emplid=\\'')\n\t\t\tstrIO.write(bar)\n\t\t\tstrIO.write('\\']')\n\t\t\tquery = strIO.getvalue()\n\n\t\t\tnodes = root.xpath(query)\n\t\t\tnode_strings = []\n\t\t\tfor node in nodes:\n\t\t\t\tnode_strings.append(' '.join([e.text for e in node]))\n\n\t\t\tRESPONSE += (\n\t\t\t\tf'Your XPATH query results are: <br>[ {', '.join(node_strings)} ]'\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error parsing XPath Query: \\'{escape_for_html(query)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-643",
+      "confidence": 0.8178,
+      "label_scores": {
+        "A05:2025": 0.8178
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada puede alterar la expresion de seleccion de datos.",
+      "recommendation": "Usar variables XPath enlazadas y evitar concatenar entrada en expresiones.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-bc9e15d20f9b",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00600.py",
+      "line": 52,
+      "language": "Python",
+      "description": "Patron sensible sin clasificacion suficientemente respaldada",
+      "evidence": "eval(bar)",
+      "context": "\tdef BenchmarkTest00600_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\theaders = request.headers.getlist(\"BenchmarkTest00600\")\n\t\t\n\t\tif headers:\n\t\t\tparam = headers[0]\n\n\t\tpossible = \"ABC\"\n\t\tguess = possible[1]\n\t\t\n\t\tmatch guess:\n\t\t\tcase 'A':\n\t\t\t\tbar = param\n\t\t\tcase 'B':\n\t\t\t\tbar = 'bob'\n\t\t\tcase 'C' | 'D':\n\t\t\t\tbar = param\n\t\t\tcase _:\n\t\t\t\tbar = 'bob\\'s your uncle'\n\n\t\ttry:\n\t\t\tRESPONSE += (\n\t\t\t\teval(bar)\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error evaluating expression \\'{escape_for_html(bar)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [],
+      "owasp_api": [],
+      "cwe": null,
+      "confidence": 0.5879,
+      "label_scores": {},
+      "severity": "Sin estimar",
+      "severity_justification": "No hay evidencia suficiente para estimar el impacto.",
+      "recommendation": "Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.",
+      "verification_status": "Pendiente de revision",
+      "confirmed": false
+    },
+    {
+      "id": "VM-19ee83856d03",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00601.py",
+      "line": 44,
+      "language": "Python",
+      "description": "Evaluacion dinamica potencial de codigo no confiable",
+      "evidence": "eval(bar)",
+      "context": "\tdef BenchmarkTest00601_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\theaders = request.headers.getlist(\"BenchmarkTest00601\")\n\t\t\n\t\tif headers:\n\t\t\tparam = headers[0]\n\n\t\timport helpers.ThingFactory\n\t\t\n\t\tthing = helpers.ThingFactory.createThing()\n\t\tbar = thing.doSomething(param)\n\n\t\ttry:\n\t\t\tRESPONSE += (\n\t\t\t\teval(bar)\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error evaluating expression \\'{escape_for_html(bar)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-94",
+      "confidence": 0.9237,
+      "label_scores": {
+        "A05:2025": 0.9237
+      },
+      "severity": "Alta",
+      "severity_justification": "La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.",
+      "recommendation": "Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-6a3b569c8e75",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00604.py",
+      "line": 57,
+      "language": "Python",
+      "description": "Consulta LDAP potencialmente construida con entrada externa",
+      "evidence": "conn.search(base, filter, attributes=ldap3.ALL_ATTRIBUTES)",
+      "context": "\tdef BenchmarkTest00604_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = \"\"\n\t\theaders = request.headers.getlist(\"BenchmarkTest00604\")\n\t\t\n\t\tif headers:\n\t\t\tparam = headers[0]\n\n\t\tpossible = \"ABC\"\n\t\tguess = possible[0]\n\t\t\n\t\tmatch guess:\n\t\t\tcase 'A':\n\t\t\t\tbar = param\n\t\t\tcase 'B':\n\t\t\t\tbar = 'bob'\n\t\t\tcase 'C' | 'D':\n\t\t\t\tbar = param\n\t\t\tcase _:\n\t\t\t\tbar = 'bob\\'s your uncle'\n\n\t\timport helpers.ldap\n\t\timport ldap3\n\n\t\tbase = 'ou=users,ou=system'\n\t\tfilter = f'(&(objectclass=person)(|(uid={bar})(street=The streetz 4 Ms bar)))'\n\t\ttry:\n\t\t\tconn = helpers.ldap.get_connection()\n\t\t\tconn.search(base, filter, attributes=ldap3.ALL_ATTRIBUTES)\n\t\t\tfound = False\n\t\t\tfor e in conn.entries:\n\t\t\t\tRESPONSE += (\n\t\t\t\t\tf'LDAP query results:<br>'\n\t\t\t\t\tf'Record found with name {e['uid']}<br>'\n\t\t\t\t\tf'Address: {e['street']}<br>'\n\t\t\t\t)\n\t\t\t\tfound = True\n\t\t\tconn.unbind()\n\n\t\t\tif not found:\n\t\t\t\tRESPONSE += (\n\t\t\t\t\tf'LDAP query results: nothing found for query: {helpers.utils.escape_for_html(filter)}'\n\t\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\t\"Error processing LDAP query.\"\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-90",
+      "confidence": 0.8073,
+      "label_scores": {
+        "A05:2025": 0.8073
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada puede alterar el filtro de consulta LDAP.",
+      "recommendation": "Usar constructores de filtros seguros y escape LDAP especifico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-a391e382e0c3",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00613.py",
+      "line": 58,
+      "language": "Python",
+      "description": "Acceso a archivos con posible recorrido de rutas",
+      "evidence": "fd = open(fileName, 'rb')",
+      "context": "\tdef BenchmarkTest00613_post():\n\t\tRESPONSE = \"\"\n\n\t\timport helpers.utils\n\t\tparam = \"\"\n\t\t\n\t\tfor name in request.headers.keys():\n\t\t\tif name.lower() in helpers.utils.commonHeaderNames:\n\t\t\t\tcontinue\n\t\t\n\t\t\tif request.headers.get_all(name):\n\t\t\t\tparam = name\n\t\t\t\tbreak\n\n\t\timport configparser\n\t\t\n\t\tbar = 'safe!'\n\t\tconf66153 = configparser.ConfigParser()\n\t\tconf66153.add_section('section66153')\n\t\tconf66153.set('section66153', 'keyA-66153', 'a-Value')\n\t\tconf66153.set('section66153', 'keyB-66153', param)\n\t\tbar = conf66153.get('section66153', 'keyB-66153')\n\n\t\timport helpers.utils\n\n\t\tfileName = None\n\t\tfd = None\n\n\t\ttry:\n\t\t\tfileName = f'{helpers.utils.TESTFILES_DIR}/{bar}'\n\t\t\tfd = open(fileName, 'rb')\n\t\t\tRESPONSE += (\n\t\t\t\tf'The beginning of file: \\'{escape_for_html(fileName)}\\' is:\\n\\n'\n\t\t\t\tf'{escape_for_html(fd.read(1000).decode('utf-8'))}'\n\t\t\t)\n\t\texcept IOError as e:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Problem reading from file \\'{{escape_for_html(fileName)}}\\': '\n\t\t\t\tf'{escape_for_html(e.strerror)}'\n\t\t\t)\n\t\tfinally:\n\t\t\ttry:\n\t\t\t\tif fd is not None:\n\t\t\t\t\tfd.close()\n\t\t\texcept IOError:\n\t\t\t\tpass # \"// we tried...\"\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A01:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-22",
+      "confidence": 0.9028,
+      "label_scores": {
+        "A01:2025": 0.9028
+      },
+      "severity": "Alta",
+      "severity_justification": "Una ruta externa podria acceder a archivos fuera del directorio autorizado.",
+      "recommendation": "Resolver y validar la ruta final dentro de una raiz permitida, evitando enlaces y rutas externas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-fcb79bc2ac38",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00682.py",
+      "line": 52,
+      "language": "Python",
+      "description": "Consulta XPath potencialmente construida con entrada externa",
+      "evidence": "nodes = root.xpath(query)",
+      "context": "\tdef BenchmarkTest00682_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = request.args.get(\"BenchmarkTest00682\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\tbar = \"\"\n\t\tif param:\n\t\t\tlst = []\n\t\t\tlst.append('safe')\n\t\t\tlst.append(param)\n\t\t\tlst.append('moresafe')\n\t\t\tlst.pop(0)\n\t\t\tbar = lst[0]\n\n\t\timport lxml.etree\n\t\timport helpers.utils\n\n\t\ttry:\n\t\t\tfd = open(f'{helpers.utils.RES_DIR}/employees.xml', 'rb')\n\t\t\troot = lxml.etree.parse(fd)\n\t\t\tquery = '/Employees/Employee[@emplid=\\'' + bar + '\\']'\n\n\t\t\tnodes = root.xpath(query)\n\t\t\tnode_strings = []\n\t\t\tfor node in nodes:\n\t\t\t\tnode_strings.append(' '.join([e.text for e in node]))\n\n\t\t\tRESPONSE += (\n\t\t\t\tf'Your XPATH query results are: <br>[ {', '.join(node_strings)} ]'\n\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Error parsing XPath Query: \\'{escape_for_html(query)}\\''\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-643",
+      "confidence": 0.6274,
+      "label_scores": {
+        "A05:2025": 0.6274
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada puede alterar la expresion de seleccion de datos.",
+      "recommendation": "Usar variables XPath enlazadas y evitar concatenar entrada en expresiones.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-1c2fe5ba8c89",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00721.py",
+      "line": 57,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "RESPONSE.set_cookie(cookie, value,",
+      "context": "\tdef BenchmarkTest00721_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = request.args.get(\"BenchmarkTest00721\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\tbar = ''\n\t\tif param:\n\t\t\tbar = param.split(' ')[0]\n\n\t\tfrom flask import make_response\n\t\timport io\n\t\timport helpers.utils\n\n\t\tinput = ''\n\t\tif isinstance(bar, str):\n\t\t\tinput = bar.encode('utf-8')\n\t\telif isinstance(bar, io.IOBase):\n\t\t\tinput = bar.read(1000)\n\n\t\tcookie = 'SomeCookie'\n\t\tvalue = input.decode('utf-8')\n\n\t\tRESPONSE += (\n\t\t\tf'Created cookie: \\'{cookie}\\' with value \\'{helpers.utils.escape_for_html(value)}\\' and secure flag set to false.'\n\t\t)\n\n\t\tRESPONSE = make_response(RESPONSE)\n\t\tRESPONSE.set_cookie(cookie, value,\n\t\t\tpath=request.path,\n\t\t\tsecure=True,\n\t\t\thttponly=True)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.9881,
+      "label_scores": {
+        "A02:2025": 0.9881
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-47f4386fd620",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00767.py",
+      "line": 45,
+      "language": "Python",
+      "description": "Aleatoriedad potencialmente insuficiente para un uso de seguridad",
+      "evidence": "value = str(random.getrandbits(32))",
+      "context": "\tdef BenchmarkTest00767_post():\n\t\tRESPONSE = \"\"\n\n\t\tvalues = request.args.getlist(\"BenchmarkTest00767\")\n\t\tparam = \"\"\n\t\tif values:\n\t\t\tparam = values[0]\n\n\t\tsuperstring = f'79542{param}abcd'\n\t\tbar = superstring[len('79542'):len(superstring)-5]\n\n\t\timport random\n\t\tfrom helpers.utils import mysession\n\n\t\tnum = 'BenchmarkTest00767'[13:]\n\t\tuser = f'Randy{num}'\n\t\tcookie = f'rememberMe{num}'\n\t\tvalue = str(random.getrandbits(32))\n\n\t\tif cookie in mysession and request.cookies.get(cookie) == mysession[cookie]:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Welcome back: {user}<br/>'\n\t\t\t)\n\t\telse:\n\t\t\tmysession[cookie] = value\n\t\t\tRESPONSE += (\n\t\t\t\tf'{user} has been remembered with cookie: '\n\t\t\t\tf'{cookie} whose value is: {mysession[cookie]}<br/>'\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-330",
+      "confidence": 0.7201,
+      "label_scores": {
+        "A04:2025": 0.7201
+      },
+      "severity": "Media",
+      "severity_justification": "Un generador predecible puede debilitar tokens o identificadores secretos.",
+      "recommendation": "Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-d59741748eb6",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00823.py",
+      "line": 48,
+      "language": "Python",
+      "description": "Consulta LDAP potencialmente construida con entrada externa",
+      "evidence": "conn.search(base, filter, attributes=ldap3.ALL_ATTRIBUTES)",
+      "context": "\tdef BenchmarkTest00823_post():\n\t\tRESPONSE = \"\"\n\n\t\tvalues = request.args.getlist(\"BenchmarkTest00823\")\n\t\tparam = \"\"\n\t\tif values:\n\t\t\tparam = values[0]\n\n\t\tstring33668 = 'help'\n\t\tstring33668 += param\n\t\tstring33668 += 'snapes on a plane'\n\t\tbar = string33668[4:-17]\n\n\t\timport helpers.ldap\n\t\timport ldap3\n\n\t\tbase = 'ou=users,ou=system'\n\t\tfilter = f'(&(objectclass=person)(|(uid={bar})(street=The streetz 4 Ms bar)))'\n\t\ttry:\n\t\t\tconn = helpers.ldap.get_connection()\n\t\t\tconn.search(base, filter, attributes=ldap3.ALL_ATTRIBUTES)\n\t\t\tfound = False\n\t\t\tfor e in conn.entries:\n\t\t\t\tRESPONSE += (\n\t\t\t\t\tf'LDAP query results:<br>'\n\t\t\t\t\tf'Record found with name {e['uid']}<br>'\n\t\t\t\t\tf'Address: {e['street']}<br>'\n\t\t\t\t)\n\t\t\t\tfound = True\n\t\t\tconn.unbind()\n\n\t\t\tif not found:\n\t\t\t\tRESPONSE += (\n\t\t\t\t\tf'LDAP query results: nothing found for query: {helpers.utils.escape_for_html(filter)}'\n\t\t\t\t)\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\t\"Error processing LDAP query.\"\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-90",
+      "confidence": 0.845,
+      "label_scores": {
+        "A05:2025": 0.845
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada puede alterar el filtro de consulta LDAP.",
+      "recommendation": "Usar constructores de filtros seguros y escape LDAP especifico.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-0898b7141b5f",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00899.py",
+      "line": 64,
+      "language": "Python",
+      "description": "Ejecucion de comandos con posible entrada no confiable",
+      "evidence": "proc = subprocess.run(argList, capture_output=True, encoding=\"utf-8\")",
+      "context": "\tdef BenchmarkTest00899_post():\n\t\tRESPONSE = \"\"\n\n\t\timport helpers.separate_request\n\t\t\n\t\twrapped = helpers.separate_request.request_wrapper(request)\n\t\tparam = wrapped.get_query_parameter(\"BenchmarkTest00899\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\tpossible = \"ABC\"\n\t\tguess = possible[0]\n\t\t\n\t\tmatch guess:\n\t\t\tcase 'A':\n\t\t\t\tbar = param\n\t\t\tcase 'B':\n\t\t\t\tbar = 'bob'\n\t\t\tcase 'C' | 'D':\n\t\t\t\tbar = param\n\t\t\tcase _:\n\t\t\t\tbar = 'bob\\'s your uncle'\n\n\t\timport os\n\t\timport subprocess\n\t\timport helpers.utils\n\n\t\targList = []\n\t\tif \"Windows\" in os.name:\n\t\t\targList.append(\"cmd.exe\")\n\t\t\targList.append(\"-c\")\n\t\telse:\n\t\t\targList.append(\"sh\")\n\t\t\targList.append(\"-c\")\n\t\targList.append(f\"echo {bar}\")\n\n\t\tproc = subprocess.run(argList, capture_output=True, encoding=\"utf-8\")\n\t\tRESPONSE += (\n\t\t\thelpers.utils.commandOutput(proc)\n\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-78",
+      "confidence": 0.7951,
+      "label_scores": {
+        "A05:2025": 0.7951
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada puede modificar un comando del sistema.",
+      "recommendation": "Evitar el shell, usar una lista de argumentos y validar operaciones permitidas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-58db0b21afa7",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00946.py",
+      "line": 54,
+      "language": "Python",
+      "description": "Aleatoriedad potencialmente insuficiente para un uso de seguridad",
+      "evidence": "value = str(random.getrandbits(32))",
+      "context": "\tdef BenchmarkTest00946_post():\n\t\tRESPONSE = \"\"\n\n\t\timport urllib.parse\n\t\t\n\t\tquery_string = request.query_string.decode('utf-8')\n\t\tparamLoc = query_string.find(\"BenchmarkTest00946\" + '=')\n\t\tif paramLoc == -1:\n\t\t\treturn f\"request.query_string did not contain expected parameter \\'{\"BenchmarkTest00946\"}\\'.\"\n\t\tparam = query_string[paramLoc + len(\"BenchmarkTest00946\") + 1:]\n\t\tampLoc = param.find('&')\n\t\tif ampLoc != -1:\n\t\t\tparam = param[:ampLoc]\n\t\t\n\t\tparam = urllib.parse.unquote_plus(param)\n\n\t\timport markupsafe\n\t\t\n\t\tbar = markupsafe.escape(param)\n\n\t\timport random\n\t\tfrom helpers.utils import mysession\n\n\t\tnum = 'BenchmarkTest00946'[13:]\n\t\tuser = f'Randy{num}'\n\t\tcookie = f'rememberMe{num}'\n\t\tvalue = str(random.getrandbits(32))\n\n\t\tif cookie in mysession and request.cookies.get(cookie) == mysession[cookie]:\n\t\t\tRESPONSE += (\n\t\t\t\tf'Welcome back: {user}<br/>'\n\t\t\t)\n\t\telse:\n\t\t\tmysession[cookie] = value\n\t\t\tRESPONSE += (\n\t\t\t\tf'{user} has been remembered with cookie: '\n\t\t\t\tf'{cookie} whose value is: {mysession[cookie]}<br/>'\n\t\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-330",
+      "confidence": 0.7827,
+      "label_scores": {
+        "A04:2025": 0.7827
+      },
+      "severity": "Media",
+      "severity_justification": "Un generador predecible puede debilitar tokens o identificadores secretos.",
+      "recommendation": "Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-89aaba962d2e",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest00993.py",
+      "line": 57,
+      "language": "Python",
+      "description": "Deserializacion de entrada externa",
+      "evidence": "unpickled = pickle.loads(base64.urlsafe_b64decode(bar))",
+      "context": "\tdef BenchmarkTest00993_post():\n\t\tRESPONSE = \"\"\n\n\t\timport urllib.parse\n\t\t\n\t\tquery_string = request.query_string.decode('utf-8')\n\t\tparamLoc = query_string.find(\"BenchmarkTest00993\" + '=')\n\t\tif paramLoc == -1:\n\t\t\treturn f\"request.query_string did not contain expected parameter \\'{\"BenchmarkTest00993\"}\\'.\"\n\t\tparam = query_string[paramLoc + len(\"BenchmarkTest00993\") + 1:]\n\t\tampLoc = param.find('&')\n\t\tif ampLoc != -1:\n\t\t\tparam = param[:ampLoc]\n\t\t\n\t\tparam = urllib.parse.unquote_plus(param)\n\n\t\tTestParam = \"This should never happen\"\n\t\tif 'should' not in TestParam:\n\t\t\tbar = \"Ifnot case passed\"\n\t\telse:\n\t\t\tbar = param\n\n\t\timport pickle\n\t\timport base64\n\t\timport helpers.utils\n\n\t\thelpers.utils.sharedstr = \"no pickles to be seen here\"\n\n\t\ttry:\n\t\t\tunpickled = pickle.loads(base64.urlsafe_b64decode(bar))\n\t\texcept:\n\t\t\tRESPONSE += (\n\t\t\t\t'Unpickling failed!'\n\t\t\t)\n\t\t\treturn RESPONSE\n\n\t\tRESPONSE += (\n\t\t\tf'shared string is {helpers.utils.sharedstr}'\n\t\t)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A08:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-502",
+      "confidence": 0.9581,
+      "label_scores": {
+        "A08:2025": 0.9581
+      },
+      "severity": "Alta",
+      "severity_justification": "Un deserializador de objetos puede ejecutar comportamiento peligroso.",
+      "recommendation": "Usar JSON con validacion de esquema; evitar pickle o node-serialize para datos no confiables.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-6a69dd3a601f",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest01070.py",
+      "line": 60,
+      "language": "Python",
+      "description": "Algoritmo criptografico debil en contexto sensible",
+      "evidence": "hash = hashlib.new('md5')",
+      "context": "\tdef BenchmarkTest01070_post():\n\t\tRESPONSE = \"\"\n\n\t\tparts = request.path.split(\"/\")\n\t\tparam = parts[1]\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\t\timport configparser\n\t\t\n\t\tbar = 'safe!'\n\t\tconf19133 = configparser.ConfigParser()\n\t\tconf19133.add_section('section19133')\n\t\tconf19133.set('section19133', 'keyA-19133', 'a-Value')\n\t\tconf19133.set('section19133', 'keyB-19133', param)\n\t\tbar = conf19133.get('section19133', 'keyB-19133')\n\n\t\timport hashlib, base64\n\t\timport io, helpers.utils\n\n\t\tinput = ''\n\t\tif isinstance(bar, str):\n\t\t\tinput = bar.encode('utf-8')\n\t\telif isinstance(bar, io.IOBase):\n\t\t\tinput = bar.read(1000)\n\n\t\tif len(input) == 0:\n\t\t\tRESPONSE += (\n\t\t\t\t'Cannot generate hash: Input was empty.'\n\t\t\t)\n\t\t\treturn RESPONSE\n\n\t\thash = hashlib.new('md5')\n\t\thash.update(input)\n\n\t\tresult = hash.digest()\n\t\tf = open(f'{helpers.utils.TESTFILES_DIR}/passwordFile.txt', 'a')\n\t\tf.write(f'hash_value={base64.b64encode(result)}\\n')\n\t\tRESPONSE += (\n\t\t\tf'Sensitive value \\'{helpers.utils.escape_for_html(input.decode('utf-8'))}\\' hashed and stored.'\n\t\t)\n\t\tf.close()\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-327",
+      "confidence": 0.8583,
+      "label_scores": {
+        "A04:2025": 0.8583
+      },
+      "severity": "Media",
+      "severity_justification": "MD5 o SHA-1 no proporcionan resistencia adecuada en este contexto.",
+      "recommendation": "Usar Argon2id para contrasenas y algoritmos actuales adecuados al uso; revisar el contexto.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-f9a6975bca69",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest01177.py",
+      "line": 26,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "response.set_cookie('BenchmarkTest01177', 'whatever',",
+      "context": "\tdef BenchmarkTest01177_get():\n\t\tresponse = make_response(render_template('web/securecookie-00/BenchmarkTest01177.html'))\n\t\tresponse.set_cookie('BenchmarkTest01177', 'whatever',\n\t\t\tmax_age=60*3,\n\t\t\tsecure=True,\n\t\t\tpath=request.path,\n\t\t\tdomain='localhost')\n\t\treturn response\n\t\treturn BenchmarkTest01177_post()",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.6634,
+      "label_scores": {
+        "A02:2025": 0.6634
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-767852f59b5a",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest01177.py",
+      "line": 60,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "RESPONSE.set_cookie(cookie, value,",
+      "context": "\tdef BenchmarkTest01177_post():\n\t\tRESPONSE = \"\"\n\n\t\timport urllib.parse\n\t\tparam = urllib.parse.unquote_plus(request.cookies.get(\"BenchmarkTest01177\", \"noCookieValueSupplied\"))\n\n\n\t\tfrom flask import make_response\n\t\timport io\n\t\timport helpers.utils\n\n\t\tinput = ''\n\t\tif isinstance(param, str):\n\t\t\tinput = param.encode('utf-8')\n\t\telif isinstance(param, io.IOBase):\n\t\t\tinput = param.read(1000)\n\n\t\tcookie = 'SomeCookie'\n\t\tvalue = input.decode('utf-8')\n\n\t\tRESPONSE += (\n\t\t\tf'Created cookie: \\'{cookie}\\' with value \\'{helpers.utils.escape_for_html(value)}\\' and secure flag set to false.'\n\t\t)\n\n\t\tRESPONSE = make_response(RESPONSE)\n\t\tRESPONSE.set_cookie(cookie, value,\n\t\t\tpath=request.path,\n\t\t\tsecure=False,\n\t\t\thttponly=True)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.9803,
+      "label_scores": {
+        "A02:2025": 0.9803
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-df7b6123ca9d",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest01178.py",
+      "line": 44,
+      "language": "Python",
+      "description": "Redireccion potencialmente controlada por entrada externa",
+      "evidence": "return flask.redirect(param)",
+      "context": "\tdef BenchmarkTest01178_post():\n\t\tRESPONSE = \"\"\n\n\t\timport urllib.parse\n\t\tparam = urllib.parse.unquote_plus(request.cookies.get(\"BenchmarkTest01178\", \"noCookieValueSupplied\"))\n\n\n\t\timport flask\n\n\t\treturn flask.redirect(param)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A01:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-601",
+      "confidence": 0.8842,
+      "label_scores": {
+        "A01:2025": 0.8842
+      },
+      "severity": "Media",
+      "severity_justification": "Un destino no validado puede dirigir a un sitio no confiable.",
+      "recommendation": "Permitir solo destinos locales o una lista explicita de origenes autorizados.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-15649793cf7a",
+      "service": "python-service",
+      "file": "python-service/BenchmarkTest01207.py",
+      "line": 54,
+      "language": "Python",
+      "description": "Cookie con configuracion de transporte potencialmente insegura",
+      "evidence": "RESPONSE.set_cookie(cookie, value,",
+      "context": "\tdef BenchmarkTest01207_post():\n\t\tRESPONSE = \"\"\n\n\t\tparam = request.args.get(\"BenchmarkTest01207\")\n\t\tif not param:\n\t\t\tparam = \"\"\n\n\n\t\tfrom flask import make_response\n\t\timport io\n\t\timport helpers.utils\n\n\t\tinput = ''\n\t\tif isinstance(param, str):\n\t\t\tinput = param.encode('utf-8')\n\t\telif isinstance(param, io.IOBase):\n\t\t\tinput = param.read(1000)\n\n\t\tcookie = 'SomeCookie'\n\t\tvalue = input.decode('utf-8')\n\n\t\tRESPONSE += (\n\t\t\tf'Created cookie: \\'{cookie}\\' with value \\'{helpers.utils.escape_for_html(value)}\\' and secure flag set to false.'\n\t\t)\n\n\t\tRESPONSE = make_response(RESPONSE)\n\t\tRESPONSE.set_cookie(cookie, value,\n\t\t\tpath=request.path,\n\t\t\tsecure=True,\n\t\t\thttponly=True)\n\n\t\treturn RESPONSE",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-614",
+      "confidence": 0.9878,
+      "label_scores": {
+        "A02:2025": 0.9878
+      },
+      "severity": "Media",
+      "severity_justification": "Una cookie sensible sin Secure puede viajar por un canal no protegido.",
+      "recommendation": "Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    }
+  ],
+  "catalog": [
+    {
+      "id": "A01:2025",
+      "name": "Broken Access Control",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A02:2025",
+      "name": "Security Misconfiguration",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A03:2025",
+      "name": "Software Supply Chain Failures",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "A04:2025",
+      "name": "Cryptographic Failures",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A05:2025",
+      "name": "Injection",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A06:2025",
+      "name": "Insecure Design",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A07:2025",
+      "name": "Authentication Failures",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A08:2025",
+      "name": "Software or Data Integrity Failures",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "A09:2025",
+      "name": "Security Logging and Alerting Failures",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "A10:2025",
+      "name": "Mishandling of Exceptional Conditions",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API1:2023",
+      "name": "Broken Object Level Authorization",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API2:2023",
+      "name": "Broken Authentication",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "API3:2023",
+      "name": "Broken Object Property Level Authorization",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API4:2023",
+      "name": "Unrestricted Resource Consumption",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API5:2023",
+      "name": "Broken Function Level Authorization",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API6:2023",
+      "name": "Unrestricted Access to Sensitive Business Flows",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API7:2023",
+      "name": "Server Side Request Forgery",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "API8:2023",
+      "name": "Security Misconfiguration",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    },
+    {
+      "id": "API9:2023",
+      "name": "Improper Inventory Management",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API10:2023",
+      "name": "Unsafe Consumption of APIs",
+      "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
+    }
+  ],
+  "limitations": [
+    "Analisis lexico local sin prueba de explotabilidad ni flujo interprocedimental.",
+    "Entrenamiento con OWASP Benchmark publico y suplemento propio; ambos son casos controlados, no produccion.",
+    "Ausencia de hallazgos no certifica seguridad.",
+    "Dependencias e inventario se leen como configuracion; sin base CVE ni auditoria de cadena de suministro.",
+    "Java se analiza lexicalmente; no se resuelven tipos ni flujos entre metodos. Configuraciones fuera del alcance requieren revision.",
+    "El reporte contiene evidencia del codigo y puede contener informacion sensible."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "name": "BenchmarkPython",
+      "repo": "OWASP-Benchmark/BenchmarkPython",
+      "commit": "f1291485808b66e20ddb6b01b10dc71b3df8c8ba",
+      "language": "Python",
+      "folder": "testcode",
+      "suffix": ".py",
+      "oracle": "expectedresults-0.1.csv",
+      "license": "GPL-3.0-only",
+      "records_downloaded": 1230,
+      "expectedresults_sha256": "0c5ae0f9a8cdcb49549c459a25651cc058c7b17d621fc064ade2bd942dad80b8",
+      "archive_sha256": "e618655e20b2ac8269c24f5aa686bc86d1087a09b5d5c3057da4454c25a2f875",
+      "url": "https://github.com/OWASP-Benchmark/BenchmarkPython"
+    },
+    {
+      "name": "BenchmarkJava",
+      "repo": "OWASP-Benchmark/BenchmarkJava",
+      "commit": "10dfcc54ad02dcfcb358b0ba4a0fef8c919a6d17",
+      "language": "Java",
+      "folder": "src/main/java/org/owasp/benchmark/testcode",
+      "suffix": ".java",
+      "oracle": "expectedresults-1.2.csv",
+      "license": "GPL-2.0-only",
+      "records_downloaded": 2740,
+      "expectedresults_sha256": "f0311c850dea7f15125113f7cfdbd7ad612d7f5951c7331584f6981b6ae2d630",
+      "archive_sha256": "9c53fec82f5e3f48cb6708c3b8596c4b612ab62da86582130b3b4b0c50f69626",
+      "url": "https://github.com/OWASP-Benchmark/BenchmarkJava"
+    }
+  ],
+  "raw_public_records": 3970,
+  "public_records_retained": 3966,
+  "duplicate_records_removed": 4,
+  "ambiguous_records_removed": 0,
+  "controlled_records": 1008,
+  "total_records": 4974,
+  "source_counts": {
+    "original-controlled-v1": 1008,
+    "BenchmarkPython": 1230,
+    "BenchmarkJava": 2736
+  },
+  "partitions": {
+    "train": 3504,
+    "validation": 735,
+    "test": 735
+  },
+  "public_structural_groups": 3816,
+  "split_method": "StratifiedGroupKFold 7; fold 0 test, 1 validation, others train; controlled families 0..3/4/5.",
+  "notes": [
+    "Public benchmarks are synthetic test suites, not production incident code.",
+    "No API labels are inferred solely from a Benchmark CWE.",
+    "Comments, test IDs, category routes and Python wrapper docstrings are removed before features.",
+    "Structural groups ignore identifier and literal differences; no group crosses partitions."
+  ]
+}

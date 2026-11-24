@@ -5,7 +5,7 @@ import json
 import zipfile
 
 ROOT=Path(__file__).resolve().parents[1]
-INCLUDE=['README.md','pyproject.toml','requirements-lock.txt','.gitignore','.gitattributes','Modelo_mineria_datos.pdf','vulnminer','scripts','tests','data','docs','notebooks','examples','output/evaluation','output/reports','output/pdf','output/packages']
+INCLUDE=['README.md','THIRD_PARTY_NOTICES.md','pyproject.toml','requirements-lock.txt','.gitignore','.gitattributes','Modelo_mineria_datos.pdf','vulnminer','scripts','tests','data','docs','notebooks','examples','output/evaluation','output/baseline_synthetic','output/reports','output/pdf','output/packages']
 
 
 def package():

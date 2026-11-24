@@ -2,12 +2,12 @@
   {
     "id": "A01:2025",
     "name": "Broken Access Control",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A02:2025",
     "name": "Security Misconfiguration",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A03:2025",
@@ -17,27 +17,27 @@
   {
     "id": "A04:2025",
     "name": "Cryptographic Failures",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A05:2025",
     "name": "Injection",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A06:2025",
     "name": "Insecure Design",
-    "status": "No evaluada: sin datos ni detector suficiente"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A07:2025",
     "name": "Authentication Failures",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A08:2025",
     "name": "Software or Data Integrity Failures",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "A09:2025",
@@ -57,7 +57,7 @@
   {
     "id": "API2:2023",
     "name": "Broken Authentication",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "API3:2023",
@@ -82,12 +82,12 @@
   {
     "id": "API7:2023",
     "name": "Server Side Request Forgery",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "API8:2023",
     "name": "Security Misconfiguration",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   },
   {
     "id": "API9:2023",
@@ -97,6 +97,6 @@
   {
     "id": "API10:2023",
     "name": "Unsafe Consumption of APIs",
-    "status": "Evaluada en casos controlados"
+    "status": "Evaluada parcialmente con Benchmark publico y/o suplemento controlado"
   }
 ]

@@ -1,0 +1,1142 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VulnMiner - benchmark-holdout</title><style>body{font:16px/1.6 system-ui;margin:0;background:#edf2f6;color:#172a3b}main{max-width:1100px;margin:auto;padding:32px}header,article,section{background:white;padding:26px;border-radius:12px;margin-bottom:20px}header{border-top:6px solid #156b82}h1{font-size:36px;margin:0}h2{font-size:22px}.tag{color:#156b82;font-weight:700}pre{background:#142c3c;color:#edf5fa;padding:18px;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:8px}.status{color:#8b4700}table{border-collapse:collapse;width:100%}td,th{text-align:left;border-bottom:1px solid #ddd;padding:10px}select{padding:10px;font:inherit}.stats{display:flex;gap:30px;flex-wrap:wrap}@media(max-width:600px){main{padding:12px}table{font-size:12px}}</style></head><body><main><header><p class="tag">ESPE / DESARROLLO DE SOFTWARE SEGURO</p><h1>VulnMiner</h1><p>Proyecto: benchmark-holdout · 2026-11-24T14:40:18.716229+00:00</p><div class="stats"><b>2 servicios</b><b>99 archivos</b><b>55 hallazgos potenciales</b></div><p>Modelo: LogisticRegression. Puntuacion del clasificador; no es probabilidad calibrada ni severidad.</p><label>Filtrar por microservicio: <select id="service"><option value="">Todos</option><option value="java-service">java-service</option><option value="python-service">python-service</option></select></label></header><article data-service="java-service"><p class="tag">VM-e3139d8d3565 / java-service</p><h2>Evaluacion dinamica potencial de codigo no confiable</h2><p>java-service/BenchmarkTest00092.java:96 · Java</p><p><b>A05:2025</b> · CWE-94</p><pre>        try {
+            Process p = r.exec(args, argsEnv);
+            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);
+        } catch (IOException e) {</pre><p>Confianza: 66.3% · Severidad estimada: <b>Alta</b></p><p>La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.</p><p><b>Remediacion:</b> Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-b8fee1fb53bc / java-service</p><h2>Evaluacion dinamica potencial de codigo no confiable</h2><p>java-service/BenchmarkTest00174.java:63 · Java</p><p><b>A05:2025</b> · CWE-94</p><pre>        try {
+            Process p = r.exec(cmd, argsEnv);
+            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);
+        } catch (IOException e) {</pre><p>Confianza: 60.8% · Severidad estimada: <b>Alta</b></p><p>La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.</p><p><b>Remediacion:</b> Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-d71386d680b6 / java-service</p><h2>Aleatoriedad potencialmente insuficiente para un uso de seguridad</h2><p>java-service/BenchmarkTest00233.java:65 · Java</p><p><b>A04:2025</b> · CWE-330</p><pre>        int randNumber = new java.util.Random().nextInt(99);
+        String rememberMeKey = Integer.toString(randNumber);</pre><p>Confianza: 61.5% · Severidad estimada: <b>Media</b></p><p>Un generador predecible puede debilitar tokens o identificadores secretos.</p><p><b>Remediacion:</b> Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-a32305672213 / java-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>java-service/BenchmarkTest00403.java:68 · Java</p><p><b>A02:2025</b> · CWE-614</p><pre>        }
+        if (&quot;&quot;.equals(str)) str = &quot;No cookie value supplied&quot;;
+        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(&quot;SomeCookie&quot;, str);</pre><p>Confianza: 80.5% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-1a00ef74de1f / java-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>java-service/BenchmarkTest00655.java:72 · Java</p><p><b>A02:2025</b> · CWE-614</p><pre>        }
+        if (&quot;&quot;.equals(str)) str = &quot;No cookie value supplied&quot;;
+        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(&quot;SomeCookie&quot;, str);</pre><p>Confianza: 80.5% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-b30956102ae3 / java-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>java-service/BenchmarkTest00887.java:55 · Java</p><p><b>A05:2025</b> · CWE-79</p><pre>        response.setHeader(&quot;X-XSS-Protection&quot;, &quot;0&quot;);
+        response.getWriter().println(bar.toCharArray());
+    }
+}</pre><p>Confianza: 65.3% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-290760ead3da / java-service</p><h2>Hash potencialmente debil en un contexto sensible</h2><p>java-service/BenchmarkTest01041.java:58 · Java</p><p><b>A04:2025</b> · CWE-328</p><pre>                    this.getClass().getClassLoader().getResourceAsStream(&quot;benchmark.properties&quot;));
+            String algorithm = benchmarkprops.getProperty(&quot;hashAlg1&quot;, &quot;SHA512&quot;);
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);
+            byte[] input = {(byte) &#x27;?&#x27;};
+            Object inputParam = bar;</pre><p>Confianza: 69.9% · Severidad estimada: <b>Media</b></p><p>Un hash debil puede no proteger adecuadamente secretos o integridad.</p><p><b>Remediacion:</b> Elegir una funcion moderna adecuada al contexto y usar Argon2id para contrasenas.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-32997b79885a / java-service</p><h2>Aleatoriedad potencialmente insuficiente para un uso de seguridad</h2><p>java-service/BenchmarkTest01279.java:48 · Java</p><p><b>A04:2025</b> · CWE-330</p><pre>        long l = new java.util.Random().nextLong();
+        String rememberMeKey = Long.toString(l);</pre><p>Confianza: 71.1% · Severidad estimada: <b>Media</b></p><p>Un generador predecible puede debilitar tokens o identificadores secretos.</p><p><b>Remediacion:</b> Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-96e60585466a / java-service</p><h2>Aleatoriedad potencialmente insuficiente para un uso de seguridad</h2><p>java-service/BenchmarkTest01279.java:95 · Java</p><p><b>A04:2025</b> · CWE-330</p><pre>        response.getWriter().println(&quot;Weak Randomness Test java.util.Random.nextLong() executed&quot;);
+    } // end doPost</pre><p>Confianza: 67.0% · Severidad estimada: <b>Media</b></p><p>Un generador predecible puede debilitar tokens o identificadores secretos.</p><p><b>Remediacion:</b> Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-4949c1067607 / java-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>java-service/BenchmarkTest01280.java:63 · Java</p><p><b>A02:2025</b> · CWE-614</p><pre>        }
+        if (&quot;&quot;.equals(str)) str = &quot;No cookie value supplied&quot;;
+        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(&quot;SomeCookie&quot;, str);</pre><p>Confianza: 80.5% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-f3078962eae3 / java-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>java-service/BenchmarkTest01347.java:53 · Java</p><p><b>A05:2025</b> · CWE-79</p><pre>        response.setHeader(&quot;X-XSS-Protection&quot;, &quot;0&quot;);
+        response.getWriter().println(bar);
+    } // end doPost</pre><p>Confianza: 80.7% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-d076adcfe33a / java-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>java-service/BenchmarkTest01604.java:65 · Java</p><p><b>A02:2025</b> · CWE-614</p><pre>        }
+        if (&quot;&quot;.equals(str)) str = &quot;No cookie value supplied&quot;;
+        javax.servlet.http.Cookie cookie = new javax.servlet.http.Cookie(&quot;SomeCookie&quot;, str);</pre><p>Confianza: 80.5% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-eb41705dc024 / java-service</p><h2>Evaluacion dinamica potencial de codigo no confiable</h2><p>java-service/BenchmarkTest01606.java:59 · Java</p><p><b>A05:2025</b> · CWE-94</p><pre>        try {
+            Process p = r.exec(cmd + bar);
+            org.owasp.benchmark.helpers.Utils.printOSCommandResults(p, response);
+        } catch (IOException e) {</pre><p>Confianza: 60.2% · Severidad estimada: <b>Alta</b></p><p>La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.</p><p><b>Remediacion:</b> Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-cb6b7c5e1899 / java-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>java-service/BenchmarkTest01622.java:65 · Java</p><p><b>A05:2025</b> · CWE-79</p><pre>        } catch (java.sql.SQLException e) {
+            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {
+                response.getWriter().println(&quot;Error processing request.&quot;);
+            } else throw new ServletException(e);
+        }</pre><p>Confianza: 60.8% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-9ead213179ee / java-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>java-service/BenchmarkTest01665.java:73 · Java</p><p><b>A05:2025</b> · CWE-79</p><pre>        response.setHeader(&quot;X-XSS-Protection&quot;, &quot;0&quot;);
+        response.getWriter().println(bar.toCharArray());
+    } // end doPost</pre><p>Confianza: 66.1% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-c3bb6df2953b / java-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>java-service/BenchmarkTest01885.java:77 · Java</p><p><b>A05:2025</b> · CWE-79</p><pre>        } catch (java.sql.SQLException e) {
+            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {
+                response.getWriter().println(&quot;Error processing request.&quot;);
+            } else throw new ServletException(e);
+        }</pre><p>Confianza: 60.8% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-0d6f5177bfd6 / java-service</p><h2>Hash potencialmente debil en un contexto sensible</h2><p>java-service/BenchmarkTest02391.java:55 · Java</p><p><b>A04:2025</b> · CWE-328</p><pre>                    this.getClass().getClassLoader().getResourceAsStream(&quot;benchmark.properties&quot;));
+            String algorithm = benchmarkprops.getProperty(&quot;hashAlg1&quot;, &quot;SHA512&quot;);
+            java.security.MessageDigest md = java.security.MessageDigest.getInstance(algorithm);
+            byte[] input = {(byte) &#x27;?&#x27;};
+            Object inputParam = bar;</pre><p>Confianza: 69.9% · Severidad estimada: <b>Media</b></p><p>Un hash debil puede no proteger adecuadamente secretos o integridad.</p><p><b>Remediacion:</b> Elegir una funcion moderna adecuada al contexto y usar Argon2id para contrasenas.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-8d909e67866f / java-service</p><h2>Acceso a archivos con posible recorrido de rutas</h2><p>java-service/BenchmarkTest02470.java:56 · Java</p><p><b>A01:2025</b> · CWE-22</p><pre>            fos = new java.io.FileOutputStream(fileName, false);
+            response.getWriter()
+                    .println(</pre><p>Confianza: 60.2% · Severidad estimada: <b>Alta</b></p><p>Una ruta externa podria acceder a archivos fuera del directorio autorizado.</p><p><b>Remediacion:</b> Resolver y validar la ruta final dentro de una raiz permitida, evitando enlaces y rutas externas.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="java-service"><p class="tag">VM-3277802c99ef / java-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>java-service/BenchmarkTest02627.java:86 · Java</p><p><b>A05:2025</b> · CWE-79</p><pre>        } catch (java.sql.SQLException e) {
+            if (org.owasp.benchmark.helpers.DatabaseHelper.hideSQLErrors) {
+                response.getWriter().println(&quot;Error processing request.&quot;);
+            } else throw new ServletException(e);
+        }</pre><p>Confianza: 60.8% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-acb5f22d62c9 / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest00012.py:26 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest00012_get():
+		response = make_response(render_template(&#x27;web/sqli-00/BenchmarkTest00012.html&#x27;))
+		response.set_cookie(&#x27;BenchmarkTest00012&#x27;, &#x27;bar&#x27;,
+			max_age=60*3,
+			secure=True,
+			path=request.path,
+			domain=&#x27;localhost&#x27;)
+		return response
+		return BenchmarkTest00012_post()</pre><p>Confianza: 64.8% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-6621a42f4810 / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest00036.py:26 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest00036_get():
+		response = make_response(render_template(&#x27;web/weakrand-00/BenchmarkTest00036.html&#x27;))
+		response.set_cookie(&#x27;BenchmarkTest00036&#x27;, &#x27;whatever&#x27;,
+			max_age=60*3,
+			secure=True,
+			path=request.path,
+			domain=&#x27;localhost&#x27;)
+		return response
+		return BenchmarkTest00036_post()</pre><p>Confianza: 65.2% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-dd2836d2c0f6 / python-service</p><h2>Patron sensible sin clasificacion suficientemente respaldada</h2><p>python-service/BenchmarkTest00074.py:51 · Python</p><p><b>Sin categoria: pendiente de revision</b> · CWE sin determinar</p><pre>	def BenchmarkTest00074_post():
+		RESPONSE = &quot;&quot;
+
+		import urllib.parse
+		param = urllib.parse.unquote_plus(request.cookies.get(&quot;BenchmarkTest00074&quot;, &quot;noCookieValueSupplied&quot;))
+
+		import configparser
+		
+		bar = &#x27;safe!&#x27;
+		conf90091 = configparser.ConfigParser()
+		conf90091.add_section(&#x27;section90091&#x27;)
+		conf90091.set(&#x27;section90091&#x27;, &#x27;keyA-90091&#x27;, &#x27;a-Value&#x27;)
+		conf90091.set(&#x27;section90091&#x27;, &#x27;keyB-90091&#x27;, param)
+		bar = conf90091.get(&#x27;section90091&#x27;, &#x27;keyB-90091&#x27;)
+
+		try:
+			exec(bar)
+		except:
+			RESPONSE += (
+				f&#x27;Error executing statement \&#x27;{escape_for_html(bar)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 29.9% · Severidad estimada: <b>Sin estimar</b></p><p>No hay evidencia suficiente para estimar el impacto.</p><p><b>Remediacion:</b> Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.</p><p class="status">Pendiente de revision · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-059db19e8d3f / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest00076.py:26 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest00076_get():
+		response = make_response(render_template(&#x27;web/ldapi-00/BenchmarkTest00076.html&#x27;))
+		response.set_cookie(&#x27;BenchmarkTest00076&#x27;, &#x27;Ms+Bar&#x27;,
+			max_age=60*3,
+			secure=True,
+			path=request.path,
+			domain=&#x27;localhost&#x27;)
+		return response
+		return BenchmarkTest00076_post()</pre><p>Confianza: 60.7% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-e5d6d2f4ab1c / python-service</p><h2>Algoritmo criptografico debil en contexto sensible</h2><p>python-service/BenchmarkTest00143.py:54 · Python</p><p><b>A04:2025</b> · CWE-327</p><pre>	def BenchmarkTest00143_post():
+		RESPONSE = &quot;&quot;
+
+		param = request.form.get(&quot;BenchmarkTest00143&quot;)
+		if not param:
+			param = &quot;&quot;
+
+		import html
+		
+		bar = html.escape(param)
+
+		import hashlib, base64
+		import io, helpers.utils
+
+		input = &#x27;&#x27;
+		if isinstance(bar, str):
+			input = bar.encode(&#x27;utf-8&#x27;)
+		elif isinstance(bar, io.IOBase):
+			input = bar.read(1000)
+
+		if len(input) == 0:
+			RESPONSE += (
+				&#x27;Cannot generate hash: Input was empty.&#x27;
+			)
+			return RESPONSE
+
+		hash = hashlib.sha1()
+		hash.update(input)
+
+		result = hash.digest()
+		f = open(f&#x27;{helpers.utils.TESTFILES_DIR}/passwordFile.txt&#x27;, &#x27;a&#x27;)
+		f.write(f&#x27;hash_value={base64.b64encode(result)}\n&#x27;)
+		RESPONSE += (
+			f&#x27;Sensitive value \&#x27;{helpers.utils.escape_for_html(input.decode(&#x27;utf-8&#x27;))}\&#x27; hashed and stored.&#x27;
+		)
+		f.close()
+
+		return RESPONSE</pre><p>Confianza: 79.8% · Severidad estimada: <b>Media</b></p><p>MD5 o SHA-1 no proporcionan resistencia adecuada en este contexto.</p><p><b>Remediacion:</b> Usar Argon2id para contrasenas y algoritmos actuales adecuados al uso; revisar el contexto.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-e5ae62b4a5ce / python-service</p><h2>Redireccion potencialmente controlada por entrada externa</h2><p>python-service/BenchmarkTest00258.py:40 · Python</p><p><b>A01:2025</b> · CWE-601</p><pre>	def BenchmarkTest00258_post():
+		RESPONSE = &quot;&quot;
+
+		values = request.form.getlist(&quot;BenchmarkTest00258&quot;)
+		param = &quot;&quot;
+		if values:
+			param = values[0]
+
+		bar = param
+
+		import flask
+
+		return flask.redirect(bar)
+
+		return RESPONSE</pre><p>Confianza: 90.3% · Severidad estimada: <b>Media</b></p><p>Un destino no validado puede dirigir a un sitio no confiable.</p><p><b>Remediacion:</b> Permitir solo destinos locales o una lista explicita de origenes autorizados.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-c08296a4ecdf / python-service</p><h2>Posible cruce de limites de confianza en estado de sesion</h2><p>python-service/BenchmarkTest00260.py:41 · Python</p><p><b>A06:2025</b> · CWE-501</p><pre>	def BenchmarkTest00260_post():
+		RESPONSE = &quot;&quot;
+
+		values = request.form.getlist(&quot;BenchmarkTest00260&quot;)
+		param = &quot;&quot;
+		if values:
+			param = values[0]
+
+		superstring = f&#x27;39218{param}abcd&#x27;
+		bar = superstring[len(&#x27;39218&#x27;):len(superstring)-5]
+
+		import flask
+
+		flask.session[&#x27;userid&#x27;] = bar
+
+		RESPONSE += (
+			f&#x27;Item: \&#x27;userid\&#x27; with value \&#x27;{escape_for_html(bar)}&#x27;
+			&#x27;\&#x27;saved in session.&#x27;
+		)
+
+		return RESPONSE</pre><p>Confianza: 94.2% · Severidad estimada: <b>Media</b></p><p>La entrada externa puede modificar estado que deberia controlar la aplicacion.</p><p><b>Remediacion:</b> Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-f453f072a297 / python-service</p><h2>Posible cruce de limites de confianza en estado de sesion</h2><p>python-service/BenchmarkTest00261.py:46 · Python</p><p><b>A06:2025</b> · CWE-501</p><pre>	def BenchmarkTest00261_post():
+		RESPONSE = &quot;&quot;
+
+		values = request.form.getlist(&quot;BenchmarkTest00261&quot;)
+		param = &quot;&quot;
+		if values:
+			param = values[0]
+
+		map14820 = {}
+		map14820[&#x27;keyA-14820&#x27;] = &#x27;a-Value&#x27;
+		map14820[&#x27;keyB-14820&#x27;] = param
+		map14820[&#x27;keyC&#x27;] = &#x27;another-Value&#x27;
+		bar = &quot;safe!&quot;
+		bar = map14820[&#x27;keyB-14820&#x27;]
+		bar = map14820[&#x27;keyA-14820&#x27;]
+
+		import flask
+
+		flask.session[bar] = &#x27;12345&#x27;
+
+		RESPONSE += (
+			f&#x27;Item: \&#x27;{escape_for_html(bar)}&#x27;
+			&#x27;\&#x27; with value: 12345 saved in session.&#x27;
+		)
+
+		return RESPONSE</pre><p>Confianza: 90.9% · Severidad estimada: <b>Media</b></p><p>La entrada externa puede modificar estado que deberia controlar la aplicacion.</p><p><b>Remediacion:</b> Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-d457d37643c7 / python-service</p><h2>Deserializacion de entrada externa</h2><p>python-service/BenchmarkTest00269.py:44 · Python</p><p><b>A08:2025</b> · CWE-502</p><pre>	def BenchmarkTest00269_post():
+		RESPONSE = &quot;&quot;
+
+		values = request.form.getlist(&quot;BenchmarkTest00269&quot;)
+		param = &quot;&quot;
+		if values:
+			param = values[0]
+
+		import helpers.ThingFactory
+		
+		thing = helpers.ThingFactory.createThing()
+		bar = thing.doSomething(param)
+
+		import yaml
+
+		try:
+			yobj = yaml.load(bar, Loader=yaml.Loader)
+
+			RESPONSE += (
+				yobj[&#x27;text&#x27;]
+			)
+		except:
+			RESPONSE += (
+				&quot;There was an error loading the configuration&quot;
+			)
+
+		return RESPONSE</pre><p>Confianza: 84.0% · Severidad estimada: <b>Alta</b></p><p>Un deserializador de objetos puede ejecutar comportamiento peligroso.</p><p><b>Remediacion:</b> Usar JSON con validacion de esquema; evitar pickle o node-serialize para datos no confiables.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-9d4c40b54730 / python-service</p><h2>Procesamiento XML con posible resolucion de entidades externas</h2><p>python-service/BenchmarkTest00294.py:52 · Python</p><p><b>A02:2025</b> · CWE-611</p><pre>	def BenchmarkTest00294_post():
+		RESPONSE = &quot;&quot;
+
+		import helpers.separate_request
+		
+		wrapped = helpers.separate_request.request_wrapper(request)
+		param = wrapped.get_form_parameter(&quot;BenchmarkTest00294&quot;)
+		if not param:
+			param = &quot;&quot;
+
+		TestParam = &quot;This should never happen&quot;
+		if &#x27;should&#x27; not in TestParam:
+			bar = &quot;Ifnot case passed&quot;
+		else:
+			bar = param
+
+		import xml.dom.minidom
+		import xml.sax.handler
+
+		try:
+			parser = xml.sax.make_parser()
+			# all features are disabled by default
+			parser.setFeature(xml.sax.handler.feature_external_ges, True)
+
+			doc = xml.dom.minidom.parseString(bar, parser)
+
+			out = &#x27;&#x27;
+			processing = [doc.documentElement]
+			while processing:
+				e = processing.pop(0)
+				if e.nodeType == xml.dom.Node.TEXT_NODE:
+					out += e.data
+				else:
+					processing[:0] = e.childNodes
+
+			RESPONSE += (
+				f&#x27;Your XML doc results are: &lt;br&gt;{escape_for_html(out)}&#x27;
+			)
+		except:
+			RESPONSE += (
+				f&#x27;There was an error reading your XML doc:&lt;br&gt;{escape_for_html(bar)}&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 83.1% · Severidad estimada: <b>Alta</b></p><p>Una entidad externa podria revelar archivos o provocar solicitudes internas.</p><p><b>Remediacion:</b> Deshabilitar DTD y entidades externas y usar un analizador XML endurecido.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-975e9d31b2dc / python-service</p><h2>Posible cruce de limites de confianza en estado de sesion</h2><p>python-service/BenchmarkTest00341.py:44 · Python</p><p><b>A06:2025</b> · CWE-501</p><pre>	def BenchmarkTest00341_post():
+		RESPONSE = &quot;&quot;
+
+		import helpers.separate_request
+		
+		wrapped = helpers.separate_request.request_wrapper(request)
+		param = wrapped.get_form_parameter(&quot;BenchmarkTest00341&quot;)
+		if not param:
+			param = &quot;&quot;
+
+		bar = &quot;This should never happen&quot;
+		if &#x27;should&#x27; in bar:
+			bar = param
+
+		import flask
+
+		flask.session[bar] = &#x27;12345&#x27;
+
+		RESPONSE += (
+			f&#x27;Item: \&#x27;{escape_for_html(bar)}&#x27;
+			&#x27;\&#x27; with value: 12345 saved in session.&#x27;
+		)
+
+		return RESPONSE</pre><p>Confianza: 94.7% · Severidad estimada: <b>Media</b></p><p>La entrada externa puede modificar estado que deberia controlar la aplicacion.</p><p><b>Remediacion:</b> Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-79131c3d3577 / python-service</p><h2>Acceso a archivos con posible recorrido de rutas</h2><p>python-service/BenchmarkTest00351.py:43 · Python</p><p><b>A01:2025</b> · CWE-22</p><pre>	def BenchmarkTest00351_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		for name in request.form.keys():
+			if &quot;BenchmarkTest00351&quot; in request.form.getlist(name):
+				param = name
+				break
+
+		bar = param
+
+		import codecs
+		import helpers.utils
+
+		try:
+			fileTarget = codecs.open(f&#x27;{helpers.utils.TESTFILES_DIR}/{bar}&#x27;,&#x27;r&#x27;,&#x27;utf-8&#x27;)
+
+			RESPONSE += (
+				f&quot;Access to file: \&#x27;{escape_for_html(fileTarget.name)}\&#x27; created.&quot;
+			)
+
+			RESPONSE += (
+				&quot; And file already exists.&quot;
+			)
+
+		except FileNotFoundError:
+			RESPONSE += (
+				&quot; But file doesn&#x27;t exist yet.&quot;
+			)
+
+		return RESPONSE</pre><p>Confianza: 95.6% · Severidad estimada: <b>Alta</b></p><p>Una ruta externa podria acceder a archivos fuera del directorio autorizado.</p><p><b>Remediacion:</b> Resolver y validar la ruta final dentro de una raiz permitida, evitando enlaces y rutas externas.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-e21807100d01 / python-service</p><h2>Consulta XPath potencialmente construida con entrada externa</h2><p>python-service/BenchmarkTest00375.py:50 · Python</p><p><b>A05:2025</b> · CWE-643</p><pre>	def BenchmarkTest00375_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		for name in request.form.keys():
+			if &quot;BenchmarkTest00375&quot; in request.form.getlist(name):
+				param = name
+				break
+
+		TestParam = &quot;This should never happen&quot;
+		if &#x27;should&#x27; not in TestParam:
+			bar = &quot;Ifnot case passed&quot;
+		else:
+			bar = param
+
+		import lxml.etree
+		import helpers.utils
+
+		try:
+			fd = open(f&#x27;{helpers.utils.RES_DIR}/employees.xml&#x27;, &#x27;rb&#x27;)
+			root = lxml.etree.parse(fd)
+			query = f&#x27;/Employees/Employee[@emplid=\&#x27;{bar.replace(&#x27;\&#x27;&#x27;, &#x27;&amp;apos;&#x27;)}\&#x27;]&#x27;
+			nodes = root.xpath(query)
+			node_strings = []
+			for node in nodes:
+				node_strings.append(&#x27; &#x27;.join([e.text for e in node]))
+
+			RESPONSE += (
+				f&#x27;Your XPATH query results are: &lt;br&gt;[ {&#x27;, &#x27;.join(node_strings)} ]&#x27;
+			)
+		except:
+			RESPONSE += (
+				f&#x27;Error parsing XPath Query: \&#x27;{escape_for_html(query)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 61.4% · Severidad estimada: <b>Alta</b></p><p>La entrada puede alterar la expresion de seleccion de datos.</p><p><b>Remediacion:</b> Usar variables XPath enlazadas y evitar concatenar entrada en expresiones.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-a8b27a5bdf8f / python-service</p><h2>Posible cruce de limites de confianza en estado de sesion</h2><p>python-service/BenchmarkTest00421.py:52 · Python</p><p><b>A06:2025</b> · CWE-501</p><pre>	def BenchmarkTest00421_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		for name in request.form.keys():
+			if &quot;BenchmarkTest00421&quot; in request.form.getlist(name):
+				param = name
+				break
+
+		possible = &quot;ABC&quot;
+		guess = possible[1]
+		
+		match guess:
+			case &#x27;A&#x27;:
+				bar = param
+			case &#x27;B&#x27;:
+				bar = &#x27;bob&#x27;
+			case &#x27;C&#x27; | &#x27;D&#x27;:
+				bar = param
+			case _:
+				bar = &#x27;bob\&#x27;s your uncle&#x27;
+
+		import flask
+
+		flask.session[&#x27;userid&#x27;] = bar
+
+		RESPONSE += (
+			f&#x27;Item: \&#x27;userid\&#x27; with value \&#x27;{escape_for_html(bar)}&#x27;
+			&#x27;\&#x27;saved in session.&#x27;
+		)
+
+		return RESPONSE</pre><p>Confianza: 76.1% · Severidad estimada: <b>Media</b></p><p>La entrada externa puede modificar estado que deberia controlar la aplicacion.</p><p><b>Remediacion:</b> Mantener claves y privilegios de sesion bajo control del servidor y validar el flujo completo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-4f6ce0fdfeae / python-service</p><h2>Patron sensible sin clasificacion suficientemente respaldada</h2><p>python-service/BenchmarkTest00424.py:47 · Python</p><p><b>Sin categoria: pendiente de revision</b> · CWE sin determinar</p><pre>	def BenchmarkTest00424_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		for name in request.form.keys():
+			if &quot;BenchmarkTest00424&quot; in request.form.getlist(name):
+				param = name
+				break
+
+		bar = &quot;alsosafe&quot;
+		if param:
+			lst = []
+			lst.append(&#x27;safe&#x27;)
+			lst.append(param)
+			lst.append(&#x27;moresafe&#x27;)
+			lst.pop(0)
+			bar = lst[1]
+
+		try:
+			exec(bar)
+		except:
+			RESPONSE += (
+				f&#x27;Error executing statement \&#x27;{escape_for_html(bar)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 34.1% · Severidad estimada: <b>Sin estimar</b></p><p>No hay evidencia suficiente para estimar el impacto.</p><p><b>Remediacion:</b> Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.</p><p class="status">Pendiente de revision · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-8b215587ed99 / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest00494.py:57 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest00494_post():
+		RESPONSE = &quot;&quot;
+
+		param = request.headers.get(&quot;BenchmarkTest00494&quot;)
+		if not param:
+		    param = &quot;&quot;
+
+		bar = &#x27;&#x27;
+		if param:
+			bar = param.split(&#x27; &#x27;)[0]
+
+		from flask import make_response
+		import io
+		import helpers.utils
+
+		input = &#x27;&#x27;
+		if isinstance(bar, str):
+			input = bar.encode(&#x27;utf-8&#x27;)
+		elif isinstance(bar, io.IOBase):
+			input = bar.read(1000)
+
+		cookie = &#x27;SomeCookie&#x27;
+		value = input.decode(&#x27;utf-8&#x27;)
+
+		RESPONSE += (
+			f&#x27;Created cookie: \&#x27;{cookie}\&#x27; with value \&#x27;{helpers.utils.escape_for_html(value)}\&#x27; and secure flag set to false.&#x27;
+		)
+
+		RESPONSE = make_response(RESPONSE)
+		RESPONSE.set_cookie(cookie, value,
+			path=request.path,
+			secure=False,
+			httponly=True)
+
+		return RESPONSE</pre><p>Confianza: 98.3% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-1dd82f45413b / python-service</p><h2>Patron sensible sin clasificacion suficientemente respaldada</h2><p>python-service/BenchmarkTest00512.py:56 · Python</p><p><b>Sin categoria: pendiente de revision</b> · CWE sin determinar</p><pre>	def BenchmarkTest00512_post():
+		RESPONSE = &quot;&quot;
+
+		param = request.headers.get(&quot;BenchmarkTest00512&quot;)
+		if not param:
+		    param = &quot;&quot;
+
+		import configparser
+		
+		bar = &#x27;safe!&#x27;
+		conf41882 = configparser.ConfigParser()
+		conf41882.add_section(&#x27;section41882&#x27;)
+		conf41882.set(&#x27;section41882&#x27;, &#x27;keyA-41882&#x27;, &#x27;a_Value&#x27;)
+		conf41882.set(&#x27;section41882&#x27;, &#x27;keyB-41882&#x27;, param)
+		bar = conf41882.get(&#x27;section41882&#x27;, &#x27;keyA-41882&#x27;)
+
+		import platform
+		import subprocess
+		import helpers.utils
+
+		argStr = &quot;&quot;
+		if platform.system() == &quot;Windows&quot;:
+			argStr = &quot;cmd.exe /c &quot;
+		else:
+			argStr = &quot;sh -c &quot;
+		argStr += f&quot;echo {bar}&quot;
+
+		try:
+			proc = subprocess.run(argStr, shell=True, capture_output=True, encoding=&quot;utf-8&quot;)
+
+			RESPONSE += (
+				helpers.utils.commandOutput(proc)
+			)
+		except IOError:
+			RESPONSE += (
+				&quot;Problem executing cmdi - subprocess.run(list) Test Case&quot;
+			)
+
+		return RESPONSE</pre><p>Confianza: 55.0% · Severidad estimada: <b>Sin estimar</b></p><p>No hay evidencia suficiente para estimar el impacto.</p><p><b>Remediacion:</b> Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.</p><p class="status">Pendiente de revision · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-960085ad5ae9 / python-service</p><h2>Procesamiento XML con posible resolucion de entidades externas</h2><p>python-service/BenchmarkTest00540.py:58 · Python</p><p><b>A02:2025</b> · CWE-611</p><pre>	def BenchmarkTest00540_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		headers = request.headers.getlist(&quot;BenchmarkTest00540&quot;)
+		
+		if headers:
+			param = headers[0]
+
+		possible = &quot;ABC&quot;
+		guess = possible[1]
+		
+		match guess:
+			case &#x27;A&#x27;:
+				bar = param
+			case &#x27;B&#x27;:
+				bar = &#x27;bob&#x27;
+			case &#x27;C&#x27; | &#x27;D&#x27;:
+				bar = param
+			case _:
+				bar = &#x27;bob\&#x27;s your uncle&#x27;
+
+		import xml.dom.minidom
+		import xml.sax.handler
+
+		try:
+			parser = xml.sax.make_parser()
+			# all features are disabled by default
+			parser.setFeature(xml.sax.handler.feature_external_ges, True)
+
+			doc = xml.dom.minidom.parseString(bar, parser)
+
+			out = &#x27;&#x27;
+			processing = [doc.documentElement]
+			while processing:
+				e = processing.pop(0)
+				if e.nodeType == xml.dom.Node.TEXT_NODE:
+					out += e.data
+				else:
+					processing[:0] = e.childNodes
+
+			RESPONSE += (
+				f&#x27;Your XML doc results are: &lt;br&gt;{escape_for_html(out)}&#x27;
+			)
+		except:
+			RESPONSE += (
+				f&#x27;There was an error reading your XML doc:&lt;br&gt;{escape_for_html(bar)}&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 89.7% · Severidad estimada: <b>Alta</b></p><p>Una entidad externa podria revelar archivos o provocar solicitudes internas.</p><p><b>Remediacion:</b> Deshabilitar DTD y entidades externas y usar un analizador XML endurecido.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-9992f2ae2ce2 / python-service</p><h2>Salida HTML potencialmente construida con entrada externa</h2><p>python-service/BenchmarkTest00554.py:51 · Python</p><p><b>A05:2025</b> · CWE-79</p><pre>	def BenchmarkTest00554_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		headers = request.headers.getlist(&quot;BenchmarkTest00554&quot;)
+		
+		if headers:
+			param = headers[0]
+
+		TestParam = &quot;This should never happen&quot;
+		if &#x27;should&#x27; not in TestParam:
+			bar = &quot;Ifnot case passed&quot;
+		else:
+			bar = param
+
+		import lxml.etree
+		import helpers.utils
+		import io
+
+		try:
+			fd = open(f&#x27;{helpers.utils.RES_DIR}/employees.xml&#x27;, &#x27;rb&#x27;)
+			root = lxml.etree.parse(fd)
+			strIO = io.StringIO()
+			strIO.write(&#x27;/Employees/Employee[@emplid=\&#x27;&#x27;)
+			strIO.write(bar)
+			strIO.write(&#x27;\&#x27;]&#x27;)
+			query = strIO.getvalue()
+
+			nodes = root.xpath(query)
+			node_strings = []
+			for node in nodes:
+				node_strings.append(&#x27; &#x27;.join([e.text for e in node]))
+
+			RESPONSE += (
+				f&#x27;Your XPATH query results are: &lt;br&gt;[ {&#x27;, &#x27;.join(node_strings)} ]&#x27;
+			)
+		except:
+			RESPONSE += (
+				f&#x27;Error parsing XPath Query: \&#x27;{escape_for_html(query)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 81.8% · Severidad estimada: <b>Media</b></p><p>Contenido no codificado puede interpretarse como marcado activo.</p><p><b>Remediacion:</b> Codificar segun el contexto de salida y utilizar plantillas con escape automatico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-bf60ceba1a73 / python-service</p><h2>Consulta XPath potencialmente construida con entrada externa</h2><p>python-service/BenchmarkTest00554.py:56 · Python</p><p><b>A05:2025</b> · CWE-643</p><pre>	def BenchmarkTest00554_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		headers = request.headers.getlist(&quot;BenchmarkTest00554&quot;)
+		
+		if headers:
+			param = headers[0]
+
+		TestParam = &quot;This should never happen&quot;
+		if &#x27;should&#x27; not in TestParam:
+			bar = &quot;Ifnot case passed&quot;
+		else:
+			bar = param
+
+		import lxml.etree
+		import helpers.utils
+		import io
+
+		try:
+			fd = open(f&#x27;{helpers.utils.RES_DIR}/employees.xml&#x27;, &#x27;rb&#x27;)
+			root = lxml.etree.parse(fd)
+			strIO = io.StringIO()
+			strIO.write(&#x27;/Employees/Employee[@emplid=\&#x27;&#x27;)
+			strIO.write(bar)
+			strIO.write(&#x27;\&#x27;]&#x27;)
+			query = strIO.getvalue()
+
+			nodes = root.xpath(query)
+			node_strings = []
+			for node in nodes:
+				node_strings.append(&#x27; &#x27;.join([e.text for e in node]))
+
+			RESPONSE += (
+				f&#x27;Your XPATH query results are: &lt;br&gt;[ {&#x27;, &#x27;.join(node_strings)} ]&#x27;
+			)
+		except:
+			RESPONSE += (
+				f&#x27;Error parsing XPath Query: \&#x27;{escape_for_html(query)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 81.8% · Severidad estimada: <b>Alta</b></p><p>La entrada puede alterar la expresion de seleccion de datos.</p><p><b>Remediacion:</b> Usar variables XPath enlazadas y evitar concatenar entrada en expresiones.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-bc9e15d20f9b / python-service</p><h2>Patron sensible sin clasificacion suficientemente respaldada</h2><p>python-service/BenchmarkTest00600.py:52 · Python</p><p><b>Sin categoria: pendiente de revision</b> · CWE sin determinar</p><pre>	def BenchmarkTest00600_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		headers = request.headers.getlist(&quot;BenchmarkTest00600&quot;)
+		
+		if headers:
+			param = headers[0]
+
+		possible = &quot;ABC&quot;
+		guess = possible[1]
+		
+		match guess:
+			case &#x27;A&#x27;:
+				bar = param
+			case &#x27;B&#x27;:
+				bar = &#x27;bob&#x27;
+			case &#x27;C&#x27; | &#x27;D&#x27;:
+				bar = param
+			case _:
+				bar = &#x27;bob\&#x27;s your uncle&#x27;
+
+		try:
+			RESPONSE += (
+				eval(bar)
+			)
+		except:
+			RESPONSE += (
+				f&#x27;Error evaluating expression \&#x27;{escape_for_html(bar)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 58.8% · Severidad estimada: <b>Sin estimar</b></p><p>No hay evidencia suficiente para estimar el impacto.</p><p><b>Remediacion:</b> Revisar origen de la entrada, controles y flujo de datos; ampliar pruebas.</p><p class="status">Pendiente de revision · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-19ee83856d03 / python-service</p><h2>Evaluacion dinamica potencial de codigo no confiable</h2><p>python-service/BenchmarkTest00601.py:44 · Python</p><p><b>A05:2025</b> · CWE-94</p><pre>	def BenchmarkTest00601_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		headers = request.headers.getlist(&quot;BenchmarkTest00601&quot;)
+		
+		if headers:
+			param = headers[0]
+
+		import helpers.ThingFactory
+		
+		thing = helpers.ThingFactory.createThing()
+		bar = thing.doSomething(param)
+
+		try:
+			RESPONSE += (
+				eval(bar)
+			)
+		except:
+			RESPONSE += (
+				f&#x27;Error evaluating expression \&#x27;{escape_for_html(bar)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 92.4% · Severidad estimada: <b>Alta</b></p><p>La interpretacion de entrada como codigo puede permitir ejecucion arbitraria.</p><p><b>Remediacion:</b> Evitar eval y exec sobre datos externos y usar parsers de datos con esquema.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-6a3b569c8e75 / python-service</p><h2>Consulta LDAP potencialmente construida con entrada externa</h2><p>python-service/BenchmarkTest00604.py:57 · Python</p><p><b>A05:2025</b> · CWE-90</p><pre>	def BenchmarkTest00604_post():
+		RESPONSE = &quot;&quot;
+
+		param = &quot;&quot;
+		headers = request.headers.getlist(&quot;BenchmarkTest00604&quot;)
+		
+		if headers:
+			param = headers[0]
+
+		possible = &quot;ABC&quot;
+		guess = possible[0]
+		
+		match guess:
+			case &#x27;A&#x27;:
+				bar = param
+			case &#x27;B&#x27;:
+				bar = &#x27;bob&#x27;
+			case &#x27;C&#x27; | &#x27;D&#x27;:
+				bar = param
+			case _:
+				bar = &#x27;bob\&#x27;s your uncle&#x27;
+
+		import helpers.ldap
+		import ldap3
+
+		base = &#x27;ou=users,ou=system&#x27;
+		filter = f&#x27;(&amp;(objectclass=person)(|(uid={bar})(street=The streetz 4 Ms bar)))&#x27;
+		try:
+			conn = helpers.ldap.get_connection()
+			conn.search(base, filter, attributes=ldap3.ALL_ATTRIBUTES)
+			found = False
+			for e in conn.entries:
+				RESPONSE += (
+					f&#x27;LDAP query results:&lt;br&gt;&#x27;
+					f&#x27;Record found with name {e[&#x27;uid&#x27;]}&lt;br&gt;&#x27;
+					f&#x27;Address: {e[&#x27;street&#x27;]}&lt;br&gt;&#x27;
+				)
+				found = True
+			conn.unbind()
+
+			if not found:
+				RESPONSE += (
+					f&#x27;LDAP query results: nothing found for query: {helpers.utils.escape_for_html(filter)}&#x27;
+				)
+		except:
+			RESPONSE += (
+				&quot;Error processing LDAP query.&quot;
+			)
+
+		return RESPONSE</pre><p>Confianza: 80.7% · Severidad estimada: <b>Alta</b></p><p>La entrada puede alterar el filtro de consulta LDAP.</p><p><b>Remediacion:</b> Usar constructores de filtros seguros y escape LDAP especifico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-a391e382e0c3 / python-service</p><h2>Acceso a archivos con posible recorrido de rutas</h2><p>python-service/BenchmarkTest00613.py:58 · Python</p><p><b>A01:2025</b> · CWE-22</p><pre>	def BenchmarkTest00613_post():
+		RESPONSE = &quot;&quot;
+
+		import helpers.utils
+		param = &quot;&quot;
+		
+		for name in request.headers.keys():
+			if name.lower() in helpers.utils.commonHeaderNames:
+				continue
+		
+			if request.headers.get_all(name):
+				param = name
+				break
+
+		import configparser
+		
+		bar = &#x27;safe!&#x27;
+		conf66153 = configparser.ConfigParser()
+		conf66153.add_section(&#x27;section66153&#x27;)
+		conf66153.set(&#x27;section66153&#x27;, &#x27;keyA-66153&#x27;, &#x27;a-Value&#x27;)
+		conf66153.set(&#x27;section66153&#x27;, &#x27;keyB-66153&#x27;, param)
+		bar = conf66153.get(&#x27;section66153&#x27;, &#x27;keyB-66153&#x27;)
+
+		import helpers.utils
+
+		fileName = None
+		fd = None
+
+		try:
+			fileName = f&#x27;{helpers.utils.TESTFILES_DIR}/{bar}&#x27;
+			fd = open(fileName, &#x27;rb&#x27;)
+			RESPONSE += (
+				f&#x27;The beginning of file: \&#x27;{escape_for_html(fileName)}\&#x27; is:\n\n&#x27;
+				f&#x27;{escape_for_html(fd.read(1000).decode(&#x27;utf-8&#x27;))}&#x27;
+			)
+		except IOError as e:
+			RESPONSE += (
+				f&#x27;Problem reading from file \&#x27;{{escape_for_html(fileName)}}\&#x27;: &#x27;
+				f&#x27;{escape_for_html(e.strerror)}&#x27;
+			)
+		finally:
+			try:
+				if fd is not None:
+					fd.close()
+			except IOError:
+				pass # &quot;// we tried...&quot;
+
+		return RESPONSE</pre><p>Confianza: 90.3% · Severidad estimada: <b>Alta</b></p><p>Una ruta externa podria acceder a archivos fuera del directorio autorizado.</p><p><b>Remediacion:</b> Resolver y validar la ruta final dentro de una raiz permitida, evitando enlaces y rutas externas.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-fcb79bc2ac38 / python-service</p><h2>Consulta XPath potencialmente construida con entrada externa</h2><p>python-service/BenchmarkTest00682.py:52 · Python</p><p><b>A05:2025</b> · CWE-643</p><pre>	def BenchmarkTest00682_post():
+		RESPONSE = &quot;&quot;
+
+		param = request.args.get(&quot;BenchmarkTest00682&quot;)
+		if not param:
+			param = &quot;&quot;
+
+		bar = &quot;&quot;
+		if param:
+			lst = []
+			lst.append(&#x27;safe&#x27;)
+			lst.append(param)
+			lst.append(&#x27;moresafe&#x27;)
+			lst.pop(0)
+			bar = lst[0]
+
+		import lxml.etree
+		import helpers.utils
+
+		try:
+			fd = open(f&#x27;{helpers.utils.RES_DIR}/employees.xml&#x27;, &#x27;rb&#x27;)
+			root = lxml.etree.parse(fd)
+			query = &#x27;/Employees/Employee[@emplid=\&#x27;&#x27; + bar + &#x27;\&#x27;]&#x27;
+
+			nodes = root.xpath(query)
+			node_strings = []
+			for node in nodes:
+				node_strings.append(&#x27; &#x27;.join([e.text for e in node]))
+
+			RESPONSE += (
+				f&#x27;Your XPATH query results are: &lt;br&gt;[ {&#x27;, &#x27;.join(node_strings)} ]&#x27;
+			)
+		except:
+			RESPONSE += (
+				f&#x27;Error parsing XPath Query: \&#x27;{escape_for_html(query)}\&#x27;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 62.7% · Severidad estimada: <b>Alta</b></p><p>La entrada puede alterar la expresion de seleccion de datos.</p><p><b>Remediacion:</b> Usar variables XPath enlazadas y evitar concatenar entrada en expresiones.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-1c2fe5ba8c89 / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest00721.py:57 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest00721_post():
+		RESPONSE = &quot;&quot;
+
+		param = request.args.get(&quot;BenchmarkTest00721&quot;)
+		if not param:
+			param = &quot;&quot;
+
+		bar = &#x27;&#x27;
+		if param:
+			bar = param.split(&#x27; &#x27;)[0]
+
+		from flask import make_response
+		import io
+		import helpers.utils
+
+		input = &#x27;&#x27;
+		if isinstance(bar, str):
+			input = bar.encode(&#x27;utf-8&#x27;)
+		elif isinstance(bar, io.IOBase):
+			input = bar.read(1000)
+
+		cookie = &#x27;SomeCookie&#x27;
+		value = input.decode(&#x27;utf-8&#x27;)
+
+		RESPONSE += (
+			f&#x27;Created cookie: \&#x27;{cookie}\&#x27; with value \&#x27;{helpers.utils.escape_for_html(value)}\&#x27; and secure flag set to false.&#x27;
+		)
+
+		RESPONSE = make_response(RESPONSE)
+		RESPONSE.set_cookie(cookie, value,
+			path=request.path,
+			secure=True,
+			httponly=True)
+
+		return RESPONSE</pre><p>Confianza: 98.8% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-47f4386fd620 / python-service</p><h2>Aleatoriedad potencialmente insuficiente para un uso de seguridad</h2><p>python-service/BenchmarkTest00767.py:45 · Python</p><p><b>A04:2025</b> · CWE-330</p><pre>	def BenchmarkTest00767_post():
+		RESPONSE = &quot;&quot;
+
+		values = request.args.getlist(&quot;BenchmarkTest00767&quot;)
+		param = &quot;&quot;
+		if values:
+			param = values[0]
+
+		superstring = f&#x27;79542{param}abcd&#x27;
+		bar = superstring[len(&#x27;79542&#x27;):len(superstring)-5]
+
+		import random
+		from helpers.utils import mysession
+
+		num = &#x27;BenchmarkTest00767&#x27;[13:]
+		user = f&#x27;Randy{num}&#x27;
+		cookie = f&#x27;rememberMe{num}&#x27;
+		value = str(random.getrandbits(32))
+
+		if cookie in mysession and request.cookies.get(cookie) == mysession[cookie]:
+			RESPONSE += (
+				f&#x27;Welcome back: {user}&lt;br/&gt;&#x27;
+			)
+		else:
+			mysession[cookie] = value
+			RESPONSE += (
+				f&#x27;{user} has been remembered with cookie: &#x27;
+				f&#x27;{cookie} whose value is: {mysession[cookie]}&lt;br/&gt;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 72.0% · Severidad estimada: <b>Media</b></p><p>Un generador predecible puede debilitar tokens o identificadores secretos.</p><p><b>Remediacion:</b> Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-d59741748eb6 / python-service</p><h2>Consulta LDAP potencialmente construida con entrada externa</h2><p>python-service/BenchmarkTest00823.py:48 · Python</p><p><b>A05:2025</b> · CWE-90</p><pre>	def BenchmarkTest00823_post():
+		RESPONSE = &quot;&quot;
+
+		values = request.args.getlist(&quot;BenchmarkTest00823&quot;)
+		param = &quot;&quot;
+		if values:
+			param = values[0]
+
+		string33668 = &#x27;help&#x27;
+		string33668 += param
+		string33668 += &#x27;snapes on a plane&#x27;
+		bar = string33668[4:-17]
+
+		import helpers.ldap
+		import ldap3
+
+		base = &#x27;ou=users,ou=system&#x27;
+		filter = f&#x27;(&amp;(objectclass=person)(|(uid={bar})(street=The streetz 4 Ms bar)))&#x27;
+		try:
+			conn = helpers.ldap.get_connection()
+			conn.search(base, filter, attributes=ldap3.ALL_ATTRIBUTES)
+			found = False
+			for e in conn.entries:
+				RESPONSE += (
+					f&#x27;LDAP query results:&lt;br&gt;&#x27;
+					f&#x27;Record found with name {e[&#x27;uid&#x27;]}&lt;br&gt;&#x27;
+					f&#x27;Address: {e[&#x27;street&#x27;]}&lt;br&gt;&#x27;
+				)
+				found = True
+			conn.unbind()
+
+			if not found:
+				RESPONSE += (
+					f&#x27;LDAP query results: nothing found for query: {helpers.utils.escape_for_html(filter)}&#x27;
+				)
+		except:
+			RESPONSE += (
+				&quot;Error processing LDAP query.&quot;
+			)
+
+		return RESPONSE</pre><p>Confianza: 84.5% · Severidad estimada: <b>Alta</b></p><p>La entrada puede alterar el filtro de consulta LDAP.</p><p><b>Remediacion:</b> Usar constructores de filtros seguros y escape LDAP especifico.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-0898b7141b5f / python-service</p><h2>Ejecucion de comandos con posible entrada no confiable</h2><p>python-service/BenchmarkTest00899.py:64 · Python</p><p><b>A05:2025</b> · CWE-78</p><pre>	def BenchmarkTest00899_post():
+		RESPONSE = &quot;&quot;
+
+		import helpers.separate_request
+		
+		wrapped = helpers.separate_request.request_wrapper(request)
+		param = wrapped.get_query_parameter(&quot;BenchmarkTest00899&quot;)
+		if not param:
+			param = &quot;&quot;
+
+		possible = &quot;ABC&quot;
+		guess = possible[0]
+		
+		match guess:
+			case &#x27;A&#x27;:
+				bar = param
+			case &#x27;B&#x27;:
+				bar = &#x27;bob&#x27;
+			case &#x27;C&#x27; | &#x27;D&#x27;:
+				bar = param
+			case _:
+				bar = &#x27;bob\&#x27;s your uncle&#x27;
+
+		import os
+		import subprocess
+		import helpers.utils
+
+		argList = []
+		if &quot;Windows&quot; in os.name:
+			argList.append(&quot;cmd.exe&quot;)
+			argList.append(&quot;-c&quot;)
+		else:
+			argList.append(&quot;sh&quot;)
+			argList.append(&quot;-c&quot;)
+		argList.append(f&quot;echo {bar}&quot;)
+
+		proc = subprocess.run(argList, capture_output=True, encoding=&quot;utf-8&quot;)
+		RESPONSE += (
+			helpers.utils.commandOutput(proc)
+		)
+
+		return RESPONSE</pre><p>Confianza: 79.5% · Severidad estimada: <b>Alta</b></p><p>La entrada puede modificar un comando del sistema.</p><p><b>Remediacion:</b> Evitar el shell, usar una lista de argumentos y validar operaciones permitidas.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-58db0b21afa7 / python-service</p><h2>Aleatoriedad potencialmente insuficiente para un uso de seguridad</h2><p>python-service/BenchmarkTest00946.py:54 · Python</p><p><b>A04:2025</b> · CWE-330</p><pre>	def BenchmarkTest00946_post():
+		RESPONSE = &quot;&quot;
+
+		import urllib.parse
+		
+		query_string = request.query_string.decode(&#x27;utf-8&#x27;)
+		paramLoc = query_string.find(&quot;BenchmarkTest00946&quot; + &#x27;=&#x27;)
+		if paramLoc == -1:
+			return f&quot;request.query_string did not contain expected parameter \&#x27;{&quot;BenchmarkTest00946&quot;}\&#x27;.&quot;
+		param = query_string[paramLoc + len(&quot;BenchmarkTest00946&quot;) + 1:]
+		ampLoc = param.find(&#x27;&amp;&#x27;)
+		if ampLoc != -1:
+			param = param[:ampLoc]
+		
+		param = urllib.parse.unquote_plus(param)
+
+		import markupsafe
+		
+		bar = markupsafe.escape(param)
+
+		import random
+		from helpers.utils import mysession
+
+		num = &#x27;BenchmarkTest00946&#x27;[13:]
+		user = f&#x27;Randy{num}&#x27;
+		cookie = f&#x27;rememberMe{num}&#x27;
+		value = str(random.getrandbits(32))
+
+		if cookie in mysession and request.cookies.get(cookie) == mysession[cookie]:
+			RESPONSE += (
+				f&#x27;Welcome back: {user}&lt;br/&gt;&#x27;
+			)
+		else:
+			mysession[cookie] = value
+			RESPONSE += (
+				f&#x27;{user} has been remembered with cookie: &#x27;
+				f&#x27;{cookie} whose value is: {mysession[cookie]}&lt;br/&gt;&#x27;
+			)
+
+		return RESPONSE</pre><p>Confianza: 78.3% · Severidad estimada: <b>Media</b></p><p>Un generador predecible puede debilitar tokens o identificadores secretos.</p><p><b>Remediacion:</b> Usar secrets o SecureRandom cuando se necesite impredecibilidad criptografica.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-89aaba962d2e / python-service</p><h2>Deserializacion de entrada externa</h2><p>python-service/BenchmarkTest00993.py:57 · Python</p><p><b>A08:2025</b> · CWE-502</p><pre>	def BenchmarkTest00993_post():
+		RESPONSE = &quot;&quot;
+
+		import urllib.parse
+		
+		query_string = request.query_string.decode(&#x27;utf-8&#x27;)
+		paramLoc = query_string.find(&quot;BenchmarkTest00993&quot; + &#x27;=&#x27;)
+		if paramLoc == -1:
+			return f&quot;request.query_string did not contain expected parameter \&#x27;{&quot;BenchmarkTest00993&quot;}\&#x27;.&quot;
+		param = query_string[paramLoc + len(&quot;BenchmarkTest00993&quot;) + 1:]
+		ampLoc = param.find(&#x27;&amp;&#x27;)
+		if ampLoc != -1:
+			param = param[:ampLoc]
+		
+		param = urllib.parse.unquote_plus(param)
+
+		TestParam = &quot;This should never happen&quot;
+		if &#x27;should&#x27; not in TestParam:
+			bar = &quot;Ifnot case passed&quot;
+		else:
+			bar = param
+
+		import pickle
+		import base64
+		import helpers.utils
+
+		helpers.utils.sharedstr = &quot;no pickles to be seen here&quot;
+
+		try:
+			unpickled = pickle.loads(base64.urlsafe_b64decode(bar))
+		except:
+			RESPONSE += (
+				&#x27;Unpickling failed!&#x27;
+			)
+			return RESPONSE
+
+		RESPONSE += (
+			f&#x27;shared string is {helpers.utils.sharedstr}&#x27;
+		)
+
+		return RESPONSE</pre><p>Confianza: 95.8% · Severidad estimada: <b>Alta</b></p><p>Un deserializador de objetos puede ejecutar comportamiento peligroso.</p><p><b>Remediacion:</b> Usar JSON con validacion de esquema; evitar pickle o node-serialize para datos no confiables.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-6a69dd3a601f / python-service</p><h2>Algoritmo criptografico debil en contexto sensible</h2><p>python-service/BenchmarkTest01070.py:60 · Python</p><p><b>A04:2025</b> · CWE-327</p><pre>	def BenchmarkTest01070_post():
+		RESPONSE = &quot;&quot;
+
+		parts = request.path.split(&quot;/&quot;)
+		param = parts[1]
+		if not param:
+			param = &quot;&quot;
+
+		import configparser
+		
+		bar = &#x27;safe!&#x27;
+		conf19133 = configparser.ConfigParser()
+		conf19133.add_section(&#x27;section19133&#x27;)
+		conf19133.set(&#x27;section19133&#x27;, &#x27;keyA-19133&#x27;, &#x27;a-Value&#x27;)
+		conf19133.set(&#x27;section19133&#x27;, &#x27;keyB-19133&#x27;, param)
+		bar = conf19133.get(&#x27;section19133&#x27;, &#x27;keyB-19133&#x27;)
+
+		import hashlib, base64
+		import io, helpers.utils
+
+		input = &#x27;&#x27;
+		if isinstance(bar, str):
+			input = bar.encode(&#x27;utf-8&#x27;)
+		elif isinstance(bar, io.IOBase):
+			input = bar.read(1000)
+
+		if len(input) == 0:
+			RESPONSE += (
+				&#x27;Cannot generate hash: Input was empty.&#x27;
+			)
+			return RESPONSE
+
+		hash = hashlib.new(&#x27;md5&#x27;)
+		hash.update(input)
+
+		result = hash.digest()
+		f = open(f&#x27;{helpers.utils.TESTFILES_DIR}/passwordFile.txt&#x27;, &#x27;a&#x27;)
+		f.write(f&#x27;hash_value={base64.b64encode(result)}\n&#x27;)
+		RESPONSE += (
+			f&#x27;Sensitive value \&#x27;{helpers.utils.escape_for_html(input.decode(&#x27;utf-8&#x27;))}\&#x27; hashed and stored.&#x27;
+		)
+		f.close()
+
+		return RESPONSE</pre><p>Confianza: 85.8% · Severidad estimada: <b>Media</b></p><p>MD5 o SHA-1 no proporcionan resistencia adecuada en este contexto.</p><p><b>Remediacion:</b> Usar Argon2id para contrasenas y algoritmos actuales adecuados al uso; revisar el contexto.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-f9a6975bca69 / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest01177.py:26 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest01177_get():
+		response = make_response(render_template(&#x27;web/securecookie-00/BenchmarkTest01177.html&#x27;))
+		response.set_cookie(&#x27;BenchmarkTest01177&#x27;, &#x27;whatever&#x27;,
+			max_age=60*3,
+			secure=True,
+			path=request.path,
+			domain=&#x27;localhost&#x27;)
+		return response
+		return BenchmarkTest01177_post()</pre><p>Confianza: 66.3% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-767852f59b5a / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest01177.py:60 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest01177_post():
+		RESPONSE = &quot;&quot;
+
+		import urllib.parse
+		param = urllib.parse.unquote_plus(request.cookies.get(&quot;BenchmarkTest01177&quot;, &quot;noCookieValueSupplied&quot;))
+
+
+		from flask import make_response
+		import io
+		import helpers.utils
+
+		input = &#x27;&#x27;
+		if isinstance(param, str):
+			input = param.encode(&#x27;utf-8&#x27;)
+		elif isinstance(param, io.IOBase):
+			input = param.read(1000)
+
+		cookie = &#x27;SomeCookie&#x27;
+		value = input.decode(&#x27;utf-8&#x27;)
+
+		RESPONSE += (
+			f&#x27;Created cookie: \&#x27;{cookie}\&#x27; with value \&#x27;{helpers.utils.escape_for_html(value)}\&#x27; and secure flag set to false.&#x27;
+		)
+
+		RESPONSE = make_response(RESPONSE)
+		RESPONSE.set_cookie(cookie, value,
+			path=request.path,
+			secure=False,
+			httponly=True)
+
+		return RESPONSE</pre><p>Confianza: 98.0% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-df7b6123ca9d / python-service</p><h2>Redireccion potencialmente controlada por entrada externa</h2><p>python-service/BenchmarkTest01178.py:44 · Python</p><p><b>A01:2025</b> · CWE-601</p><pre>	def BenchmarkTest01178_post():
+		RESPONSE = &quot;&quot;
+
+		import urllib.parse
+		param = urllib.parse.unquote_plus(request.cookies.get(&quot;BenchmarkTest01178&quot;, &quot;noCookieValueSupplied&quot;))
+
+
+		import flask
+
+		return flask.redirect(param)
+
+		return RESPONSE</pre><p>Confianza: 88.4% · Severidad estimada: <b>Media</b></p><p>Un destino no validado puede dirigir a un sitio no confiable.</p><p><b>Remediacion:</b> Permitir solo destinos locales o una lista explicita de origenes autorizados.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><article data-service="python-service"><p class="tag">VM-15649793cf7a / python-service</p><h2>Cookie con configuracion de transporte potencialmente insegura</h2><p>python-service/BenchmarkTest01207.py:54 · Python</p><p><b>A02:2025</b> · CWE-614</p><pre>	def BenchmarkTest01207_post():
+		RESPONSE = &quot;&quot;
+
+		param = request.args.get(&quot;BenchmarkTest01207&quot;)
+		if not param:
+			param = &quot;&quot;
+
+
+		from flask import make_response
+		import io
+		import helpers.utils
+
+		input = &#x27;&#x27;
+		if isinstance(param, str):
+			input = param.encode(&#x27;utf-8&#x27;)
+		elif isinstance(param, io.IOBase):
+			input = param.read(1000)
+
+		cookie = &#x27;SomeCookie&#x27;
+		value = input.decode(&#x27;utf-8&#x27;)
+
+		RESPONSE += (
+			f&#x27;Created cookie: \&#x27;{cookie}\&#x27; with value \&#x27;{helpers.utils.escape_for_html(value)}\&#x27; and secure flag set to false.&#x27;
+		)
+
+		RESPONSE = make_response(RESPONSE)
+		RESPONSE.set_cookie(cookie, value,
+			path=request.path,
+			secure=True,
+			httponly=True)
+
+		return RESPONSE</pre><p>Confianza: 98.8% · Severidad estimada: <b>Media</b></p><p>Una cookie sensible sin Secure puede viajar por un canal no protegido.</p><p><b>Remediacion:</b> Habilitar Secure, HttpOnly y SameSite segun el uso; verificar HTTPS en todo el flujo.</p><p class="status">Requiere verificacion · Hallazgo potencial</p></article><section><h2>Cobertura declarada</h2><table><thead><tr><th>Categoria</th><th>Nombre</th><th>Estado</th></tr></thead><tbody><tr><td>A01:2025</td><td>Broken Access Control</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A02:2025</td><td>Security Misconfiguration</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A03:2025</td><td>Software Supply Chain Failures</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>A04:2025</td><td>Cryptographic Failures</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A05:2025</td><td>Injection</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A06:2025</td><td>Insecure Design</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A07:2025</td><td>Authentication Failures</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A08:2025</td><td>Software or Data Integrity Failures</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>A09:2025</td><td>Security Logging and Alerting Failures</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>A10:2025</td><td>Mishandling of Exceptional Conditions</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API1:2023</td><td>Broken Object Level Authorization</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API2:2023</td><td>Broken Authentication</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>API3:2023</td><td>Broken Object Property Level Authorization</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API4:2023</td><td>Unrestricted Resource Consumption</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API5:2023</td><td>Broken Function Level Authorization</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API6:2023</td><td>Unrestricted Access to Sensitive Business Flows</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API7:2023</td><td>Server Side Request Forgery</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>API8:2023</td><td>Security Misconfiguration</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr><tr><td>API9:2023</td><td>Improper Inventory Management</td><td>No evaluada: sin datos ni detector suficiente</td></tr><tr><td>API10:2023</td><td>Unsafe Consumption of APIs</td><td>Evaluada parcialmente con Benchmark publico y/o suplemento controlado</td></tr></tbody></table></section><section><h2>Limitaciones</h2><ul><li>Analisis lexico local sin prueba de explotabilidad ni flujo interprocedimental.</li><li>Entrenamiento con OWASP Benchmark publico y suplemento propio; ambos son casos controlados, no produccion.</li><li>Ausencia de hallazgos no certifica seguridad.</li><li>Dependencias e inventario se leen como configuracion; sin base CVE ni auditoria de cadena de suministro.</li><li>Java se analiza lexicalmente; no se resuelven tipos ni flujos entre metodos. Configuraciones fuera del alcance requieren revision.</li><li>El reporte contiene evidencia del codigo y puede contener informacion sensible.</li></ul><p>Archivos omitidos: 0. Consulte el JSON para ver el detalle.</p></section></main><script>document.getElementById('service').addEventListener('change',function(){document.querySelectorAll('article').forEach(a=>a.hidden=this.value!==''&&a.dataset.service!==this.value)});</script></body></html>

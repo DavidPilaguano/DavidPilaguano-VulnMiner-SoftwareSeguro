@@ -1,6 +1,8 @@
 {
   "date": "2026-11-24",
-  "environment": "Entorno virtual aislado .venv en la computadora de entrega",
+  "environment": "Paquete instalado en entorno virtual; ejecucion aislada -I",
+  "package_version": "1.1.0",
+  "package_path": "D:\\ESPE\\36902-DESARROLLO SOFTWARE SEGURO\\Pacial2\\Trabajo\\.venv\\Lib\\site-packages\\vulnminer\\__init__.py",
   "python": "3.14.5",
   "versions": {
     "scikit-learn": "1.8.0",
@@ -10,12 +12,13 @@
     "joblib": "1.6.0",
     "PyYAML": "6.0.4"
   },
-  "command": "./scripts/probar.ps1",
+  "command": "python -I scripts/verify_release.py",
   "unit_tests": {
-    "run": 10,
+    "run": 13,
     "failures": 0,
     "errors": 0
   },
+  "dependency_check": "No broken requirements found.",
   "notebooks": {
     "count": 5,
     "executed_code_cells": 15,
@@ -39,5 +42,8 @@
       "html": true
     }
   ],
-  "limitations": "Fixtures sinteticas; pendiente proyecto desconocido del docente."
+  "public_records": 3966,
+  "dataset_records": 4974,
+  "model_test_f1_macro": 0.7617525810204812,
+  "limitations": "Benchmarks y suplemento controlados; no se demuestra generalizacion de produccion."
 }

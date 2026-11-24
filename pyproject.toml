@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "vulnminer-espe"
-version = "1.0.0"
+version = "1.1.0"
 description = "Clasificacion supervisada de riesgos OWASP mediante SEMMA"
 requires-python = ">=3.11"
 dependencies = ["scikit-learn==1.8.0", "numpy>=2,<3", "pandas>=2.2,<3.1", "scipy>=1.14,<2", "joblib>=1.4,<2", "PyYAML>=6,<7"]
