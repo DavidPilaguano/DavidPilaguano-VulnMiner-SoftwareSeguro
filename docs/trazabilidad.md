@@ -23,4 +23,4 @@
 
 ## Trabajo externo pendiente
 
-El proyecto desconocido debe ser proporcionado por el docente. Su ejecución y evaluación independiente, así como la exposición del 26 de noviembre de 2026, requieren ese material y la participación de los estudiantes. No se presenta la evaluación sintética como sustituto de esa demostración. Repositorio de entrega: https://github.com/DavidPilaguano/DavidPilaguano-VulnMoner-SoftwareSeguro. Autor identificado por el usuario: DavidPilaguano.
+El proyecto desconocido debe ser proporcionado por el docente. Su ejecución y evaluación independiente, así como la exposición del 26 de noviembre de 2026, requieren ese material y la participación de los estudiantes. No se presenta la evaluación sintética como sustituto de esa demostración. Repositorio de entrega: https://github.com/DavidPilaguano/DavidPilaguano-VulnMiner-SoftwareSeguro. Autor identificado por el usuario: DavidPilaguano.

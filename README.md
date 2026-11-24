@@ -1,6 +1,6 @@
-# DavidPilaguano · VulnMoner · SoftwareSeguro
+# DavidPilaguano · VulnMiner · SoftwareSeguro
 
-Repositorio del laboratorio: [DavidPilaguano-VulnMoner-SoftwareSeguro](https://github.com/DavidPilaguano/DavidPilaguano-VulnMoner-SoftwareSeguro). Autor: **DavidPilaguano**. El programa conserva el comando `vulnminer`.
+Repositorio del laboratorio: [DavidPilaguano-VulnMiner-SoftwareSeguro](https://github.com/DavidPilaguano/DavidPilaguano-VulnMiner-SoftwareSeguro). Autor: **DavidPilaguano**. El programa conserva el comando `vulnminer`.
 
 ## Probar en esta computadora
 

@@ -6,7 +6,7 @@ Desarrollo de Software Seguro | Laboratorio 1 | Docente: Prof. Geovanny Cudco
 
 Informe técnico de implementación y experimentación. 24 de noviembre de 2026.
 
-Autor: DavidPilaguano. Repositorio: DavidPilaguano-VulnMoner-SoftwareSeguro. Entrega de la actividad: 26 de noviembre de 2026.
+Autor: DavidPilaguano. Repositorio: DavidPilaguano-VulnMiner-SoftwareSeguro. Entrega de la actividad: 26 de noviembre de 2026.
 
 Resultado principal: LogisticRegression, F1 macro de prueba 0.9556, con 1.008 fragmentos sintéticos y separación por familia. Este resultado no acredita generalización a producción.
 

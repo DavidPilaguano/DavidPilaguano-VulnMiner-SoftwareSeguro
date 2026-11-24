@@ -146,7 +146,7 @@ def report():
     para('Universidad de las Fuerzas Armadas ESPE - Carrera de Ingeniería en Software')
     para('Desarrollo de Software Seguro | Laboratorio 1 | Docente: Prof. Geovanny Cudco')
     para('Informe técnico de implementación y experimentación. 24 de noviembre de 2026.')
-    para('Autor: DavidPilaguano. Repositorio: DavidPilaguano-VulnMoner-SoftwareSeguro. Entrega de la actividad: 26 de noviembre de 2026.')
+    para('Autor: DavidPilaguano. Repositorio: DavidPilaguano-VulnMiner-SoftwareSeguro. Entrega de la actividad: 26 de noviembre de 2026.')
     para(f'Resultado principal: {chosen["algorithm"]}, F1 macro de prueba {chosen["test"]["f1_macro"]:.4f}, con 1.008 fragmentos sintéticos y separación por familia. Este resultado no acredita generalización a producción.')
     page('1. Problema, objetivo y alcance')
     para('Los microservicios distribuyen código, interfaces y configuración entre componentes heterogéneos. La actividad exige aprender patrones de posibles vulnerabilidades y producir evidencias verificables desde un único comando ejecutado en la raíz del proyecto.')
