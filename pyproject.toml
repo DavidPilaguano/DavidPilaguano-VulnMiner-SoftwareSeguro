@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vulnminer-espe"
+version = "1.0.0"
+description = "Clasificacion supervisada de riesgos OWASP mediante SEMMA"
+requires-python = ">=3.11"
+dependencies = ["scikit-learn==1.8.0", "numpy>=2,<3", "pandas>=2.2,<3.1", "scipy>=1.14,<2", "joblib>=1.4,<2", "PyYAML>=6,<7"]
+
+[project.optional-dependencies]
+lab = ["matplotlib>=3.9", "nbformat>=5.10", "nbclient>=0.10", "ipykernel>=6", "reportlab>=4", "pymupdf>=1.25"]
+
+[project.scripts]
+vulnminer = "vulnminer.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["vulnminer*"]
+
+[tool.setuptools.package-data]
+vulnminer = ["artifacts/*.joblib", "artifacts/*.json"]

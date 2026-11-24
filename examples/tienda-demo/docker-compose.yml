@@ -1,0 +1,5 @@
+services:
+  wallet-service:
+    build: ./wallet-service
+  gateway-service:
+    build: ./gateway-service

@@ -1,0 +1,13 @@
+split,language,vulnerable,count
+test,JavaScript,0,42
+test,JavaScript,1,42
+test,Python,0,42
+test,Python,1,42
+train,JavaScript,0,168
+train,JavaScript,1,168
+train,Python,0,168
+train,Python,1,168
+validation,JavaScript,0,42
+validation,JavaScript,1,42
+validation,Python,0,42
+validation,Python,1,42

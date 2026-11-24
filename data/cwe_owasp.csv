@@ -1,0 +1,8 @@
+scenario,cwe,owasp,basis
+sql,CWE-89,A05:2025,Relacion contextual del escenario; ver docs/fuentes.md
+crypto,CWE-327,A04:2025,Relacion contextual del escenario; ver docs/fuentes.md
+debug,CWE-489,A02:2025;API8:2023,Relacion contextual del escenario; ver docs/fuentes.md
+jwt,CWE-347,A07:2025;API2:2023,Relacion contextual del escenario; ver docs/fuentes.md
+ssrf,CWE-918,A01:2025;API7:2023,Relacion contextual del escenario; ver docs/fuentes.md
+deserialize,CWE-502,A08:2025,Relacion contextual del escenario; ver docs/fuentes.md
+tls,CWE-295,A07:2025;API10:2023,Relacion contextual del escenario; ver docs/fuentes.md

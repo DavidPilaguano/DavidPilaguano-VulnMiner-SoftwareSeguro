@@ -1,0 +1,43 @@
+{
+  "date": "2026-11-24",
+  "environment": "Entorno virtual aislado .venv en la computadora de entrega",
+  "python": "3.14.5",
+  "versions": {
+    "scikit-learn": "1.8.0",
+    "numpy": "2.5.5",
+    "pandas": "3.0.6",
+    "scipy": "1.18.1",
+    "joblib": "1.6.0",
+    "PyYAML": "6.0.4"
+  },
+  "command": "./scripts/probar.ps1",
+  "unit_tests": {
+    "run": 10,
+    "failures": 0,
+    "errors": 0
+  },
+  "notebooks": {
+    "count": 5,
+    "executed_code_cells": 15,
+    "errors": 0
+  },
+  "projects": [
+    {
+      "project": "tienda-demo",
+      "services": 2,
+      "files_analyzed": 20,
+      "findings": 7,
+      "json": true,
+      "html": true
+    },
+    {
+      "project": "logistica-demo",
+      "services": 2,
+      "files_analyzed": 20,
+      "findings": 7,
+      "json": true,
+      "html": true
+    }
+  ],
+  "limitations": "Fixtures sinteticas; pendiente proyecto desconocido del docente."
+}

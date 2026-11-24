@@ -1,0 +1,327 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-11-24T06:28:12.588494+00:00",
+  "project": "logistica-demo",
+  "root": "D:\\ESPE\\36902-DESARROLLO SOFTWARE SEGURO\\Pacial2\\Trabajo\\examples\\logistica-demo",
+  "standards": [
+    "owasp2025",
+    "api2023"
+  ],
+  "model": {
+    "algorithm": "LogisticRegression",
+    "threshold": 0.4,
+    "confidence_note": "Puntuacion del clasificador; no es probabilidad calibrada ni severidad."
+  },
+  "services": [
+    {
+      "name": "gateway-service",
+      "path": "gateway-service",
+      "technologies": [
+        "Configuracion",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "wallet-service",
+      "path": "wallet-service",
+      "technologies": [
+        "Configuracion",
+        "Python"
+      ]
+    }
+  ],
+  "files_analyzed": 20,
+  "skipped_files": [],
+  "findings": [
+    {
+      "id": "VM-c514a3ecd23a",
+      "service": "gateway-service",
+      "file": "gateway-service/src/debug_risk.ts",
+      "line": 1,
+      "language": "TypeScript",
+      "description": "Depuracion habilitada en configuracion de servicio",
+      "evidence": "const settings = { service: 'shipment', debug: true };",
+      "context": "const settings = { service: 'shipment', debug: true };\nexport default settings;",
+      "owasp_top10": [
+        "A02:2025"
+      ],
+      "owasp_api": [
+        "API8:2023"
+      ],
+      "cwe": "CWE-489",
+      "confidence": 0.9345,
+      "label_scores": {
+        "A02:2025": 0.9345,
+        "API8:2023": 0.9345
+      },
+      "severity": "Media",
+      "severity_justification": "La depuracion podria revelar detalles internos o exponer funciones de diagnostico.",
+      "recommendation": "Deshabilitar depuracion en produccion y separar perfiles de desarrollo y despliegue.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-c49a7a9659e5",
+      "service": "gateway-service",
+      "file": "gateway-service/src/deserialize_risk.ts",
+      "line": 2,
+      "language": "TypeScript",
+      "description": "Deserializacion de entrada externa",
+      "evidence": "const envelope = nodeSerialize.unserialize(request.body.envelope);",
+      "context": "export function unpack(request) {\n  const envelope = nodeSerialize.unserialize(request.body.envelope);\n  return envelope;\n}",
+      "owasp_top10": [
+        "A08:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-502",
+      "confidence": 0.9211,
+      "label_scores": {
+        "A08:2025": 0.9211
+      },
+      "severity": "Alta",
+      "severity_justification": "Un deserializador de objetos puede ejecutar comportamiento peligroso.",
+      "recommendation": "Usar JSON con validacion de esquema; evitar pickle o node-serialize para datos no confiables.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-dc818512ff6a",
+      "service": "gateway-service",
+      "file": "gateway-service/src/sql_risk.ts",
+      "line": 3,
+      "language": "TypeScript",
+      "description": "Consulta SQL construida con entrada externa",
+      "evidence": "return connection.execute(statement);",
+      "context": "export async function lookup(request) {\n  const statement = `SELECT amount FROM shipments WHERE reference='${request.query.reference}'`;\n  return connection.execute(statement);\n}",
+      "owasp_top10": [
+        "A05:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-89",
+      "confidence": 0.851,
+      "label_scores": {
+        "A05:2025": 0.851
+      },
+      "severity": "Alta",
+      "severity_justification": "La entrada podria modificar la consulta y acceder a datos.",
+      "recommendation": "Usar consultas parametrizadas y limitar privilegios de la cuenta de base de datos.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-fef8b1cb4e40",
+      "service": "wallet-service",
+      "file": "wallet-service/src/crypto_risk.py",
+      "line": 4,
+      "language": "Python",
+      "description": "Algoritmo criptografico debil en contexto sensible",
+      "evidence": "credential_hash = hashlib.sha1(payload['passphrase'].encode()).hexdigest()",
+      "context": "def hash_credential(payload):\n    credential_hash = hashlib.sha1(payload['passphrase'].encode()).hexdigest()\n    return credential_hash",
+      "owasp_top10": [
+        "A04:2025"
+      ],
+      "owasp_api": [],
+      "cwe": "CWE-327",
+      "confidence": 0.9654,
+      "label_scores": {
+        "A04:2025": 0.9654
+      },
+      "severity": "Media",
+      "severity_justification": "MD5 o SHA-1 no proporcionan resistencia adecuada en este contexto.",
+      "recommendation": "Usar Argon2id para contrasenas y algoritmos actuales adecuados al uso; revisar el contexto.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-994ae2aa21b6",
+      "service": "wallet-service",
+      "file": "wallet-service/src/jwt_risk.py",
+      "line": 4,
+      "language": "Python",
+      "description": "Token de autenticacion sin verificacion de firma",
+      "evidence": "principal = jwt.decode(headers['Bearer'], options={'verify_signature': False})",
+      "context": "def identify(headers):\n    principal = jwt.decode(headers['Bearer'], options={'verify_signature': False})\n    return principal['sub']",
+      "owasp_top10": [
+        "A07:2025"
+      ],
+      "owasp_api": [
+        "API2:2023"
+      ],
+      "cwe": "CWE-347",
+      "confidence": 0.9881,
+      "label_scores": {
+        "A07:2025": 0.9842,
+        "API2:2023": 0.9881
+      },
+      "severity": "Alta",
+      "severity_justification": "Una firma no verificada podria permitir suplantacion de identidad.",
+      "recommendation": "Verificar firma, algoritmo permitido, expiracion, emisor y audiencia del JWT.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-917a2348f36e",
+      "service": "wallet-service",
+      "file": "wallet-service/src/ssrf_risk.py",
+      "line": 4,
+      "language": "Python",
+      "description": "Destino de solicitud HTTP controlado externamente",
+      "evidence": "response = httpx.get(payload['callback'])",
+      "context": "def remote(payload):\n    response = httpx.get(payload['callback'])\n    return response.text",
+      "owasp_top10": [
+        "A01:2025"
+      ],
+      "owasp_api": [
+        "API7:2023"
+      ],
+      "cwe": "CWE-918",
+      "confidence": 0.9634,
+      "label_scores": {
+        "A01:2025": 0.9634,
+        "API7:2023": 0.9634
+      },
+      "severity": "Alta",
+      "severity_justification": "Un destino no restringido podria alcanzar recursos internos.",
+      "recommendation": "Aplicar allowlist de destinos, validar IP y DNS, bloquear redes internas y redirecciones no validadas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    },
+    {
+      "id": "VM-9275089d4f2a",
+      "service": "wallet-service",
+      "file": "wallet-service/src/tls_risk.py",
+      "line": 4,
+      "language": "Python",
+      "description": "Verificacion TLS deshabilitada al consumir API externa",
+      "evidence": "result = requests.get('https://carrier.example/v3', verify=False)",
+      "context": "def partner():\n    result = requests.get('https://carrier.example/v3', verify=False)\n    return result.json()",
+      "owasp_top10": [
+        "A07:2025"
+      ],
+      "owasp_api": [
+        "API10:2023"
+      ],
+      "cwe": "CWE-295",
+      "confidence": 0.7567,
+      "label_scores": {
+        "A07:2025": 0.7567,
+        "API10:2023": 0.7367
+      },
+      "severity": "Alta",
+      "severity_justification": "La identidad del servidor remoto no queda autenticada.",
+      "recommendation": "Habilitar verificacion del certificado y usar una CA confiable; validar respuestas externas.",
+      "verification_status": "Requiere verificacion",
+      "confirmed": false
+    }
+  ],
+  "catalog": [
+    {
+      "id": "A01:2025",
+      "name": "Broken Access Control",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "A02:2025",
+      "name": "Security Misconfiguration",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "A03:2025",
+      "name": "Software Supply Chain Failures",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "A04:2025",
+      "name": "Cryptographic Failures",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "A05:2025",
+      "name": "Injection",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "A06:2025",
+      "name": "Insecure Design",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "A07:2025",
+      "name": "Authentication Failures",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "A08:2025",
+      "name": "Software or Data Integrity Failures",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "A09:2025",
+      "name": "Security Logging and Alerting Failures",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "A10:2025",
+      "name": "Mishandling of Exceptional Conditions",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API1:2023",
+      "name": "Broken Object Level Authorization",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API2:2023",
+      "name": "Broken Authentication",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "API3:2023",
+      "name": "Broken Object Property Level Authorization",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API4:2023",
+      "name": "Unrestricted Resource Consumption",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API5:2023",
+      "name": "Broken Function Level Authorization",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API6:2023",
+      "name": "Unrestricted Access to Sensitive Business Flows",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API7:2023",
+      "name": "Server Side Request Forgery",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "API8:2023",
+      "name": "Security Misconfiguration",
+      "status": "Evaluada en casos controlados"
+    },
+    {
+      "id": "API9:2023",
+      "name": "Improper Inventory Management",
+      "status": "No evaluada: sin datos ni detector suficiente"
+    },
+    {
+      "id": "API10:2023",
+      "name": "Unsafe Consumption of APIs",
+      "status": "Evaluada en casos controlados"
+    }
+  ],
+  "limitations": [
+    "Analisis lexico local sin prueba de explotabilidad ni flujo interprocedimental.",
+    "Datos de entrenamiento sinteticos controlados; generalizacion real no demostrada.",
+    "Ausencia de hallazgos no certifica seguridad.",
+    "Dependencias e inventario se leen como configuracion; sin base CVE ni auditoria de cadena de suministro.",
+    "Configuraciones fuera de los patrones entrenados requieren revision; Java no esta soportado.",
+    "El reporte contiene evidencia del codigo y puede contener informacion sensible."
+  ]
+}

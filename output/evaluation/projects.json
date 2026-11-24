@@ -1,0 +1,56 @@
+[
+  {
+    "project": "tienda-demo",
+    "truth_files": 14,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0,
+    "tn": 7,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "label_precision_micro": 1.0,
+    "label_recall_micro": 1.0,
+    "covered_categories": [
+      "A01:2025",
+      "A02:2025",
+      "A04:2025",
+      "A05:2025",
+      "A07:2025",
+      "A08:2025",
+      "API10:2023",
+      "API2:2023",
+      "API7:2023",
+      "API8:2023"
+    ],
+    "errors": [],
+    "unlabeled_config_findings": []
+  },
+  {
+    "project": "logistica-demo",
+    "truth_files": 14,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0,
+    "tn": 7,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "label_precision_micro": 1.0,
+    "label_recall_micro": 1.0,
+    "covered_categories": [
+      "A01:2025",
+      "A02:2025",
+      "A04:2025",
+      "A05:2025",
+      "A07:2025",
+      "A08:2025",
+      "API10:2023",
+      "API2:2023",
+      "API7:2023",
+      "API8:2023"
+    ],
+    "errors": [],
+    "unlabeled_config_findings": []
+  }
+]

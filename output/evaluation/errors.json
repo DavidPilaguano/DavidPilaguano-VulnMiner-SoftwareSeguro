@@ -1,0 +1,182 @@
+[
+  {
+    "id": "VM-0062",
+    "code": "sql = 'UPDATE orders SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['name']))",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0064",
+    "code": "sql = 'UPDATE accounts SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['id']))",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0066",
+    "code": "sql = 'UPDATE products SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['value']))",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0068",
+    "code": "sql = 'UPDATE invoices SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['ref']))",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0070",
+    "code": "sql = 'UPDATE customers SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['item']))",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0072",
+    "code": "sql = 'UPDATE payments SET active=1 WHERE id=:value'\nconnection.execute(sql, dict(value=user_input['token']))",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "Python",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0566",
+    "code": "repository.query('SELECT * FROM orders WHERE name=$1', [payload.name]);",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0568",
+    "code": "repository.query('SELECT * FROM accounts WHERE name=$1', [payload.id]);",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0570",
+    "code": "repository.query('SELECT * FROM products WHERE name=$1', [payload.value]);",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0572",
+    "code": "repository.query('SELECT * FROM invoices WHERE name=$1', [payload.ref]);",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0574",
+    "code": "repository.query('SELECT * FROM customers WHERE name=$1', [payload.item]);",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0576",
+    "code": "repository.query('SELECT * FROM payments WHERE name=$1', [payload.token]);",
+    "false_positive": [
+      "A05:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "sql"
+  },
+  {
+    "id": "VM-0998",
+    "code": "tls.connect({ host: 'orders.example', rejectUnauthorized: true });",
+    "false_positive": [
+      "A07:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "tls"
+  },
+  {
+    "id": "VM-1000",
+    "code": "tls.connect({ host: 'accounts.example', rejectUnauthorized: true });",
+    "false_positive": [
+      "A07:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "tls"
+  },
+  {
+    "id": "VM-1002",
+    "code": "tls.connect({ host: 'products.example', rejectUnauthorized: true });",
+    "false_positive": [
+      "A07:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "tls"
+  },
+  {
+    "id": "VM-1004",
+    "code": "tls.connect({ host: 'invoices.example', rejectUnauthorized: true });",
+    "false_positive": [
+      "A07:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "tls"
+  },
+  {
+    "id": "VM-1006",
+    "code": "tls.connect({ host: 'customers.example', rejectUnauthorized: true });",
+    "false_positive": [
+      "A07:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "tls"
+  },
+  {
+    "id": "VM-1008",
+    "code": "tls.connect({ host: 'payments.example', rejectUnauthorized: true });",
+    "false_positive": [
+      "A07:2025"
+    ],
+    "false_negative": [],
+    "language": "JavaScript",
+    "scenario": "tls"
+  }
+]

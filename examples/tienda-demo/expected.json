@@ -1,0 +1,72 @@
+[
+  {
+    "file": "wallet-service/src/sql_risk.py",
+    "scenario": "sql",
+    "vulnerable": true
+  },
+  {
+    "file": "wallet-service/src/sql_safe.py",
+    "scenario": "sql",
+    "vulnerable": false
+  },
+  {
+    "file": "wallet-service/src/crypto_risk.py",
+    "scenario": "crypto",
+    "vulnerable": true
+  },
+  {
+    "file": "wallet-service/src/crypto_safe.py",
+    "scenario": "crypto",
+    "vulnerable": false
+  },
+  {
+    "file": "wallet-service/src/debug_risk.py",
+    "scenario": "debug",
+    "vulnerable": true
+  },
+  {
+    "file": "wallet-service/src/debug_safe.py",
+    "scenario": "debug",
+    "vulnerable": false
+  },
+  {
+    "file": "gateway-service/src/jwt_risk.js",
+    "scenario": "jwt",
+    "vulnerable": true
+  },
+  {
+    "file": "gateway-service/src/jwt_safe.js",
+    "scenario": "jwt",
+    "vulnerable": false
+  },
+  {
+    "file": "gateway-service/src/ssrf_risk.js",
+    "scenario": "ssrf",
+    "vulnerable": true
+  },
+  {
+    "file": "gateway-service/src/ssrf_safe.js",
+    "scenario": "ssrf",
+    "vulnerable": false
+  },
+  {
+    "file": "wallet-service/src/deserialize_risk.py",
+    "scenario": "deserialize",
+    "vulnerable": true
+  },
+  {
+    "file": "wallet-service/src/deserialize_safe.py",
+    "scenario": "deserialize",
+    "vulnerable": false
+  },
+  {
+    "file": "gateway-service/src/tls_risk.js",
+    "scenario": "tls",
+    "vulnerable": true
+  },
+  {
+    "file": "gateway-service/src/tls_safe.js",
+    "scenario": "tls",
+    "vulnerable": false
+  }
+]
