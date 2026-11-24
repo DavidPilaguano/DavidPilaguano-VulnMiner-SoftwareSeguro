@@ -1,61 +1,145 @@
-# DavidPilaguano · VulnMiner · SoftwareSeguro
+# VulnMiner
 
-Repositorio del laboratorio: [DavidPilaguano-VulnMiner-SoftwareSeguro](https://github.com/DavidPilaguano/DavidPilaguano-VulnMiner-SoftwareSeguro). Autor: **DavidPilaguano**. El programa conserva el comando `vulnminer`.
+VulnMiner es una herramienta de línea de comandos que identifica posibles vulnerabilidades en proyectos de microservicios y genera reportes JSON y HTML con evidencias, ubicaciones y recomendaciones.
 
-## Probar en esta computadora
+Utiliza clasificación supervisada multietiqueta y la metodología SEMMA para reconocer patrones conforme a OWASP Top 10:2025 y OWASP API Security Top 10:2023. **El modelo entrenado está incluido: no es necesario reentrenarlo para instalar o utilizar la herramienta.**
 
-Desde la carpeta del repositorio, ejecutar `./scripts/probar.ps1`. El script prepara `.venv`, instala el paquete con el modelo incluido, ejecuta las pruebas y analiza los dos proyectos de ejemplo sin reentrenar. Los reportes de esta comprobación quedan en `output/reports/prueba-local/`.
+Admite código Python y JavaScript, además de extracción léxica compatible con TypeScript. También lee configuraciones y manifiestos de servicios. Los resultados son hallazgos potenciales que requieren revisión.
 
-Para analizar otro proyecto después de esa preparación:
+## Requisitos
 
-```powershell
-& ./.venv/Scripts/vulnminer.exe scan 'C:\ruta\al\proyecto' --format json,html --output ./reportes
+- Python 3.11 o posterior, con `pip` y `venv` disponibles.
+- Git para clonar el repositorio, o descargar y extraer el ZIP desde GitHub.
+- Conexión a Internet para instalar dependencias. El escaneo utiliza un modelo local y no requiere una API de IA.
+
+La instalación y las pruebas se verificaron en Windows con Python 3.14 y scikit-learn 1.8.0. Se incluyen instrucciones equivalentes para Linux y macOS; esos sistemas no forman parte de la verificación realizada.
+
+## Descargar el proyecto
+
+```shell
+git clone https://github.com/DavidPilaguano/DavidPilaguano-VulnMiner-SoftwareSeguro.git
+cd DavidPilaguano-VulnMiner-SoftwareSeguro
 ```
 
-Herramienta CLI del laboratorio de Desarrollo de Software Seguro. Implementa SEMMA y clasificación supervisada multietiqueta para analizar microservicios Python, JavaScript y TypeScript, con reportes OWASP Top 10:2025 y OWASP API Security Top 10:2023. Se entrega el modelo entrenado: **el escaneo no reentrena**.
+Si se descargó un ZIP, abrir una terminal en la carpeta extraída que contiene `pyproject.toml`.
 
-## Instalación y ejecución
+## Instalar y probar
 
-Requisitos: Python 3.11 o posterior y pip. Verificación realizada con Python 3.14 y scikit-learn 1.8.0. Se fija la versión de scikit-learn para hacer compatible el artefacto serializado. Recomendado: entorno virtual.
+Se recomienda usar un entorno virtual para separar las dependencias de otras aplicaciones. Los siguientes comandos se ejecutan desde la raíz del repositorio y no requieren activar el entorno.
+
+### Windows · PowerShell
 
 ```powershell
 python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -e ".[lab]"
-vulnminer scan ./examples/tienda-demo --standards owasp2025,api2023 --format json,html --output ./output/reports/tienda-demo
+.\.venv\Scripts\python.exe -m pip install .
+.\.venv\Scripts\python.exe -m vulnminer scan ./examples/tienda-demo --standards owasp2025,api2023 --format json,html --output ./reportes/tienda-demo
 ```
 
-Desde cualquier proyecto que el docente proporcione, después de instalar:
+Si `python` no está disponible pero se cuenta con el lanzador de Python para Windows, usar `py -3 -m venv .venv` en el primer comando.
+
+### Linux y macOS · Bash o Zsh
+
+```bash
+python3 -m venv .venv
+./.venv/bin/python -m pip install .
+./.venv/bin/python -m vulnminer scan ./examples/tienda-demo --standards owasp2025,api2023 --format json,html --output ./reportes/tienda-demo
+```
+
+### Consultar los resultados
+
+El ejemplo contiene dos servicios y pares de fragmentos vulnerables y corregidos. En la verificación realizada se generaron siete hallazgos potenciales. Los archivos de salida son:
+
+- `reportes/tienda-demo/analisis.json`: resultados estructurados, evidencias y metadatos.
+- `reportes/tienda-demo/analisis.html`: reporte para abrir en un navegador, con filtro por microservicio.
+
+Las fixtures de ejemplo están destinadas al análisis estático; no son servidores preparados para desplegar. No es necesario instalar sus dependencias ni ejecutarlas.
+
+Para probar la segunda fixture, sustituir `examples/tienda-demo` por `examples/logistica-demo` en el comando de escaneo y elegir otra carpeta de salida.
+
+## Analizar un proyecto propio
+
+Reemplazar la ruta de entrada por el directorio raíz del proyecto que se desea analizar. La carpeta de salida debe ser distinta de la raíz analizada.
+
+En Windows, desde el repositorio de VulnMiner:
 
 ```powershell
-cd C:\ruta\al\proyecto-microservicios
+.\.venv\Scripts\python.exe -m vulnminer scan "C:\ruta\al\proyecto" --standards owasp2025,api2023 --format json,html --output ./reportes/mi-proyecto
+```
+
+En Linux o macOS, desde el repositorio de VulnMiner:
+
+```bash
+./.venv/bin/python -m vulnminer scan /ruta/al/proyecto --standards owasp2025,api2023 --format json,html --output ./reportes/mi-proyecto
+```
+
+También se puede activar el entorno virtual y utilizar directamente el comando `vulnminer`. Con ese entorno activo, es posible cambiar a la raíz de cualquier proyecto y ejecutar:
+
+```shell
 vulnminer scan . --standards owasp2025,api2023 --format json,html --output ./reportes
 ```
 
-Si el ejecutable no está en PATH, usar `python -m vulnminer scan . --output ./reportes` con el mismo entorno activo. No usar continuaciones `\` de Bash en PowerShell.
+## Comandos y opciones
 
-También se entrega `output/packages/vulnminer_espe-1.0.0-py3-none-any.whl`, que incluye el modelo. Puede instalarse con `python -m pip install ./output/packages/vulnminer_espe-1.0.0-py3-none-any.whl`. `requirements-lock.txt` registra las versiones exactas usadas en el laboratorio; para repetir ese entorno, instalarlo antes del proyecto.
-
-`vulnminer catalog` presenta las veinte categorías y la cobertura. `--fail-on-findings` devuelve 1 si existen hallazgos; 0 significa ejecución satisfactoria y 2 error de uso o lectura. Un código 0 no certifica seguridad.
-
-## Entregables
-
-| Producto | Ubicación |
+| Comando u opción | Función |
 |---|---|
-| Código e instalación | `vulnminer/`, `pyproject.toml`, este documento |
-| Dataset: 1.008 registros, 504 corregidos | `data/dataset.csv` |
-| Diccionario y correspondencias | `data/diccionario.md`, `data/cwe_owasp.csv`, `docs/fuentes.md` |
-| Cinco notebooks ejecutados SEMMA | `notebooks/01_sample.ipynb` a `05_assess.ipynb` |
-| Modelo y pipeline TF-IDF serializados | `vulnminer/artifacts/model.joblib` |
-| Estadísticas, matrices, errores y gráficos | `output/evaluation/` |
-| Reportes de dos proyectos de ejemplo | `output/reports/` |
-| Informe técnico | `output/pdf/informe_tecnico.pdf`, `docs/informe_tecnico.md` |
-| Demostración y requisitos | `docs/demostracion.md`, `docs/trazabilidad.md` |
-| Pruebas funcionales | `tests/test_vulnminer.py` |
+| `vulnminer --help` | Mostrar la ayuda general. |
+| `vulnminer --version` | Consultar la versión instalada. |
+| `vulnminer catalog` | Mostrar las veinte categorías y su cobertura declarada. |
+| `vulnminer scan RUTA` | Analizar un directorio con el modelo incluido. |
+| `--standards owasp2025,api2023` | Seleccionar uno o ambos estándares. |
+| `--format json,html` | Generar uno o ambos formatos. |
+| `--output RUTA` | Seleccionar la carpeta de reportes. |
+| `--fail-on-findings` | Devolver código 1 si se generan hallazgos. |
 
-## Reproducibilidad
+Sin un entorno activado, sustituir `vulnminer` por `.\.venv\Scripts\python.exe -m vulnminer` en Windows o `./.venv/bin/python -m vulnminer` en Linux/macOS, desde la raíz de este repositorio.
+
+Los códigos de salida son 0 para ejecución satisfactoria, 1 para hallazgos cuando se solicita `--fail-on-findings` y 2 para errores de uso o lectura. Una ejecución satisfactoria no certifica la seguridad del proyecto.
+
+## Ejecutar las pruebas
+
+Después de instalar, desde la raíz del repositorio:
 
 ```powershell
+# Windows
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+```bash
+# Linux y macOS
+./.venv/bin/python -m unittest discover -s tests -v
+```
+
+La suite contiene diez pruebas funcionales sobre cobertura, ubicaciones, pares corregidos, clasificación, abstención, configuración, reportes y separación de datos.
+
+En Windows también se dispone de un asistente de preparación y prueba:
+
+```powershell
+.\scripts\probar.ps1
+```
+
+Este prepara el entorno, instala el proyecto, ejecuta las pruebas y analiza las dos fixtures. Sus reportes quedan en `output/reports/prueba-local/`.
+
+## Instalar desde el paquete distribuible
+
+El archivo `output/packages/vulnminer_espe-1.0.0-py3-none-any.whl` incluye el programa y el modelo entrenado. Se puede instalar en un entorno Python compatible mediante:
+
+```shell
+python -m pip install ./output/packages/vulnminer_espe-1.0.0-py3-none-any.whl
+```
+
+En este comando, `python` debe corresponder al entorno en el que se desea instalar. Una vez instalado el paquete, no es necesario conservar el clon para ejecutar el programa.
+
+## Desarrollo y reproducción de los experimentos
+
+Para modificar el código, entrenar modelos o ejecutar los notebooks, instalar las dependencias adicionales en el entorno elegido:
+
+```shell
+python -m pip install -e ".[lab]"
+```
+
+Después, desde la raíz del repositorio y utilizando ese mismo entorno:
+
+```shell
 python scripts/generate_dataset.py
 python scripts/train.py
 python scripts/create_examples.py
@@ -64,16 +148,37 @@ python scripts/build_deliverables.py
 python -m unittest discover -s tests -v
 ```
 
-O ejecutar `./scripts/reproduce.ps1 -Install`. Los notebooks se ejecutan desde el script de entregables. Cada notebook permite inspeccionar una fase; el de Model vuelve a entrenar y genera los artefactos de la comparación. El ajuste selecciona C/profundidad y umbral mediante validación, y después calcula prueba. La semilla es 42.
+Estos comandos regeneran datos, modelos y resultados. `build_deliverables.py` ejecuta los cinco notebooks; el de Model vuelve a entrenar. La selección utiliza F1 macro de validación antes de evaluar prueba, con semilla 42. En Windows, `scripts/reproduce.ps1 -Install` automatiza la reproducción y el empaquetado.
 
-## Diseño y límites
+`requirements-lock.txt` registra las versiones directas usadas para generar los entregables originales. Su disponibilidad puede depender de la versión de Python y del sistema operativo. Para el uso habitual basta con `pip install .`; scikit-learn se fija en 1.8.0 para mantener la compatibilidad del modelo serializado.
 
-Flujo: descubrir servicios → leer archivos → localizar operaciones sensibles → vectorizar fragmentos → predecir etiquetas con el modelo → exigir evidencia compatible → registrar hallazgos potenciales → exportar reportes. Se incluyen seis categorías generales y cuatro de API; las diez restantes se declaran no evaluadas. Consulte `docs/fuentes.md` para alcance parcial y procedencia.
+## Contenido del repositorio
 
-El dataset es sintético; sus 84 grupos son familias artificiales. Los ejemplos no se usan para entrenamiento, pero sí para depurar y evaluar la CLI; no constituyen un ensayo ciego de producción. El enfoque es léxico, sin propagación interprocedimental de datos. TypeScript usa el extractor léxico de JavaScript y no tiene evaluación estadística independiente. Se leen Dockerfile, Compose, YAML, properties, OpenAPI y manifiestos, pero no hay análisis semántico completo ni catálogo de CVE. Un patrón desconocido puede quedar pendiente de revisión o pasar inadvertido.
+| Recurso | Ubicación |
+|---|---|
+| Aplicación CLI | [`vulnminer/`](vulnminer/) |
+| Dataset: 1.008 registros, 504 corregidos | [`data/dataset.csv`](data/dataset.csv) |
+| Diccionario de datos | [`data/diccionario.md`](data/diccionario.md) |
+| Fuentes y correspondencias CWE–OWASP | [`docs/fuentes.md`](docs/fuentes.md), [`data/cwe_owasp.csv`](data/cwe_owasp.csv) |
+| Cinco notebooks SEMMA ejecutados | [`notebooks/`](notebooks/) |
+| Modelo y pipeline serializados | [`vulnminer/artifacts/`](vulnminer/artifacts/) |
+| Métricas, matrices y gráficos | [`output/evaluation/`](output/evaluation/) |
+| Proyectos de ejemplo | [`examples/`](examples/) |
+| Reportes de referencia | [`output/reports/`](output/reports/) |
+| Informe técnico | [`output/pdf/informe_tecnico.pdf`](output/pdf/informe_tecnico.pdf) |
+| Pruebas funcionales | [`tests/test_vulnminer.py`](tests/test_vulnminer.py) |
+| Entrega empaquetada | [`output/entrega_vulnminer.zip`](output/entrega_vulnminer.zip) |
 
-La herramienta no ejecuta el código inspeccionado. Omite dependencias, binarios, enlaces simbólicos y archivos mayores a 1 MB; registra omisiones. Los reportes contienen evidencia y deben custodiarse como código fuente. El HTML escapa contenido del proyecto. El archivo joblib incluido es un artefacto confiable del proyecto; no debe reemplazarse por archivos de procedencia desconocida.
+## Alcance y limitaciones
 
-No hay LLM ni llamadas a API de IA en la aplicación. La confianza es una puntuación no calibrada; la severidad se estima por impacto del escenario y se justifica por separado. Todos los resultados requieren verificación humana.
+El dataset es sintético: sus 84 grupos son familias artificiales. Las fixtures se usan para evaluación funcional y depuración; no constituyen un ensayo ciego de producción. La cobertura es parcial: seis categorías generales y cuatro de API, dentro de siete escenarios. Las diez categorías restantes se declaran no evaluadas en el catálogo.
 
-El proyecto del docente no está presente en esta carpeta. La evaluación sobre ese proyecto y la exposición en clase son pasos externos pendientes; se entrega el comando y el guion para realizarlos.
+El análisis es léxico y local, sin propagación interprocedimental de datos ni comprobación de explotabilidad. TypeScript comparte el extractor de JavaScript y no tiene evaluación estadística independiente. Se leen Dockerfile, Compose, YAML, properties, OpenAPI y manifiestos, pero no se realiza un análisis semántico completo ni una consulta a bases de CVE. Un patrón desconocido puede quedar pendiente de revisión o pasar inadvertido.
+
+La herramienta no ejecuta el código inspeccionado. Omite dependencias, binarios, enlaces simbólicos y archivos mayores a 1 MB, y registra las omisiones. Los reportes contienen evidencia del código y deben custodiarse como el código fuente. El HTML escapa el contenido analizado.
+
+No hay LLM ni llamadas a API de IA en la aplicación. Las puntuaciones no están calibradas como probabilidades de explotación; la severidad se estima por el impacto del escenario y se justifica por separado. Todos los hallazgos requieren verificación humana. El modelo joblib distribuido debe conservar su procedencia confiable.
+
+## Autor y contexto
+
+Proyecto académico de Desarrollo de Software Seguro de la Universidad de las Fuerzas Armadas ESPE, desarrollado bajo la metodología SEMMA. Autor: [DavidPilaguano](https://github.com/DavidPilaguano).
